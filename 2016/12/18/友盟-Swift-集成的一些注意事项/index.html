@@ -1,0 +1,803 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-CN">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=6.3.0" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.3.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=6.3.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.3.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=6.3.0" color="#222">
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '6.3.0',
+    sidebar: {"position":"left","display":"hide","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="最近在用swift重构公司的项目，首先踩的就是第三方SDK的坑，因为友盟没有swift集成的相关文档，所以只能摸着石头过河了，再次纪念一下自己踩的坑，同时也希望能给需要的人带来帮助一言不合上代码，首先是友盟app统计">
+<meta property="og:type" content="article">
+<meta property="og:title" content="友盟 Swift 集成的一些注意事项">
+<meta property="og:url" content="http://yoursite.com/2016/12/18/友盟-Swift-集成的一些注意事项/index.html">
+<meta property="og:site_name" content="coderwong&#39;s blog">
+<meta property="og:description" content="最近在用swift重构公司的项目，首先踩的就是第三方SDK的坑，因为友盟没有swift集成的相关文档，所以只能摸着石头过河了，再次纪念一下自己踩的坑，同时也希望能给需要的人带来帮助一言不合上代码，首先是友盟app统计">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2017-12-15T03:45:00.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="友盟 Swift 集成的一些注意事项">
+<meta name="twitter:description" content="最近在用swift重构公司的项目，首先踩的就是第三方SDK的坑，因为友盟没有swift集成的相关文档，所以只能摸着石头过河了，再次纪念一下自己踩的坑，同时也希望能给需要的人带来帮助一言不合上代码，首先是友盟app统计">
+
+
+
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2016/12/18/友盟-Swift-集成的一些注意事项/"/>
+
+
+
+<script type="text/javascript" id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>友盟 Swift 集成的一些注意事项 | coderwong's blog</title>
+  
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style type="text/css">
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
+
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
+
+    .use-motion {
+      .logo-line-before i { left: initial; }
+      .logo-line-after i { right: initial; }
+    }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">coderwong's blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+    <a href="/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-home"></i> <br />首页</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+    <a href="/archives/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />归档</a>
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/12/18/友盟-Swift-集成的一些注意事项/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="coderwong">
+      <meta itemprop="description" content="不要怂，就是干">
+      <meta itemprop="image" content="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1513588177840&di=fd065c5f8d576b6c406f9984f3abe6a2&imgtype=0&src=http%3A%2F%2Ff.hiphotos.baidu.com%2Fimage%2Fpic%2Fitem%2F9825bc315c6034a82b679065c113495408237648.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="coderwong's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">友盟 Swift 集成的一些注意事项
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2016-12-18 23:38:33" itemprop="dateCreated datePublished" datetime="2016-12-18T23:38:33+08:00">2016-12-18</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2017-12-15 11:45:00" itemprop="dateModified" datetime="2017-12-15T11:45:00+08:00">2017-12-15</time>
+              
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="最近在用swift重构公司的项目，首先踩的就是第三方SDK的坑，因为友盟没有swift集成的相关文档，所以只能摸着石头过河了，再次纪念一下自己踩的坑，同时也希望能给需要的人带来帮助"><a href="#最近在用swift重构公司的项目，首先踩的就是第三方SDK的坑，因为友盟没有swift集成的相关文档，所以只能摸着石头过河了，再次纪念一下自己踩的坑，同时也希望能给需要的人带来帮助" class="headerlink" title="最近在用swift重构公司的项目，首先踩的就是第三方SDK的坑，因为友盟没有swift集成的相关文档，所以只能摸着石头过河了，再次纪念一下自己踩的坑，同时也希望能给需要的人带来帮助"></a>最近在用swift重构公司的项目，首先踩的就是第三方SDK的坑，因为友盟没有swift集成的相关文档，所以只能摸着石头过河了，再次纪念一下自己踩的坑，同时也希望能给需要的人带来帮助</h3><h5 id="一言不合上代码，首先是友盟app统计"><a href="#一言不合上代码，首先是友盟app统计" class="headerlink" title="一言不合上代码，首先是友盟app统计"></a>一言不合上代码，首先是友盟app统计</h5><a id="more"></a>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">OC</span><br><span class="line">[UMAnalyticsConfig sharedInstance].appKey = UMENGAPPKEY;</span><br><span class="line">[MobClick startWithConfigure:[UMAnalyticsConfig sharedInstance]];</span><br><span class="line">[MobClick setCrashReportEnabled:YES];</span><br><span class="line"></span><br><span class="line">Swift</span><br><span class="line">let obj=UMAnalyticsConfig.init();</span><br><span class="line">obj.appKey=key;</span><br><span class="line">MobClick.setLogEnabled(true);</span><br><span class="line">MobClick.start(withConfigure: obj);</span><br></pre></td></tr></table></figure>
+<p>这个是从友盟论坛上面挖出来的，一个小哥骚扰了人工2个多小时得出来的成果，本人连接了半个多小时人工受理也没有连上真是  **了🐶(自行打码)</p>
+<h5 id="下面是坑点有点多的友盟推送-好吧，承认我是菜才踩得坑。。。"><a href="#下面是坑点有点多的友盟推送-好吧，承认我是菜才踩得坑。。。" class="headerlink" title="下面是坑点有点多的友盟推送(好吧，承认我是菜才踩得坑。。。)"></a>下面是坑点有点多的友盟推送(好吧，承认我是菜才踩得坑。。。)</h5><p>这里是appDelegate中的代理方法<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br></pre></td><td class="code"><pre><span class="line">OC</span><br><span class="line">#pragma mark - GetNotification</span><br><span class="line">//iOS10以下使用这个方法接收通知</span><br><span class="line">- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo&#123;</span><br><span class="line">    //关闭友盟自带的弹出框</span><br><span class="line">    [UMessage setAutoAlert:NO];</span><br><span class="line">    [UMessage didReceiveRemoteNotification:userInfo];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">//iOS10新增：处理前台收到通知的代理方法</span><br><span class="line">-(void)userNotificationCenter:(UNUserNotificationCenter *)center willPresentNotification:(UNNotification *)notification withCompletionHandler:(void (^)(UNNotificationPresentationOptions))completionHandler&#123;</span><br><span class="line">    NSDictionary * userInfo = notification.request.content.userInfo;</span><br><span class="line">    if([notification.request.trigger isKindOfClass:[UNPushNotificationTrigger class]]) &#123;</span><br><span class="line">        //应用处于前台时的远程推送接受</span><br><span class="line">        //关闭友盟自带的弹出框</span><br><span class="line">        [UMessage setAutoAlert:NO];</span><br><span class="line">        //必须加这句代码</span><br><span class="line">        [UMessage didReceiveRemoteNotification:userInfo];</span><br><span class="line">        </span><br><span class="line">    &#125;else&#123;</span><br><span class="line">        //应用处于前台时的本地推送接受</span><br><span class="line">    &#125;</span><br><span class="line">    //当应用处于前台时提示设置，需要哪个可以设置哪一个</span><br><span class="line">    completionHandler(UNNotificationPresentationOptionSound|UNNotificationPresentationOptionBadge|UNNotificationPresentationOptionAlert);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">//iOS10新增：处理后台点击通知的代理方法</span><br><span class="line">-(void)userNotificationCenter:(UNUserNotificationCenter *)center didReceiveNotificationResponse:(UNNotificationResponse *)response withCompletionHandler:(void (^)())completionHandler&#123;</span><br><span class="line">    NSDictionary * userInfo = response.notification.request.content.userInfo;</span><br><span class="line">    if([response.notification.request.trigger isKindOfClass:[UNPushNotificationTrigger class]]) &#123;</span><br><span class="line">        //应用处于后台时的远程推送接受</span><br><span class="line">        //必须加这句代码</span><br><span class="line">        [UMessage didReceiveRemoteNotification:userInfo];</span><br><span class="line">        </span><br><span class="line">    &#125;else&#123;</span><br><span class="line">        //应用处于后台时的本地推送接受</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">Swift</span><br><span class="line"> //iOS10以下使用这个方法接收通知</span><br><span class="line">func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable : Any]) &#123;</span><br><span class="line">        UMessage.setAutoAlert(true)</span><br><span class="line">        UMessage.didReceiveRemoteNotification(userInfo)</span><br><span class="line">&#125;</span><br><span class="line">@available(iOS 10.0, *)</span><br><span class="line">func userNotificationCenter(center: UNUserNotificationCenter, willPresentNotification notification: UNNotification, withCompletionHandler completionHandler: (UNNotificationPresentationOptions) -&gt; Void)&#123;</span><br><span class="line">        let userInfo = notification.request.content.userInfo</span><br><span class="line">        if (notification.request.trigger?.isKind(of: UNPushNotificationTrigger.superclass()!))! &#123;</span><br><span class="line">            //应用处于前台时的远程推送接受</span><br><span class="line">            //关闭友盟自带的弹出框</span><br><span class="line">            UMessage.setAutoAlert(false)</span><br><span class="line">            //必须加这句代码</span><br><span class="line">            UMessage.didReceiveRemoteNotification(userInfo)</span><br><span class="line">        &#125;else&#123;</span><br><span class="line">            //应用处于前台时的本地推送接受</span><br><span class="line">        &#125;</span><br><span class="line">        //当应用处于前台时提示设置，需要哪个可以设置哪一个</span><br><span class="line">        completionHandler([.sound,.alert,.badge])</span><br><span class="line">&#125;</span><br><span class="line">@available(iOS 10.0, *)</span><br><span class="line">func userNotificationCenter(center: UNUserNotificationCenter, didReceiveNotificationResponse response: UNNotificationResponse, withCompletionHandler completionHandler: () -&gt; Void)&#123;</span><br><span class="line">        let userInfo = response.notification.request.content.userInfo</span><br><span class="line">        if (response.notification.request.trigger?.isKind(of: UNPushNotificationTrigger.superclass()!))! &#123;</span><br><span class="line">            //应用处于前台时的远程推送接受</span><br><span class="line">            //必须加这句代码</span><br><span class="line">            UMessage.didReceiveRemoteNotification(userInfo)</span><br><span class="line">        &#125;else&#123;</span><br><span class="line">            //应用处于前台时的本地推送接受</span><br><span class="line">        &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>我只想说<figure class="highlight plain"><figcaption><span>10.0, *)```很重要！```@available(iOS 10.0, *)```很重要！```@available(iOS 10.0, *)```很重要！很重要！重要！要！不然除非能一字不差把方法名写出来，等着IDE提示补全```@available(iOS 10.0, *)```</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">这个是推送注册的方法，可以自行封装，```@available(iOS 10.0, *)```的使用易燃很重要</span><br></pre></td></tr></table></figure></p>
+<p>Swift<br>UMessage.start(withAppkey: key, launchOptions: launchOptions)<br>UMessage.registerForRemoteNotifications()<br>if #available(iOS 10.0, *) {<br>let center:UNUserNotificationCenter = UNUserNotificationCenter.current()<br>center.delegate = theDelegate<br>let type:UNAuthorizationOptions = [.badge, .alert, .sound]<br>center.requestAuthorization(options: type, completionHandler: { (granted, error) in<br>                if granted{</p>
+<pre><code>    }else{
+
+    }
+})
+</code></pre><p>let action1_ios10 = UNNotificationAction.init(identifier: “action1_ios10_identifier”, title: “打开应用”, options: .foreground)<br>let action2_ios10 = UNNotificationAction.init(identifier: “action2_ios10_identifier”, title: “忽略”, options: .foreground)<br>let category1_ios10 = UNNotificationCategory.init(identifier: “category101”, actions: [action1_ios10,action2_ios10], intentIdentifiers: [], options: .customDismissAction)<br>let  categories_ios10 = NSSet.init(object: category1_ios10)<br>center.setNotificationCategories(categories_ios10 as! Set<unnotificationcategory>)</unnotificationcategory></p>
+<pre><code>}
+</code></pre><p>else {<br>//如果你期望使用交互式(只有iOS 8.0及以上有)的通知，请参考下面注释部分的初始化代码<br>let action1 = UIMutableUserNotificationAction()<br>action1.identifier = “action1_identifier”<br>action1.title = “打开应用”<br>action1.activationMode = .foreground</p>
+<p>let action2 = UIMutableUserNotificationAction()<br>action2.identifier = “action2_identifier”<br>action2.title = “忽略”<br>action2.activationMode = .background<br>action2.isAuthenticationRequired = true<br>action2.isDestructive = true</p>
+<p>let actionCategory1 = UIMutableUserNotificationCategory()<br>actionCategory1.identifier = “category1”//这组动作的唯一标示<br>actionCategory1.setActions([action1,action2], for: .default)<br>//        NSSet *categories = [NSSet setWithObjects:actionCategory1, nil];<br>let categories = NSSet.init(object: actionCategory1)<br>UMessage.register(forRemoteNotifications: categories as! Set<uiusernotificationcategory>)<br>        }</uiusernotificationcategory></p>
+<p>//如果对角标，文字和声音的取舍，请用下面的方法<br>//UIRemoteNotificationType types7 = UIRemoteNotificationTypeBadge|UIRemoteNotificationTypeAlert|UIRemoteNotificationTypeSound;<br>//UIUserNotificationType types8 = UIUserNotificationTypeAlert|UIUserNotificationTypeSound|UIUserNotificationTypeBadge;<br>//[UMessage registerForRemoteNotifications:categories withTypesForIos7:types7 withTypesForIos8:types8];</p>
+<p>UMessage.setLogEnabled(true)<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">咳咳咳，不知道大家注意到这句没有</span><br><span class="line">```let type:UNAuthorizationOptions = [.badge, .alert, .sound]</span><br></pre></td></tr></table></figure></p>
+<p>OC中对应的是<br><figure class="highlight plain"><figcaption><span>types</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">这个是逻辑或的写法，有的小伙伴没有很仔细看swift的基础语法，就容易到这里卡主(比如我)，还有就是swift3.0更新不少，目的一个字！简洁！</span><br><span class="line">UNAuthorizationOptionBadge变成了.badge其他的大家自行脑补吧！</span><br><span class="line"></span><br><span class="line">#### 下面是分享</span><br></pre></td></tr></table></figure></p>
+<p>let umengShareSevice = UMSocialManager.default()<br>umengShareSevice?.umSocialAppkey = UMENGKEY<br>umengShareSevice?.setPlaform(.wechatSession, appKey: WECHATAPPKEY, appSecret: WECHATAPPSECRET , redirectURL: WECHATREDIRECTURL)<br>umengShareSevice?.setPlaform(.wechatTimeLine, appKey: WECHATAPPKEY, appSecret: WECHATAPPSECRET , redirectURL: WECHATREDIRECTURL)<br>umengShareSevice?.setPlaform(.QQ, appKey: QQAPPKEY, appSecret: nil , redirectURL: QQREDIRECTURL)<br>umengShareSevice?.setPlaform(.sina, appKey: SINAAPPKEY, appSecret: SINAAPPSECRET , redirectURL: SINAREDIRECTURL)<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">友盟的分享还是给出了swift版本的demo</span><br></pre></td></tr></table></figure></p>
+<p>UMSocialUIManager.setPreDefinePlatforms([NSNumber(value:UMSocialPlatformType.wechatSession.rawValue),NSNumber(value:UMSocialPlatformType.wechatTimeLine.rawValue),NSNumber(value:UMSocialPlatformType.QQ.rawValue),NSNumber(value:UMSocialPlatformType.sina.rawValue)])<br><code>`</code><br>上面是我在自定义平台时候的一个问题，setPreDefinePlatforms方法的参数是一个数组，虽然提示是[Any]!类型但是里面还是要元素为NSNumber类型的数组</p>
+<h4 id="大致就这些吧，希望能给大家带来帮助"><a href="#大致就这些吧，希望能给大家带来帮助" class="headerlink" title="大致就这些吧，希望能给大家带来帮助"></a>大致就这些吧，希望能给大家带来帮助</h4>
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/11/06/iOS-UIButton-swift3-0/" rel="next" title="iOS UIButton swift3.0">
+                <i class="fa fa-chevron-left"></i> iOS UIButton swift3.0
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/02/09/KVC-遇到的一些问题-O-o/" rel="prev" title="KVC 遇到的一些问题 O.o?">
+                KVC 遇到的一些问题 O.o? <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1513588177840&di=fd065c5f8d576b6c406f9984f3abe6a2&imgtype=0&src=http%3A%2F%2Ff.hiphotos.baidu.com%2Fimage%2Fpic%2Fitem%2F9825bc315c6034a82b679065c113495408237648.jpg"
+                alt="coderwong" />
+            
+              <p class="site-author-name" itemprop="name">coderwong</p>
+              <p class="site-description motion-element" itemprop="description">不要怂，就是干</p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">27</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+
+              
+            </nav>
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  <a href="https://github.com/2016321" target="_blank" title="GitHub"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="http://www.jianshu.com/u/3806171d1e74" target="_blank" title="简书"><i class="fa fa-fw fa-thumbs-down"></i>简书</a>
+                  
+                </span>
+              
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#最近在用swift重构公司的项目，首先踩的就是第三方SDK的坑，因为友盟没有swift集成的相关文档，所以只能摸着石头过河了，再次纪念一下自己踩的坑，同时也希望能给需要的人带来帮助"><span class="nav-number">1.</span> <span class="nav-text">最近在用swift重构公司的项目，首先踩的就是第三方SDK的坑，因为友盟没有swift集成的相关文档，所以只能摸着石头过河了，再次纪念一下自己踩的坑，同时也希望能给需要的人带来帮助</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#一言不合上代码，首先是友盟app统计"><span class="nav-number">1.0.1.</span> <span class="nav-text">一言不合上代码，首先是友盟app统计</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#下面是坑点有点多的友盟推送-好吧，承认我是菜才踩得坑。。。"><span class="nav-number">1.0.2.</span> <span class="nav-text">下面是坑点有点多的友盟推送(好吧，承认我是菜才踩得坑。。。)</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#大致就这些吧，希望能给大家带来帮助"><span class="nav-number">1.1.</span> <span class="nav-text">大致就这些吧，希望能给大家带来帮助</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2016 &mdash; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">coderwong</span>
+
+  
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  
+
+
+
+  
+  
+
+
+
+  
+  
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/three/three.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/three/three-waves.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/three/canvas_lines.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/three/canvas_sphere.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=6.3.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=6.3.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=6.3.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=6.3.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.3.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.3.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.3.0"></script>
+
+
+
+  
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
