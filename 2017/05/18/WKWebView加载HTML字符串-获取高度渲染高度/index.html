@@ -115,13 +115,13 @@
 <meta property="og:site_name" content="coderwong&#39;s blog">
 <meta property="og:description" content="这篇文章算是个小记，可能只会暂时描述问题和解决问题方法，原理的方面之后具体写在Diary里面">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/2353844-14fc2f98ca0ca62c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/2353844-111c82673a24fb3d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:updated_time" content="2017-12-15T08:26:02.000Z">
+<meta property="og:image" content="https://s6.postimg.cc/8a3fkyo29/2353844-14fc2f98ca0ca62c.png">
+<meta property="og:image" content="https://s6.postimg.cc/9cdm3ield/2353844-111c82673a24fb3d.png">
+<meta property="og:updated_time" content="2018-07-02T07:52:47.375Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="WKWebView加载HTML字符串 获取高度渲染高度">
 <meta name="twitter:description" content="这篇文章算是个小记，可能只会暂时描述问题和解决问题方法，原理的方面之后具体写在Diary里面">
-<meta name="twitter:image" content="http://upload-images.jianshu.io/upload_images/2353844-14fc2f98ca0ca62c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta name="twitter:image" content="https://s6.postimg.cc/8a3fkyo29/2353844-14fc2f98ca0ca62c.png">
 
 
 
@@ -342,7 +342,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2017-12-15 16:26:02" itemprop="dateModified" datetime="2017-12-15T16:26:02+08:00">2017-12-15</time>
+                <time title="修改时间：2018-07-02 15:52:47" itemprop="dateModified" datetime="2018-07-02T15:52:47+08:00">2018-07-02</time>
               
             
           </span>
@@ -354,6 +354,17 @@
           
 
           
+          
+             <span id="/2017/05/18/WKWebView加载HTML字符串-获取高度渲染高度/" class="leancloud_visitors" data-flag-title="WKWebView加载HTML字符串 获取高度渲染高度">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数：</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
           
 
           
@@ -382,9 +393,9 @@ ableView</code>来展示专题的评论，很像简书有木有。。。</p>
 <hr>
 <h4 id="下面讲讲WKWebView的处理"><a href="#下面讲讲WKWebView的处理" class="headerlink" title="下面讲讲WKWebView的处理"></a>下面讲讲<code>WKWebView</code>的处理</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">p.p1 &#123;margin: 0.0px 0.0px 0.0px 0.0px; line-height: 19.0px; font: 13.0px &apos;Helvetica Neue&apos;&#125;p.p2 &#123;margin: 0.0px 0.0px 0.0px 0.0px; line-height: 19.0px; font: 14.0px &apos;Helvetica Neue&apos;&#125;span.s1 &#123;font: 13.0px &apos;Helvetica Neue&apos;&#125;span.s2 &#123;color: #00a2ff&#125;</span><br><span class="line"></span><br><span class="line">&lt;p&gt;</span><br><span class="line"> &lt;p class=&quot;MsoNormal&quot; align=&quot;center&quot; style=&quot;text-align:center;&quot;&gt;</span><br><span class="line">  &lt;br /&gt;</span><br><span class="line"> &lt;/p &gt;</span><br><span class="line"> &lt;p class=&quot;MsoNormal&quot; align=&quot;center&quot; style=&quot;text-align:center;&quot;&gt;</span><br><span class="line">  各位小伙伴们，大家都听说过创新工场这家机构吗？在创投圈，创新工场应该是耳熟能详的一个名字了。创新工场是一家早期投资机构投资机构。所谓投资机构，全称风险投资机构（VC），风险投资机构是风险投资最直接的参与者和实际操作者，同时也最直接地承受风险、分享收益。简单来说就是会为创业者提供融资的来源之一。</span><br><span class="line"> &lt;/p &gt;</span><br><span class="line"> &lt;p class=&quot;MsoNormal&quot; align=&quot;center&quot; style=&quot;text-align:center;&quot;&gt;</span><br><span class="line">  &lt; img width=&quot;1920&quot; height=&quot;480&quot; src=&quot;http://oli02rut3.bkt.clouddn.com/201702171256554KSruA0R.jpg&quot; alt=&quot;&quot; title=&quot;&quot; align=&quot;&quot; /&gt;</span><br><span class="line"> &lt;/p &gt;</span><br><span class="line"> &lt;p class=&quot;MsoNormal&quot;&gt;</span><br><span class="line">  &amp;nbsp;</span><br><span class="line"> &lt;/p &gt;</span><br><span class="line"> &lt;p class=&quot;MsoNormal&quot;&gt;</span><br><span class="line">  如果没听说过创新工场这个名字的话，那么李开复这个名字应该听说过吧，李开复就是创新工场的创始人了。如果你连李开复都没有听说过的话，那么你肯定用过知乎吧，就算你没用过，你也应该听说过知乎吧，知乎是创新工场投过的一个成功的投资案例了。</span><br><span class="line"> &lt;/p &gt;</span><br><span class="line">&lt;/p &gt;</span><br></pre></td></tr></table></figure>
 <p>以上就是后台传过来的数据，看到这个得我是这样的</p>
-<p><img src="http://upload-images.jianshu.io/upload_images/2353844-14fc2f98ca0ca62c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Paste_Image.png"></p>
+<p><img src="https://s6.postimg.cc/8a3fkyo29/2353844-14fc2f98ca0ca62c.png" alt="Paste_Image.png"></p>
 <p>让我加载个这东西？<br>果然，第一个出问题的是图片，这个图片让我想起了iPhone20</p>
-<p><img src="http://upload-images.jianshu.io/upload_images/2353844-111c82673a24fb3d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Paste_Image.png"></p>
+<p><img src="https://s6.postimg.cc/9cdm3ield/2353844-111c82673a24fb3d.png" alt="Paste_Image.png"></p>
 <p>废话不多说，我将HTML代码处理的一下，结果是这样的</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">let html = &quot;&lt;div id = \&quot;content\&quot;&gt;&lt;style type=\&quot;text/css\&quot;&gt;img&#123;width : 100% ; height : auto; display: block;&#125;&lt;/style&gt;\(result)&lt;/div&gt;&quot;</span><br></pre></td></tr></table></figure>
 <p>首先先用一个<code>div</code>将其包起来，起一个自己比较喜欢的<code>id</code><br>里面写一个样式让图片自适应屏幕宽的100%(加载出来不是iPhone的屏宽，左右有一点留白)，高度根据原有的长宽比会自适应，高高兴兴的加载了出来发现图片正常了，但因为我们的html字符串加载不满一屏下面有一大片留白，如果运营M(zu)M(zong)那天不想写，直接一个图几句话我下面一大片空白就醉了，首先我们需要写一点js获取一下加载后的高度，直接上代码</p>
@@ -779,6 +790,102 @@ ableView</code>来展示专题的评论，很像简书有木有。。。</p>
 
 
   
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("o79yp6QTlOKrk6UpnFwepEsA-gzGzoHsz", "U8M8nSuEamEMio7QehNUEIri");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            
+            counter.save(null, {
+              success: function(counter) {
+                
+                  var $element = $(document.getElementById(url));
+                  $element.find('.leancloud-visitors-count').text(counter.get('time'));
+                
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            
+              var $element = $(document.getElementById(url));
+              $element.find('.leancloud-visitors-count').text('Counter not initialized! See more at console err msg.');
+              console.error('ATTENTION! LeanCloud counter has security bug, see here how to solve it: https://github.com/theme-next/hexo-leancloud-counter-security. \n But you also can use LeanCloud without security, by set \'security\' option to \'false\'.');
+            
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
 
   
 

@@ -115,13 +115,13 @@
 <meta property="og:site_name" content="coderwong&#39;s blog">
 <meta property="og:description" content="我们先看一下效果，现在很多app有这种交互，普通的下拉刷新有点low，这样感觉酷炫一点">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/2353844-6ae81c0421c128b3.gif?imageMogr2/auto-orient/strip">
-<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/2353844-be2e65f14a0bfe5b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:updated_time" content="2017-12-15T08:20:04.000Z">
+<meta property="og:image" content="https://s6.postimg.cc/twig1yzhd/2353844-6ae81c0421c128b3.gif">
+<meta property="og:image" content="https://s6.postimg.cc/cj85n4jlt/2353844-be2e65f14a0bfe5b.png">
+<meta property="og:updated_time" content="2018-07-02T07:51:53.786Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Swift下拉波浪动画">
 <meta name="twitter:description" content="我们先看一下效果，现在很多app有这种交互，普通的下拉刷新有点low，这样感觉酷炫一点">
-<meta name="twitter:image" content="http://upload-images.jianshu.io/upload_images/2353844-6ae81c0421c128b3.gif?imageMogr2/auto-orient/strip">
+<meta name="twitter:image" content="https://s6.postimg.cc/twig1yzhd/2353844-6ae81c0421c128b3.gif">
 
 
 
@@ -342,7 +342,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2017-12-15 16:20:04" itemprop="dateModified" datetime="2017-12-15T16:20:04+08:00">2017-12-15</time>
+                <time title="修改时间：2018-07-02 15:51:53" itemprop="dateModified" datetime="2018-07-02T15:51:53+08:00">2018-07-02</time>
               
             
           </span>
@@ -354,6 +354,17 @@
           
 
           
+          
+             <span id="/2017/06/01/Swift下拉波浪动画/" class="leancloud_visitors" data-flag-title="Swift下拉波浪动画">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数：</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
           
 
           
@@ -376,10 +387,10 @@
 
       
         <h3 id="我们先看一下效果，现在很多app有这种交互，普通的下拉刷新有点low，这样感觉酷炫一点"><a href="#我们先看一下效果，现在很多app有这种交互，普通的下拉刷新有点low，这样感觉酷炫一点" class="headerlink" title="我们先看一下效果，现在很多app有这种交互，普通的下拉刷新有点low，这样感觉酷炫一点"></a>我们先看一下效果，现在很多app有这种交互，普通的下拉刷新有点low，这样感觉酷炫一点</h3><a id="more"></a>
-<p><img src="http://upload-images.jianshu.io/upload_images/2353844-6ae81c0421c128b3.gif?imageMogr2/auto-orient/strip" alt="Demo.gif"></p>
+<p><img src="https://s6.postimg.cc/twig1yzhd/2353844-6ae81c0421c128b3.gif" alt="Demo.gif"></p>
 <h5 id="水波动画的重点就是sin、cos函数"><a href="#水波动画的重点就是sin、cos函数" class="headerlink" title="水波动画的重点就是sin、cos函数"></a>水波动画的重点就是<code>sin</code>、<code>cos</code>函数</h5><p>我们来复习一下不知道是初中还是高中的知识</p>
 <p>正弦型函数解析式：y=Asin（ωx+φ）+h<br>φ（初相位）：决定波形与X轴位置关系或横向移动距离（左加右减）<br>ω：决定周期（最小正周期T=2π/|ω|）<br>A：决定峰值（即纵向拉伸压缩的倍数）<br>h：表示波形在Y轴的位置关系或纵向移动距离（上加下减）</p>
-<p><img src="http://upload-images.jianshu.io/upload_images/2353844-be2e65f14a0bfe5b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
+<p><img src="https://s6.postimg.cc/cj85n4jlt/2353844-be2e65f14a0bfe5b.png" alt="image.png"></p>
 <h3 id="po出项目中的属性"><a href="#po出项目中的属性" class="headerlink" title="po出项目中的属性"></a>po出项目中的属性</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br></pre></td><td class="code"><pre><span class="line">private struct BingoWaveRefreshViewData&#123;</span><br><span class="line">        /// 最大波峰</span><br><span class="line">        static var maxVariable : CGFloat = 1.6</span><br><span class="line">        /// 最小波峰</span><br><span class="line">        static var minVariable : CGFloat = 1.0</span><br><span class="line">        /// 最小波峰增量</span><br><span class="line">        static var minStepLength : CGFloat = 0.01</span><br><span class="line">        /// 最大波峰增量</span><br><span class="line">        static var maxStepLength : CGFloat = 0.05</span><br><span class="line">        /// 键值</span><br><span class="line">        static var keyPathsContentOffset = &quot;contentOffset&quot;</span><br><span class="line">    &#125;</span><br><span class="line">    /// 刷新事件</span><br><span class="line">    var actionClosure : (()-&gt;())?</span><br><span class="line">    /// 顶部波浪颜色</span><br><span class="line">    var topWaveColor : UIColor? &#123;</span><br><span class="line">        willSet&#123;</span><br><span class="line">            firstWaveLayer.fillColor = newValue!.cgColor</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    /// 底部波浪颜色</span><br><span class="line">    var bottomWaveColor : UIColor? &#123;</span><br><span class="line">        willSet&#123;</span><br><span class="line">            secondWaveLayer.fillColor = newValue!.cgColor</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    /// 对应scrollView</span><br><span class="line">    fileprivate weak var scrollView : UIScrollView?&#123;</span><br><span class="line">        willSet&#123;</span><br><span class="line">            _cycle = CGFloat(2 * M_PI) / newValue!.frame.size.width;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    /// 定时器</span><br><span class="line">    fileprivate var displaylink : CADisplayLink!</span><br><span class="line">    /// 顶部波浪</span><br><span class="line">    fileprivate var firstWaveLayer : CAShapeLayer!</span><br><span class="line">    /// 底部波浪</span><br><span class="line">    fileprivate var secondWaveLayer : CAShapeLayer!</span><br><span class="line">    /// 状态</span><br><span class="line">    fileprivate var state : WaveRefreshViewState! = .stop</span><br><span class="line">    /// 根据scrollView偏移量得出的比例</span><br><span class="line">    fileprivate var _times : NSInteger = 0</span><br><span class="line">    /// 波峰值</span><br><span class="line">    fileprivate var _amplitude : CGFloat = 0</span><br><span class="line">    /// 波浪的周期值</span><br><span class="line">    fileprivate var _cycle : CGFloat = 0</span><br><span class="line">    /// 单位时间平移速率</span><br><span class="line">    fileprivate var _speed : CGFloat = 0</span><br><span class="line">    /// 波浪平移偏移量</span><br><span class="line">    fileprivate var _offsetX : CGFloat = 0</span><br><span class="line">    /// scrollView偏移量</span><br><span class="line">    fileprivate var _offsetY : CGFloat = 0</span><br><span class="line">    /// 计算波峰的比率</span><br><span class="line">    fileprivate var _variable : CGFloat = 0</span><br><span class="line">    /// 波峰至波谷的距离</span><br><span class="line">    fileprivate var _height : CGFloat = 0</span><br><span class="line">    /// 波峰是否增大</span><br><span class="line">    fileprivate var _increase  : Bool = false</span><br></pre></td></tr></table></figure>
 <h4 id="绘制曲线"><a href="#绘制曲线" class="headerlink" title="绘制曲线"></a>绘制曲线</h4><p>如果要根据函数绘制曲线，我们需要设置各个值<br>初相位设置为0<br>周期设置为2π<br>波峰设置为1<br>位移设置为0<br>然后根据y = sin(x)计算出点的坐标然后使用<code>CGMutablePath</code>对象的<code>addLine</code>方法连线得出最后路径</p>
 <h4 id="由静态到动态"><a href="#由静态到动态" class="headerlink" title="由静态到动态"></a>由静态到动态</h4><p>我们已经绘制了一条静态的曲线，我们通过什么方法来让它变成动态的呢？我们看上面各个值的定义，我们通过初相位来让曲线左右平移，我们需要通过定时器来让初相位根据时间进行线性的变化，我们设置单位时间的初相位的变化值为<code>π/2</code>,因为函数的周期为<code>2π</code>，4个单位时间为一个周期，我们可以通过改变这个变量来控制波浪平移的速度<br>顶部波浪的刷新方法,<code>firstWaveLayer</code>已创建好<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">func configFirstWaveLayerPath() -&gt; Void &#123;</span><br><span class="line">        guard let scrollView = scrollView else &#123;</span><br><span class="line">            return</span><br><span class="line">        &#125;</span><br><span class="line">        var y = _offsetY</span><br><span class="line">        let path : CGMutablePath = CGMutablePath()</span><br><span class="line">        path.move(to: CGPoint(x: 0, y: y))</span><br><span class="line">        let waveWidth : CGFloat = scrollView.frame.size.width</span><br><span class="line">        for x in 0...Int(waveWidth) &#123;</span><br><span class="line">            y = _amplitude * sin(_cycle * CGFloat(x) + _offsetX) + _offsetY</span><br><span class="line">            path.addLine(to: CGPoint(x: CGFloat(x), y: y))</span><br><span class="line">        &#125;</span><br><span class="line">        path.addLine(to: CGPoint(x: waveWidth, y: self.frame.size.height))</span><br><span class="line">        path.addLine(to: CGPoint(x: 0, y: self.frame.size.height))</span><br><span class="line">        path.closeSubpath()</span><br><span class="line">        firstWaveLayer.path = path</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure></p>
@@ -778,6 +789,102 @@
 
 
   
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("o79yp6QTlOKrk6UpnFwepEsA-gzGzoHsz", "U8M8nSuEamEMio7QehNUEIri");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            
+            counter.save(null, {
+              success: function(counter) {
+                
+                  var $element = $(document.getElementById(url));
+                  $element.find('.leancloud-visitors-count').text(counter.get('time'));
+                
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            
+              var $element = $(document.getElementById(url));
+              $element.find('.leancloud-visitors-count').text('Counter not initialized! See more at console err msg.');
+              console.error('ATTENTION! LeanCloud counter has security bug, see here how to solve it: https://github.com/theme-next/hexo-leancloud-counter-security. \n But you also can use LeanCloud without security, by set \'security\' option to \'false\'.');
+            
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
 
   
 
