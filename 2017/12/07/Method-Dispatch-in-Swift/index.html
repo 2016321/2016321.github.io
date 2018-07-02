@@ -115,19 +115,19 @@
 <meta property="og:site_name" content="coderwong&#39;s blog">
 <meta property="og:description" content="前言 已经使用Swift这门新兴的OO语言已经有很久了，作为面向对象语言在没有特殊声明的时候系统会默认对属性和方法进行重载，虽说Swift不完全算一种动态语言，但是由于和OC依然藕断丝连Swift里面动态派发依然会损耗不小的性能，那么动态派发是什么，Swift的派发机制是什么？我们来深入了(zhuang)解(bi)一下。">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/2353844-722dae5ad4a83c90.gif?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/2353844-a0190f7eaf64db0f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/2353844-cb9bd002846a63e2.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/2353844-2f383cd482292649.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/2353844-1d1e0e5b38297401.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/2353844-43890abe814efa2b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/2353844-1c945171ad5116ee.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/2353844-5ff4219d8ccc509d.gif?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:updated_time" content="2017-12-15T07:38:12.000Z">
+<meta property="og:image" content="https://s6.postimg.cc/hun285imp/2353844-722dae5ad4a83c90.gif">
+<meta property="og:image" content="https://s6.postimg.cc/s4ph7eg81/2353844-a0190f7eaf64db0f.png">
+<meta property="og:image" content="https://s6.postimg.cc/l1hlrrvcx/2353844-cb9bd002846a63e2.png">
+<meta property="og:image" content="https://s6.postimg.cc/a36c90tqp/2353844-1c945171ad5116ee.png">
+<meta property="og:image" content="https://s6.postimg.cc/5u1m6uy75/2353844-1d1e0e5b38297401.png">
+<meta property="og:image" content="https://s6.postimg.cc/buzb3x5dt/2353844-2f383cd482292649.png">
+<meta property="og:image" content="https://s6.postimg.cc/iwx8qpgvl/2353844-43890abe814efa2b.png">
+<meta property="og:image" content="https://s6.postimg.cc/6jkej86gh/2353844-5ff4219d8ccc509d.gif">
+<meta property="og:updated_time" content="2018-07-02T08:29:17.696Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Method Dispatch in Swift">
 <meta name="twitter:description" content="前言 已经使用Swift这门新兴的OO语言已经有很久了，作为面向对象语言在没有特殊声明的时候系统会默认对属性和方法进行重载，虽说Swift不完全算一种动态语言，但是由于和OC依然藕断丝连Swift里面动态派发依然会损耗不小的性能，那么动态派发是什么，Swift的派发机制是什么？我们来深入了(zhuang)解(bi)一下。">
-<meta name="twitter:image" content="http://upload-images.jianshu.io/upload_images/2353844-722dae5ad4a83c90.gif?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta name="twitter:image" content="https://s6.postimg.cc/hun285imp/2353844-722dae5ad4a83c90.gif">
 
 
 
@@ -348,7 +348,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2017-12-15 15:38:12" itemprop="dateModified" datetime="2017-12-15T15:38:12+08:00">2017-12-15</time>
+                <time title="修改时间：2018-07-02 16:29:17" itemprop="dateModified" datetime="2018-07-02T16:29:17+08:00">2018-07-02</time>
               
             
           </span>
@@ -394,15 +394,15 @@
       
         <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><hr>
 <h3 id="已经使用Swift这门新兴的OO语言已经有很久了，作为面向对象语言在没有特殊声明的时候系统会默认对属性和方法进行重载，虽说Swift不完全算一种动态语言，但是由于和OC依然藕断丝连Swift里面动态派发依然会损耗不小的性能，那么动态派发是什么，Swift的派发机制是什么？我们来深入了-zhuang-解-bi-一下。"><a href="#已经使用Swift这门新兴的OO语言已经有很久了，作为面向对象语言在没有特殊声明的时候系统会默认对属性和方法进行重载，虽说Swift不完全算一种动态语言，但是由于和OC依然藕断丝连Swift里面动态派发依然会损耗不小的性能，那么动态派发是什么，Swift的派发机制是什么？我们来深入了-zhuang-解-bi-一下。" class="headerlink" title="已经使用Swift这门新兴的OO语言已经有很久了，作为面向对象语言在没有特殊声明的时候系统会默认对属性和方法进行重载，虽说Swift不完全算一种动态语言，但是由于和OC依然藕断丝连Swift里面动态派发依然会损耗不小的性能，那么动态派发是什么，Swift的派发机制是什么？我们来深入了(zhuang)解(bi)一下。"></a>已经使用Swift这门新兴的OO语言已经有很久了，作为面向对象语言在没有特殊声明的时候系统会默认对属性和方法进行重载，虽说Swift不完全算一种动态语言，但是由于和OC依然藕断丝连Swift里面动态派发依然会损耗不小的性能，那么动态派发是什么，Swift的派发机制是什么？我们来深入了(zhuang)解(bi)一下。</h3><a id="more"></a>
-<p><img src="http://upload-images.jianshu.io/upload_images/2353844-722dae5ad4a83c90.gif?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="开始装逼"></p>
+<p><img src="https://s6.postimg.cc/hun285imp/2353844-722dae5ad4a83c90.gif" alt="开始装逼"></p>
 <h3 id="滑腻腻的分割线"><a href="#滑腻腻的分割线" class="headerlink" title="滑腻腻的分割线"></a>滑腻腻的分割线</h3><hr>
-<p><img src="http://upload-images.jianshu.io/upload_images/2353844-a0190f7eaf64db0f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="不同的引用类型和修饰符对于函数派发的影响"></p>
+<p><img src="https://s6.postimg.cc/s4ph7eg81/2353844-a0190f7eaf64db0f.png" alt="不同的引用类型和修饰符对于函数派发的影响"></p>
 <h5 id="函数派发就是当调用一个方法时候程序判断以何种调用方法去调用的机制。每次的函数调用都会触发这种机制，但是你又不会注意太多。在编码时候，了解函数的派发机制是至关重要，同时能解释其中的一些令人困惑的问题。"><a href="#函数派发就是当调用一个方法时候程序判断以何种调用方法去调用的机制。每次的函数调用都会触发这种机制，但是你又不会注意太多。在编码时候，了解函数的派发机制是至关重要，同时能解释其中的一些令人困惑的问题。" class="headerlink" title="函数派发就是当调用一个方法时候程序判断以何种调用方法去调用的机制。每次的函数调用都会触发这种机制，但是你又不会注意太多。在编码时候，了解函数的派发机制是至关重要，同时能解释其中的一些令人困惑的问题。"></a>函数派发就是当调用一个方法时候程序判断以何种调用方法去调用的机制。每次的函数调用都会触发这种机制，但是你又不会注意太多。在编码时候，了解函数的派发机制是至关重要，同时能解释其中的一些令人困惑的问题。</h5><p>编译型语言有三种主要的函数派发机制：<strong>直接派发(Direct Dispatch)</strong>、<strong>函数表派发(Table  Dispatch)</strong>、<strong>消息机制派发(Message Dispatch)</strong>，下面我会详细解释这几种机制。大多数语言支持一种或两种。Java默认使用的是函数表派发，但是可以通过 <code>final</code> 关键字来进行直接派发。C++默认使用的是直接派发，但是可以通过 <code>virtual</code> 关键字来进行函数表派发。Objective-C 只能使用消息机制派发, 但允许开发者使用 C 直接派发来获取性能的提高。WTF但是Swift都支持，这很好，同时这个也是大多数开发人员混淆的源头，并且是大多数开发人员遇到过的问题。</p>
 <h3 id="派发的方法-Types-of-Dispatch"><a href="#派发的方法-Types-of-Dispatch" class="headerlink" title="派发的方法(Types of Dispatch )"></a>派发的方法(Types of Dispatch )</h3><p>派发的目的是告诉CPU找到特定方法的可执行的代码搁哪呢。我们在深入了解之前先了解一下这三种派发方法，以及每种方式在动态性和性能之间的取舍。</p>
 <h3 id="直接派发-Direct-Dispatch"><a href="#直接派发-Direct-Dispatch" class="headerlink" title="直接派发 (Direct Dispatch)"></a>直接派发 (Direct Dispatch)</h3><p>直接派发是最快的一种函数派发方法。不但因为在汇编的层面调用的指令集最少，而且编译器还能够有很大的优化空间, 例如函数内联等, 但这不在这篇博客的讨论范围. 直接派发也有人称为静态调用。然而, 对于编程来说直接调用也是最大的局限, 而且因为缺乏动态性所以没办法支持继承。</p>
 <h3 id="函数表派发-Table-Dispatch"><a href="#函数表派发-Table-Dispatch" class="headerlink" title="函数表派发 (Table Dispatch )"></a>函数表派发 (Table Dispatch )</h3><p>函数表派发是编译型语言实现动态化最普遍的实现方式。 函数表派发机制使用了一个数组来存储类声明的每一个函数的指针。 大部分语言把这个称为 “virtual table”(虚函数表)，而在Swift 里称为 “witness table”。每一个子类都有函数表的副本，里面记录着父类所有的函数，重写之后的函数会替代父类对应的函数。 一个子类新添加的函数, 都会被插入到这个数组的最后。在运行时会去查表调用响应的函数。</p>
 <h4 id="举个🌰"><a href="#举个🌰" class="headerlink" title="举个🌰"></a>举个🌰</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">class ParentClass &#123;</span><br><span class="line">    func method1() &#123;&#125;</span><br><span class="line">    func method2() &#123;&#125;</span><br><span class="line">&#125;</span><br><span class="line">class ChildClass: ParentClass &#123;</span><br><span class="line">    override func method2() &#123;&#125;</span><br><span class="line">    func method3() &#123;&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>在这个情况下, 编译器会创建两个函数表, 一个是<code>ParentClass</code>的, 另一个是 <code>ChildClass</code>的：<br><img src="http://upload-images.jianshu.io/upload_images/2353844-cb9bd002846a63e2.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<p>在这个情况下, 编译器会创建两个函数表, 一个是<code>ParentClass</code>的, 另一个是 <code>ChildClass</code>的：<br><img src="https://s6.postimg.cc/l1hlrrvcx/2353844-cb9bd002846a63e2.png" alt=""></p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">let obj = ChildClass()</span><br><span class="line">obj.method2()</span><br></pre></td></tr></table></figure>
 <p>####当一个函数被调用时, 会经历下面的几个过程：</p>
 <ul>
@@ -414,7 +414,7 @@
 <p>这种基于数组的实现, 缺陷在于函数表无法拓展。子类会在虚数函数表的最后插入新的函数，没有位置可以让 extension 安全地插入函数。这篇 <a href="https://lists.swift.org/pipermail/swift-evolution/Week-of-Mon-20151207/001922.html" target="_blank" rel="noopener">swift-evolution post</a> 很详细地描述了这么做的局限性。</p>
 <h3 id="消息派发-Message-Dispatch"><a href="#消息派发-Message-Dispatch" class="headerlink" title="消息派发 (Message Dispatch )"></a>消息派发 (Message Dispatch )</h3><p>消息派发是最广泛的动态调用函数的方法。也是<code>Cocoa</code>的中流砥柱，这种机制也为  <a href="https://developer.apple.com/library/content/documentation/Cocoa/Conceptual/KeyValueObserving/KeyValueObserving.html" target="_blank" rel="noopener">KVO</a>, <a href="https://developer.apple.com/reference/uikit/uiappearance" target="_blank" rel="noopener">UIAppearence</a> 和 <a href="https://developer.apple.com/library/content///documentation/Cocoa/Conceptual/CoreData/index.html" target="_blank" rel="noopener">CoreData</a> 打下了基础。这种机制的关键是允许开发者在运行时改变函数的实现。不仅可使用  <a href="https://www.mikeash.com/pyblog/friday-qa-2010-01-29-method-replacement-for-fun-and-profit.html" target="_blank" rel="noopener">swizzling</a> 来改变，还可以用 <a href="http://stackoverflow.com/a/38878119/255489" target="_blank" rel="noopener">isa-swizzling</a> 修改对象的继承关系，可以在面向对象的基础上实现自定义派发。</p>
 <h4 id="再举个🌰"><a href="#再举个🌰" class="headerlink" title="再举个🌰"></a>再举个🌰</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">class ParentClass &#123;</span><br><span class="line">    dynamic func method1() &#123;&#125;</span><br><span class="line">    dynamic func method2() &#123;&#125;</span><br><span class="line">&#125;</span><br><span class="line">class ChildClass: ParentClass &#123;</span><br><span class="line">    override func method2() &#123;&#125;</span><br><span class="line">    dynamic func method3() &#123;&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>Swift 会用树来构建这种继承关系:<br><img src="http://upload-images.jianshu.io/upload_images/2353844-2f383cd482292649.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""><br>当一个消息被转发, 运行时会顺着类的继承关系向上查找应该被调用的函数。如果你觉得这样做效率很低, 它确实很低。 然而, 只要缓存建立了起来。这个查找过程就会通过缓存来把性能提高到和函数表派发一样快。但这只是消息机制的原理, 这里有一篇文章<a href="http://www.friday.com/bbum/2009/12/18/objc_msgsend-part-1-the-road-map/" target="_blank" rel="noopener">一篇文章</a>很深入的讲解了具体的技术细节。</p>
+<p>Swift 会用树来构建这种继承关系:<br><img src="https://s6.postimg.cc/a36c90tqp/2353844-1c945171ad5116ee.png" alt=""><br>当一个消息被转发, 运行时会顺着类的继承关系向上查找应该被调用的函数。如果你觉得这样做效率很低, 它确实很低。 然而, 只要缓存建立了起来。这个查找过程就会通过缓存来把性能提高到和函数表派发一样快。但这只是消息机制的原理, 这里有一篇文章<a href="http://www.friday.com/bbum/2009/12/18/objc_msgsend-part-1-the-road-map/" target="_blank" rel="noopener">一篇文章</a>很深入的讲解了具体的技术细节。</p>
 <h3 id="Swift-的派发机制"><a href="#Swift-的派发机制" class="headerlink" title="Swift 的派发机制"></a>Swift 的派发机制</h3><p>那么，Swift是啥派发机制的呢？没有一个固定的的机制，有几种环境因素来影响使用哪种派发机制：</p>
 <ul>
 <li>声明的位置</li>
@@ -423,7 +423,7 @@
 <li>可见的优化<br>在说明之前, 我有必要说清楚, Swift 没有在文档里具体写明什么时候使用函数表什么时候使用消息派发机制。唯一的承诺是使用 dynamic 修饰的时候会通过 Objective-C 的运行时进行消息机制派发。以下我写的所有东西，都只是我在 Swift 3.0 里测试出来的结果，并且很可能在之后的版本更新里进行修改。博主会在近期使用Swift 4.0进行测试。</li>
 </ul>
 <h3 id="声明的位置-Location-Matters"><a href="#声明的位置-Location-Matters" class="headerlink" title="声明的位置(Location Matters)"></a>声明的位置(Location Matters)</h3><p>Swift有两个地方可以声明一个方法：在类声明的作用域，在extension中。根据声明的类型，这将改变调度的执行方式。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">class MyClass &#123;</span><br><span class="line">    func mainMethod() &#123;&#125;</span><br><span class="line">&#125;</span><br><span class="line">extension MyClass &#123;</span><br><span class="line">    func extensionMethod() &#123;&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>在上面的例子中，<code>mainMethod</code>将会使用函数表派发，<code>extensionMethod</code>将使用静态派发。当我第一次发现时候，我很意外。我不能确认这些方法有什么不同。下面是我根据类型，声明位置总结出来的函数派发方式的表格：<br><img src="http://upload-images.jianshu.io/upload_images/2353844-1d1e0e5b38297401.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"><br>下面有几条需要注意的：</p>
+<p>在上面的例子中，<code>mainMethod</code>将会使用函数表派发，<code>extensionMethod</code>将使用静态派发。当我第一次发现时候，我很意外。我不能确认这些方法有什么不同。下面是我根据类型，声明位置总结出来的函数派发方式的表格：<br><img src="https://s6.postimg.cc/5u1m6uy75/2353844-1d1e0e5b38297401.png" alt="image.png"><br>下面有几条需要注意的：</p>
 <ul>
 <li>值类型总是使用直接派发的。这很易懂！</li>
 <li>Protocol 和 Classes 的 Extensions 使用的是直接派发。</li>
@@ -440,13 +440,13 @@
 <p><strong>@objc &amp; @nonobjc</strong><br><code>@objc</code> 和 <code>@nonobjc</code> 声明了一个函数是否能被 Objective-C 的运行时捕获到。 使用 <code>@objc</code> 的典型例子就是给 <code>selector</code> 一个命名空间 <code>@objc(abc_methodName)</code>，让这个函数可以被 Objective-C 的运行时调用。 <code>@nonobjc</code> 会改变派发的方式，可以用来禁止消息机制派发这个函数，不让这个函数注册到 Objective-C 的运行时里。 我不确定这跟 <code>final</code> 有什么区别， 因为从使用场景来说也几乎一样。我个人来说更喜欢 <code>final</code>，因为意图更加明显。个人感觉<code>@objc</code> <code>@nonobjc</code>这两个是为了与OC混编时候更加方便，而<code>final</code>是为Swift准备的原生关键字。</p>
 <p><strong>final @objc</strong><br>可以在标记为 <code>final</code> 的同时，也使用 <code>@objc</code> 来让函数可以使用消息机制派发。这么做的结果就是，调用函数的时候会使用直接派发，但也会在 Objective-C 的运行时里注册响应的 selector。函数可以响应 perform(selector:) 以及别的 Objective-C 特性，但在直接调用时又可以有直接派发的性能。</p>
 <p><strong>@inline</strong><br>Swift 也支持 <code>@inline</code>，告诉编译器可以使用直接派发。有趣的是<code>dynamic @inline(__always) func dynamicOrDirect() {}</code> 也可以通过编译！它仅仅是一个声明，开发者大会表示函数依然是使用消息派发。这就像一个未声明的行为，应该避免这样使用。</p>
-<h3 id="修饰符总结-Modifier-Overview"><a href="#修饰符总结-Modifier-Overview" class="headerlink" title="修饰符总结 (Modifier Overview)"></a>修饰符总结 (Modifier Overview)</h3><p><img src="http://upload-images.jianshu.io/upload_images/2353844-43890abe814efa2b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""><br>这张图总结这些关键字对于 Swift 派发方式的影响，想看范例的话可以看<a href="https://gist.github.com/KingOfBrian/778dc93bffddf25b2c414360727c273b#file-message-swift" target="_blank" rel="noopener">这里</a>。</p>
+<h3 id="修饰符总结-Modifier-Overview"><a href="#修饰符总结-Modifier-Overview" class="headerlink" title="修饰符总结 (Modifier Overview)"></a>修饰符总结 (Modifier Overview)</h3><p><img src="https://s6.postimg.cc/buzb3x5dt/2353844-2f383cd482292649.png" alt=""><br>这张图总结这些关键字对于 Swift 派发方式的影响，想看范例的话可以看<a href="https://gist.github.com/KingOfBrian/778dc93bffddf25b2c414360727c273b#file-message-swift" target="_blank" rel="noopener">这里</a>。</p>
 <h3 id="显示优化-Visibility-Will-Optimize"><a href="#显示优化-Visibility-Will-Optimize" class="headerlink" title="显示优化 (Visibility Will Optimize)"></a>显示优化 (Visibility Will Optimize)</h3><p>Swift 将会尽力去优化函数派发的方式。例如，如果你有一个函数从来没有 override，Swift 就会检测并且在可能的情况下使用直接派发。这个优化大多数情况下都很好，但对于使用了 target / action 模式的 Cocoa 开发者就不怎么友好了。例如：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">override func viewDidLoad() &#123;</span><br><span class="line">    super.viewDidLoad()</span><br><span class="line">    navigationItem.rightBarButtonItem = UIBarButtonItem(</span><br><span class="line">        title: &quot;Sign In&quot;, style: .plain, target: nil,</span><br><span class="line">        action: #selector(ViewController.signInAction)</span><br><span class="line">    )</span><br><span class="line">&#125;</span><br><span class="line">private func signInAction() &#123;&#125;</span><br></pre></td></tr></table></figure></p>
 <p>编译会抛出一个错误: <code>Argument of &#39;#selector&#39; refers to a method that is not exposed to Objective-C</code>Objective-C 无法获取 #selector 指定的函数。你如果记得 Swift 会把这个函数优化为直接派发的话，就会理解了。 修复这里很简单：加上<code>@objc</code> 或者 <code>dynamic</code> 就可以保证 Objective-C 的运行时可以获取到函数。这种类型的错误也会发生在<code>UIAppearance</code> 上，依赖于 proxy 和 <code>NSInvocation</code>。</p>
 <p>另一点是, 如果你没有使用 <code>dynamic</code> 修饰的话， 这个优化会让 KVO 失效。如果一个属性绑定了 KVO 的话，而这个属性的 getter 和 setter 会被优化为直接派发，代码依旧可以通过编译，不过动态生成的 KVO 函数就不会被触发。</p>
 <p>Swift 的博客有一篇<a href="https://developer.apple.com/swift/blog/?id=27" target="_blank" rel="noopener">很赞的文章</a>描述了相关的细节，和这些优化背后的考虑。</p>
 <h3 id="派发总结-Dispatch-Summary"><a href="#派发总结-Dispatch-Summary" class="headerlink" title="派发总结 (Dispatch Summary)"></a>派发总结 (Dispatch Summary)</h3><p>这里有很多需要记住的规则，所以我整理了一个表格：</p>
-<p><img src="http://upload-images.jianshu.io/upload_images/2353844-1c945171ad5116ee.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<p><img src="https://s6.postimg.cc/iwx8qpgvl/2353844-43890abe814efa2b.png" alt=""></p>
 <h3 id="NSObject-以及动态性的损失-NSObject-and-the-Loss-of-Dynamic-Behavior"><a href="#NSObject-以及动态性的损失-NSObject-and-the-Loss-of-Dynamic-Behavior" class="headerlink" title="NSObject 以及动态性的损失 (NSObject and the Loss of Dynamic Behavior)"></a>NSObject 以及动态性的损失 (NSObject and the Loss of Dynamic Behavior)</h3><p>之前还有一些 Cocoa 开发者<a href="http://mjtsai.com/blog/2016/05/21/dynamic-swift-2/" target="_blank" rel="noopener">讨论动态行为带来的问题</a>。 这段讨论很有趣，提了一大堆不同的观点。我希望可以在这里继续探讨一下，有几个 Swift 的派发方式我觉得损害了动态性，顺便说一下我的解决方案。</p>
 <h3 id="NSObject-的函数表派发-Table-Dispatch-in-NSObject"><a href="#NSObject-的函数表派发-Table-Dispatch-in-NSObject" class="headerlink" title="NSObject 的函数表派发 (Table Dispatch in NSObject)"></a>NSObject 的函数表派发 (Table Dispatch in NSObject)</h3><p>之前，我说明了一个<code>NSObject</code> 子类作用域里面定义的函数会使用函数表派发。但我觉得很迷惑，很难解释清楚，并且由于下面几个原因，这也只带来了一点点性能的提升：</p>
 <ul>
@@ -469,7 +469,7 @@
 <p>Doug Gregor 在 <a href="https://lists.swift.org/pipermail/swift-evolution/Week-of-Mon-20151207/000928.html" target="_blank" rel="noopener">Swift-Evolution 邮件列表</a>里提到，通过显式地重新把函数声明为类的函数，就可以解决这个问题，并且不会偏离我们的设想。</p>
 <h4 id="因吹斯汀-Error-Interesting-Error"><a href="#因吹斯汀-Error-Interesting-Error" class="headerlink" title="因吹斯汀 Error (Interesting Error)"></a>因吹斯汀 Error (Interesting Error)</h4><p>有一个很好玩的编译错误, 可以窥见到 Swift 的计划. 就像之前说的, 类拓展使用直接派发, 所以你试图 override 一个声明在 extension 里的函数的时候会发生什么?<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">class MyClass &#123;</span><br><span class="line">&#125;</span><br><span class="line">extension MyClass &#123;</span><br><span class="line">    func extensionMethod() &#123;&#125;</span><br><span class="line">&#125;</span><br><span class="line">class SubClass: MyClass &#123;</span><br><span class="line">    override func extensionMethod() &#123;&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <p>上面的代码会触发一个编译错误 <code>Declarations in extensions can not be overridden yet</code>(声明在 extension 里的方法不可以被重写)。这可能是 Swift 团队打算加强函数表派发的一个征兆。又或者这只是我过度解读，觉得这门语言可以优化的地方。</p>
-<p><img src="http://upload-images.jianshu.io/upload_images/2353844-5ff4219d8ccc509d.gif?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<p><img src="https://s6.postimg.cc/6jkej86gh/2353844-5ff4219d8ccc509d.gif" alt=""></p>
 <h3 id="致谢-Thanks"><a href="#致谢-Thanks" class="headerlink" title="致谢 Thanks"></a>致谢 Thanks</h3><p>我希望了解函数派发机制的过程中你感受到了乐趣，并且可以帮助你更好的理解 Swift。虽然我抱怨了 <code>NSObject</code> 相关的一些东西，但我还是觉得 Swift 提供了高性能的可能性，我只是希望可以有足够简单的方式，让这篇博客没有存在的必要。<br>原文:</p>
 <ul>
 <li>原文： <a href="https://www.raizlabs.com/dev/2016/12/swift-method-dispatch/?utm_campaign=This+Week+in+Swift&amp;utm_medium=email&amp;utm_source=This_Week_in_Swift_114" target="_blank" rel="noopener">Method Dispatch in Swift</a></li>
@@ -512,8 +512,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2017/12/13/再见简书👋/" rel="prev" title="再见简书👋">
-                再见简书👋 <i class="fa fa-chevron-right"></i>
+              <a href="/2017/12/18/使用LeanCloud对Hexo构建的博客配置统计功能/" rel="prev" title="使用LeanCloud对Hexo构建的博客配置统计功能">
+                使用LeanCloud对Hexo构建的博客配置统计功能 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -592,7 +592,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">27</span>
+                    <span class="site-state-item-count">26</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
