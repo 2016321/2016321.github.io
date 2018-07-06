@@ -119,7 +119,7 @@
 <meta property="og:image" content="https://s6.postimg.cc/81bu1h1zl/Simulator_Screen_Shot_-_i_Phone_X_-_2018-07-06_at_09.43.59.png">
 <meta property="og:image" content="https://developer.apple.com/library/archive/documentation/StringsTextFonts/Conceptual/TextAndWebiPhoneOS/Art/text_kit_arch_2x.png">
 <meta property="og:image" content="https://developer.apple.com/library/archive/documentation/StringsTextFonts/Conceptual/CoreText_Programming/Art/core_text_arch_2x.png">
-<meta property="og:updated_time" content="2018-07-06T08:30:13.418Z">
+<meta property="og:updated_time" content="2018-07-06T08:35:12.506Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="CoreText跳坑">
 <meta name="twitter:description" content="#####记得上次更新是半年前了，转眼就到了18年的Q3了。回顾一下我的博客的空窗期，记得在年初的时候前东家孵化了个线上的视频约见的项目，自己也算是尽力在做。之后又对项目管理感兴趣学了些报了个项目管理的考试，然而在最后一门论文崩盘也是心塞。在工作学习中发现，自己接触的越多越会感觉到自己的渺小自己的不足，同时考完试之后跳了一家更大的公司也搬了家，在项目组里面默默无闻，尽力去做的更好去完善自己吧，咳咳">
@@ -238,7 +238,7 @@
           
           <li class="menu-item menu-item-archives">
     <a href="/archives/" rel="section">
-      <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />归档<span class="badge">28</span></a>
+      <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />归档<span class="badge">27</span></a>
   </li>
         
         
@@ -254,7 +254,7 @@
           
           <li class="menu-item menu-item-categories">
     <a href="/categories/" rel="section">
-      <i class="menu-item-icon fa fa-fw fa-th"></i> <br />分类<span class="badge">3</span></a>
+      <i class="menu-item-icon fa fa-fw fa-th"></i> <br />分类<span class="badge">2</span></a>
   </li>
 
       
@@ -364,7 +364,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2018-07-06 16:30:13" itemprop="dateModified" datetime="2018-07-06T16:30:13+08:00">2018-07-06</time>
+                <time title="修改时间：2018-07-06 16:35:12" itemprop="dateModified" datetime="2018-07-06T16:35:12+08:00">2018-07-06</time>
               
             
           </span>
@@ -381,7 +381,7 @@
                 <span class="post-meta-item-text">分类于</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/mobile/" itemprop="url" rel="index"><span itemprop="name">mobile</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Mobile/" itemprop="url" rel="index"><span itemprop="name">Mobile</span></a></span>
 
                 
                 
@@ -415,12 +415,13 @@
       
 
       
-        <p>#####<em>记得上次更新是半年前了，转眼就到了18年的Q3了。回顾一下我的博客的空窗期，记得在年初的时候前东家孵化了个线上的视频约见的项目，自己也算是尽力在做。之后又对项目管理感兴趣学了些报了个项目管理的考试，然而在最后一门论文崩盘也是心塞。在工作学习中发现，自己接触的越多越会感觉到自己的渺小自己的不足，同时考完试之后跳了一家更大的公司也搬了家，在项目组里面默默无闻，尽力去做的更好去完善自己吧，咳咳，扯多了，作为回归的第一篇还是得有点质量，总结一下CoreText的相关的东西，尽量用最少的文字讲更多的东西</em></p>
+        <p>#####记得上次更新是半年前了，转眼就到了18年的Q3了。回顾一下我的博客的空窗期，记得在年初的时候前东家孵化了个线上的视频约见的项目，自己也算是尽力在做。之后又对项目管理感兴趣学了些报了个项目管理的考试，然而在最后一门论文崩盘也是心塞。在工作学习中发现，自己接触的越多越会感觉到自己的渺小自己的不足，同时考完试之后跳了一家更大的公司也搬了家，在项目组里面默默无闻，尽力去做的更好去完善自己吧，咳咳，扯多了，作为回归的第一篇还是得有点质量，总结一下CoreText的相关的东西，尽量用最少的文字讲更多的东西</p>
 <p>#CoreText</p>
 <p>##OverView</p>
 <p>Core Text提供了一个现代的低级编程接口，用于布置文本和处理字体。Core Text布局引擎旨在实现高性能，易用性以及与Core Foundation的紧密集成。文本布局API提供高质量的排版，包括字符到字形的转换，带有连字，字距调整等。互补的Core Text字体技术提供自动字体替换（级联），字体描述符和集合，轻松访问字体度量和字形数据以及许多其他功能。</p>
 <p>多线程中的注意事项：Core Text中的所有单个函数都是线程安全的。字体对象（<strong>CTFont</strong>，<strong>CTFontDescriptor</strong>和相关的对象）可以被多个任务、队列或线程同时使用。但是，布局对象（<strong>CTTypesetter</strong>，<strong>CTFramesetter</strong>，<strong>CTRun</strong>，<strong>CTLine</strong>，<strong>CTFrame</strong>和关联对象）应该在单个操作，工作队列或线程中使用。</p>
-<p>##基本概念<br><span id="1-2-1"></span></p>
+<p>##基本概念</p>
+<p><span id="1-2-1"></span></p>
 <p>###坐标系相关</p>
 <p>我们如果不做任何转换的话我们应该绘制的是这个样子的</p>
 <p><img src="https://s6.postimg.cc/81bu1h1zl/Simulator_Screen_Shot_-_i_Phone_X_-_2018-07-06_at_09.43.59.png" alt=""></p>
@@ -433,18 +434,30 @@
 <p><a href="https://developer.apple.com/library/archive/documentation/StringsTextFonts/Conceptual/TextAndWebiPhoneOS/Introduction/Introduction.html" target="_blank" rel="noopener">可以看相关的文档做更深入了解</a></p>
 <p><a href="https://developer.apple.com/library/archive/documentation/StringsTextFonts/Conceptual/CoreText_Programming/Overview/Overview.html" target="_blank" rel="noopener">还有这里</a></p>
 <p>##基本Class</p>
-<p>###CTFont<br><code>CTFont</code>用来表示<code>Core Text</code>字体对象。字体对象表示应用程序的字体，<code>CTFont</code>提供对字体描述的访问，例如磅值，变换矩阵属性和其他属性。字体提供了相对于彼此布置字形的帮助，并用于在图形上下文中绘制时设置字体。</p>
-<p>###CTFontCollection<br><code>CTFontCollection</code>用来表示字体描述对象集合，即一组字体合成的单个对象。</p>
-<p>###CTFontDescriptor<br><code>CTFontDescriptor</code>用来表示字体描述对象，可以指定字体的属性字典（例如名称，磅值和变体）。</p>
-<p>###CTFrame<br><code>CTFrame</code>用来表示包含多行文本的框架。帧对象是由框架集对象执行的文本框架处理产生的输出。</p>
-<p>###CTFramesetter<br><code>CTFramesetter</code>类型用于生成CTFrame对象。CTFramesetter是CTFrame对象的对象工厂。</p>
-<p>###CTGlyphInfo<br><code>CTGlyphInfo</code>类型让你可以覆盖字体从Unicode到字形ID的指定映射。</p>
-<p>###CTLine<br><code>CTLine</code>用来表示一行文本。</p>
-<p>###CTParagraphStyle<br><code>CTParagraphStyle</code>用来表示属性字符串中的段落或标尺属性对象。</p>
-<p>###CTRun<br><code>CTRun</code>用来表示字形运行，它是一组拥有相同属性和方向的连续字形。</p>
-<p>###CTRunDelegate<br><code>CTRunDelegate</code>用来表示一个运行代理，其被分配到一个运行（属性范围），以控制印刷性状例如字的向上偏移量，字的向下偏移量，和字宽。</p>
-<p>###CTTextTab<br><code>CTTextTab</code>用来表示段落样式中的选项卡，存储对齐类型和位置。</p>
-<p>###CTTypesetter<br><code>CTTypesetter</code>用来表示排版器，它执行行布局。</p>
+<p>###CTFont</p>
+<p><code>CTFont</code>用来表示<code>Core Text</code>字体对象。字体对象表示应用程序的字体，<code>CTFont</code>提供对字体描述的访问，例如磅值，变换矩阵属性和其他属性。字体提供了相对于彼此布置字形的帮助，并用于在图形上下文中绘制时设置字体。</p>
+<p>###CTFontCollection</p>
+<p><code>CTFontCollection</code>用来表示字体描述对象集合，即一组字体合成的单个对象。</p>
+<p>###CTFontDescriptor</p>
+<p><code>CTFontDescriptor</code>用来表示字体描述对象，可以指定字体的属性字典（例如名称，磅值和变体）。</p>
+<p>###CTFrame</p>
+<p><code>CTFrame</code>用来表示包含多行文本的框架。帧对象是由框架集对象执行的文本框架处理产生的输出。</p>
+<p>###CTFramesetter</p>
+<p><code>CTFramesetter</code>类型用于生成CTFrame对象。CTFramesetter是CTFrame对象的对象工厂。</p>
+<p>###CTGlyphInfo</p>
+<p><code>CTGlyphInfo</code>类型让你可以覆盖字体从Unicode到字形ID的指定映射。</p>
+<p>###CTLine</p>
+<p><code>CTLine</code>用来表示一行文本。</p>
+<p>###CTParagraphStyle</p>
+<p><code>CTParagraphStyle</code>用来表示属性字符串中的段落或标尺属性对象。</p>
+<p>###CTRun</p>
+<p><code>CTRun</code>用来表示字形运行，它是一组拥有相同属性和方向的连续字形。</p>
+<p>###CTRunDelegate</p>
+<p><code>CTRunDelegate</code>用来表示一个运行代理，其被分配到一个运行（属性范围），以控制印刷性状例如字的向上偏移量，字的向下偏移量，和字宽。</p>
+<p>###CTTextTab</p>
+<p><code>CTTextTab</code>用来表示段落样式中的选项卡，存储对齐类型和位置。</p>
+<p>###CTTypesetter</p>
+<p><code>CTTypesetter</code>用来表示排版器，它执行行布局。</p>
 <p><a href="https://developer.apple.com/documentation/coretext?language=objc" target="_blank" rel="noopener">查看详细文档</a></p>
 <p>#简单的Demo</p>
 <p>##简单的绘制文字<br>因为<code>Core Text</code>底层是使用<code>Core Graphics</code>来绘制的，我们要在<code>UIView</code>的<code>drawRect</code>中写相关的代码</p>
@@ -474,14 +487,15 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">CTFrameDraw(frame, context);</span><br></pre></td></tr></table></figure>
 <p>###7.2<br>但是有的时候我们需要对不同的行做操作，这个时候我们就要对CTLine分别做绘制了</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">//获取CTLine数组</span><br><span class="line">CFArrayRef lines = CTFrameGetLines(frame);</span><br><span class="line">//获取CTLine对象数量</span><br><span class="line">CFIndex lineNumber =  CFArrayGetCount(lines);</span><br><span class="line">//初始化行原点数组</span><br><span class="line">CGPoint lineOrigins[lineNumber];</span><br><span class="line">//获取每行的原点</span><br><span class="line">CTFrameGetLineOrigins(frame, CFRangeMake(0, 0), lineOrigins);</span><br><span class="line">for (int i = 0 ; i &lt; lineNumber; i++) &#123;</span><br><span class="line">	//获取行对象</span><br><span class="line">	CTLineRef line = CFArrayGetValueAtIndex(lines, i);</span><br><span class="line">	//设置行的绘制的原点</span><br><span class="line">	CGContextSetTextPosition(context, lineOrigins[i].x, lineOrigins[i].y);</span><br><span class="line">	//绘制一行的内容</span><br><span class="line">	CTLineDraw(line , context);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>###7.3<br>同时我们有的时候要对每行的<code>CTRun</code>对象做不同的操作</p>
+<p>###7.3</p>
+<p>同时我们有的时候要对每行的<code>CTRun</code>对象做不同的操作</p>
 <p>我们将<strong>7.2</strong>的最后的操作换成下面的代码就是遍历每行的<code>CTRun</code>进行绘制</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">CFArrayRef runs = CTLineGetGlyphRuns(line);</span><br><span class="line">for (int j = 0; j &lt; CFArrayGetCount(runs); j++) &#123;</span><br><span class="line">	CTRunRef run = CFArrayGetValueAtIndex(runs, j);</span><br><span class="line">	CTRunDraw(run, context, CFRangeMake(0, 0));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>###8</p>
 <p>值得一提的就是，之前向系统申请的<code>Context</code>不需要释放，系统会在恰当的时机去释放</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">CFRelease(path);</span><br><span class="line">CFRelease(framesetter);</span><br><span class="line">CFRelease(frame);</span><br></pre></td></tr></table></figure>
 <p>###简单介绍一下概念，具体项目中可以用到的功能周末继续更新~<br>随后我们会讲到图文混排、文字点击回调、文字点击高亮等相关操作</p>
-<p>英文水平贼渣的我看了好久英文文档和博客总结的，如果转载请附上链接，万分感谢</p>
+<p>英文水平贼渣的我看了好久英文文档和博客总结的，如果转载请附上链接<a href="https://coderwong.com/2018/07/05/CoreText%E8%B7%B3%E5%9D%91/" target="_blank" rel="noopener">https://coderwong.com/2018/07/05/CoreText%E8%B7%B3%E5%9D%91/</a>，万分感谢</p>
 
       
     </div>
@@ -519,8 +533,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/07/03/CoreText/" rel="next" title="CoreText">
-                <i class="fa fa-chevron-left"></i> CoreText
+              <a href="/2017/12/19/Swift原生与RN通信的实现/" rel="next" title="Swift原生与RN通信的实现">
+                <i class="fa fa-chevron-left"></i> Swift原生与RN通信的实现
               </a>
             
           </div>
@@ -596,7 +610,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">28</span>
+                    <span class="site-state-item-count">27</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -613,9 +627,7 @@
                     
                       
                     
-                      
-                    
-                    <span class="site-state-item-count">3</span>
+                    <span class="site-state-item-count">2</span>
                     <span class="site-state-item-name">分类</span>
                   </a>
                 </div>
