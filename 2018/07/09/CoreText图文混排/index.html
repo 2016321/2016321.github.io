@@ -116,7 +116,7 @@
 <meta property="og:site_name" content="Coder Note">
 <meta property="og:description" content="我们接着上一篇讲，上篇已经大概的讲了下单纯的绘制文字，但是一篇文章一般都会有几张图片的，而且是嵌入文字内的，不一定是将上下文字换行来处理的，我们今天就讲一下如果图片嵌入了文字该如何处理。  思路我们已经可以正常绘制富文本了，也可以通过CTLine和CTRun来分别对每行或者每行的绘制对象来进行干预来完成绘制。我们来简单捋一下图文混排的思路，一些准备操作和之前是一样的，只是在将富文本传递给CTFr">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-07-09T11:47:57.645Z">
+<meta property="og:updated_time" content="2018-07-09T11:49:17.950Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="CoreText图文混排">
 <meta name="twitter:description" content="我们接着上一篇讲，上篇已经大概的讲了下单纯的绘制文字，但是一篇文章一般都会有几张图片的，而且是嵌入文字内的，不一定是将上下文字换行来处理的，我们今天就讲一下如果图片嵌入了文字该如何处理。  思路我们已经可以正常绘制富文本了，也可以通过CTLine和CTRun来分别对每行或者每行的绘制对象来进行干预来完成绘制。我们来简单捋一下图文混排的思路，一些准备操作和之前是一样的，只是在将富文本传递给CTFr">
@@ -343,7 +343,7 @@
                 
               
 
-              <time title="创建时间：2018-07-09 09:52:24 / 修改时间：19:47:57" itemprop="dateCreated datePublished" datetime="2018-07-09T09:52:24+08:00">2018-07-09</time>
+              <time title="创建时间：2018-07-09 09:52:24 / 修改时间：19:49:17" itemprop="dateCreated datePublished" datetime="2018-07-09T09:52:24+08:00">2018-07-09</time>
             
 
             
@@ -428,7 +428,7 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">//距离顶部基线的距离</span><br><span class="line">CGFloat ascent;</span><br><span class="line">//距离底部基线的距离</span><br><span class="line">CGFloat descent;</span><br><span class="line">//进行计算的中间变量</span><br><span class="line">CGRect bounds;</span><br><span class="line">//获取图片的宽和上下基线的距离</span><br><span class="line">bounds.size.width = CTRunGetTypographicBounds(run, CFRangeMake(0, 0), &amp;ascent, &amp;descent, NULL);</span><br><span class="line">bounds.size.height = ascent + descent;</span><br><span class="line">//获取距离行的第一个字的原点的水平距离</span><br><span class="line">CGFloat xOffset = CTLineGetOffsetForStringIndex(line, CTRunGetStringRange(run).location, NULL);</span><br><span class="line">//计算图片原点的x坐标</span><br><span class="line">bounds.origin.x = point.x + xOffset;</span><br><span class="line">//计算图片原点的y坐标</span><br><span class="line">bounds.origin.y = point.y - descent;</span><br><span class="line">//获取绘制的区域</span><br><span class="line">CGPathRef path = CTFrameGetPath(frame);</span><br><span class="line">//获取裁剪区域的区域</span><br><span class="line">CGRect colRect = CGPathGetBoundingBox(path);</span><br><span class="line">//获取图片的绝对布局</span><br><span class="line">CGRect imageBounds = CGRectOffset(bounds, colRect.origin.x, colRect.origin.y);</span><br></pre></td></tr></table></figure>
 <h3 id="5"><a href="#5" class="headerlink" title="5"></a>5</h3><p>两个形参分别是需要绘制的图片和图片的绝对布局，我们直接绘制既可。</p>
 <hr>
-<h5 id="我将图文混排增加的代码直接写成了各个方法，更灵活更易懂，这个地方我们可以自定义一个类来专门处理图文相关的代理等一系列的参数，YYText就是自定义了一个YYTextRunDelegate这个类来处理相关的，下一篇我们将继续写点击事件相关"><a href="#我将图文混排增加的代码直接写成了各个方法，更灵活更易懂，这个地方我们可以自定义一个类来专门处理图文相关的代理等一系列的参数，YYText就是自定义了一个YYTextRunDelegate这个类来处理相关的，下一篇我们将继续写点击事件相关" class="headerlink" title="我将图文混排增加的代码直接写成了各个方法，更灵活更易懂，这个地方我们可以自定义一个类来专门处理图文相关的代理等一系列的参数，YYText就是自定义了一个YYTextRunDelegate这个类来处理相关的，下一篇我们将继续写点击事件相关"></a>我将图文混排增加的代码直接写成了各个方法，更灵活更易懂，这个地方我们可以自定义一个类来专门处理图文相关的代理等一系列的参数，<code>YYText</code>就是自定义了一个<code>YYTextRunDelegate</code>这个类来处理相关的，下一篇我们将继续写点击事件相关</h5><p>英文水平贼渣的我又看了好久英文文档和博客总结的，如果转载请附上链接<a href="https://coderwong.com/2018/07/05/CoreText%E8%B7%B3%E5%9D%91/" target="_blank" rel="noopener">https://coderwong.com/2018/07/05/CoreText%E8%B7%B3%E5%9D%91/</a>，万分感谢</p>
+<h5 id="我将图文混排增加的代码直接写成了各个方法，更灵活更易懂，这个地方我们可以自定义一个类来专门处理图文相关的代理等一系列的参数，YYText就是自定义了一个YYTextRunDelegate这个类来处理相关的，下一篇我们将继续写点击事件相关"><a href="#我将图文混排增加的代码直接写成了各个方法，更灵活更易懂，这个地方我们可以自定义一个类来专门处理图文相关的代理等一系列的参数，YYText就是自定义了一个YYTextRunDelegate这个类来处理相关的，下一篇我们将继续写点击事件相关" class="headerlink" title="我将图文混排增加的代码直接写成了各个方法，更灵活更易懂，这个地方我们可以自定义一个类来专门处理图文相关的代理等一系列的参数，YYText就是自定义了一个YYTextRunDelegate这个类来处理相关的，下一篇我们将继续写点击事件相关"></a>我将图文混排增加的代码直接写成了各个方法，更灵活更易懂，这个地方我们可以自定义一个类来专门处理图文相关的代理等一系列的参数，<code>YYText</code>就是自定义了一个<code>YYTextRunDelegate</code>这个类来处理相关的，下一篇我们将继续写点击事件相关</h5><p>英文水平贼渣的我又看了好久英文文档和博客总结的，如果转载请附上链接<a href="https://coderwong.com/2018/07/09/CoreText%E5%9B%BE%E6%96%87%E6%B7%B7%E6%8E%92/" target="_blank" rel="noopener">https://coderwong.com/2018/07/09/CoreText%E5%9B%BE%E6%96%87%E6%B7%B7%E6%8E%92/</a>，万分感谢</p>
 
       
     </div>
