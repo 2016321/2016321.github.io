@@ -233,7 +233,7 @@
           
           <li class="menu-item menu-item-archives">
     <a href="/archives/" rel="section">
-      <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />归档<span class="badge">28</span></a>
+      <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />归档<span class="badge">29</span></a>
   </li>
         
         
@@ -300,7 +300,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/09/CoreText图文混排/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/10/CoreTextTouch/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="coderwong">
@@ -319,8 +319,8 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/07/09/CoreText图文混排/" itemprop="url">
-                  CoreText图文混排
+                <a class="post-title-link" href="/2018/07/10/CoreTextTouch/" itemprop="url">
+                  CoreText点击事件处理
                 </a>
               
             
@@ -346,7 +346,7 @@
                 
               
 
-              <time title="创建时间：2018-07-09 09:52:24" itemprop="dateCreated datePublished" datetime="2018-07-09T09:52:24+08:00">2018-07-09</time>
+              <time title="创建时间：2018-07-10 11:03:49" itemprop="dateCreated datePublished" datetime="2018-07-10T11:03:49+08:00">2018-07-10</time>
             
 
             
@@ -363,7 +363,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2018-07-10 10:37:31" itemprop="dateModified" datetime="2018-07-10T10:37:31+08:00">2018-07-10</time>
+                <time title="修改时间：2018-07-11 11:20:14" itemprop="dateModified" datetime="2018-07-11T11:20:14+08:00">2018-07-11</time>
               
             
           </span>
@@ -394,7 +394,7 @@
 
           
           
-             <span id="/2018/07/09/CoreText图文混排/" class="leancloud_visitors" data-flag-title="CoreText图文混排">
+             <span id="/2018/07/10/CoreTextTouch/" class="leancloud_visitors" data-flag-title="CoreText点击事件处理">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -428,13 +428,13 @@
         
           
           
-我们接着上一篇讲，上篇已经大概的讲了下单纯的绘制文字，但是一篇文章一般都会有几张图片的，而且是嵌入文字内的，不一定是将上下文字换行来处理的，我们今天就讲一下如果图片嵌入了文字该如何处理。
+这篇我们来讲一下点击事件，看了不少博客将图文混排、点击事件等等都放在一篇来讲，这样的话可能对于我这种小白来说有点难消化，我就将几种需求放在几篇细细道来
 
-思路我们已经可以正常绘制富文本了，也可以通过CTLine和CTRun来分别对每行或者每行的绘制对象来进行干预
+思路我们通过之前几篇已经可以直接进行图文混排了，这次我们需要给富文本加上点击的方法，点击回调的时候将对应的字符串、绘制范围、字符串的位置等等信息
           ...
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2018/07/09/CoreText图文混排/#more" rel="contents">
+            <a class="btn" href="/2018/07/10/CoreTextTouch/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -490,7 +490,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/05/CoreText跳坑/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/09/CoreText/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="coderwong">
@@ -509,7 +509,197 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/07/05/CoreText跳坑/" itemprop="url">
+                <a class="post-title-link" href="/2018/07/09/CoreText/" itemprop="url">
+                  CoreText图文混排
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2018-07-09 09:52:24" itemprop="dateCreated datePublished" datetime="2018-07-09T09:52:24+08:00">2018-07-09</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2018-07-11 11:13:09" itemprop="dateModified" datetime="2018-07-11T11:13:09+08:00">2018-07-11</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Mobile/" itemprop="url" rel="index"><span itemprop="name">Mobile</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2018/07/09/CoreText/" class="leancloud_visitors" data-flag-title="CoreText图文混排">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数：</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+          
+我们接着上一篇讲，上篇已经大概的讲了下单纯的绘制文字，但是一篇文章一般都会有几张图片的，而且是嵌入文字内的，不一定是将上下文字换行来处理的，我们今天就讲一下如果图片嵌入了文字该如何处理。
+
+思路我们已经可以正常绘制富文本了，也可以通过CTLine和CTRun来分别对每行或者每行的绘制对象来进行干预
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/07/09/CoreText/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/05/CoreTextBase/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="coderwong">
+      <meta itemprop="description" content="天道酬勤">
+      <meta itemprop="image" content="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1513588177840&di=fd065c5f8d576b6c406f9984f3abe6a2&imgtype=0&src=http%3A%2F%2Ff.hiphotos.baidu.com%2Fimage%2Fpic%2Fitem%2F9825bc315c6034a82b679065c113495408237648.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Coder Note">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/07/05/CoreTextBase/" itemprop="url">
                   CoreText跳坑
                 </a>
               
@@ -553,7 +743,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2018-07-10 10:37:29" itemprop="dateModified" datetime="2018-07-10T10:37:29+08:00">2018-07-10</time>
+                <time title="修改时间：2018-07-11 11:22:20" itemprop="dateModified" datetime="2018-07-11T11:22:20+08:00">2018-07-11</time>
               
             
           </span>
@@ -584,7 +774,7 @@
 
           
           
-             <span id="/2018/07/05/CoreText跳坑/" class="leancloud_visitors" data-flag-title="CoreText跳坑">
+             <span id="/2018/07/05/CoreTextBase/" class="leancloud_visitors" data-flag-title="CoreText跳坑">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -621,7 +811,7 @@
 </blockquote>
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2018/07/05/CoreText跳坑/#more" rel="contents">
+            <a class="btn" href="/2018/07/05/CoreTextBase/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -1963,191 +2153,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/08/01/Swift-获取device-token/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="coderwong">
-      <meta itemprop="description" content="天道酬勤">
-      <meta itemprop="image" content="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1513588177840&di=fd065c5f8d576b6c406f9984f3abe6a2&imgtype=0&src=http%3A%2F%2Ff.hiphotos.baidu.com%2Fimage%2Fpic%2Fitem%2F9825bc315c6034a82b679065c113495408237648.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Coder Note">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/08/01/Swift-获取device-token/" itemprop="url">
-                  Swift 获取device token
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2017-08-01 15:56:21" itemprop="dateCreated datePublished" datetime="2017-08-01T15:56:21+08:00">2017-08-01</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2018-07-02 18:42:11" itemprop="dateModified" datetime="2018-07-02T18:42:11+08:00">2018-07-02</time>
-              
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Mobile/" itemprop="url" rel="index"><span itemprop="name">Mobile</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-             <span id="/2017/08/01/Swift-获取device-token/" class="leancloud_visitors" data-flag-title="Swift 获取device token">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">阅读次数：</span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h5 id="在做推送通知的时候发现一个尴尬的事情，在测试推送时候需要获取device-token，按照友盟的文档，我做了如下操作"><a href="#在做推送通知的时候发现一个尴尬的事情，在测试推送时候需要获取device-token，按照友盟的文档，我做了如下操作" class="headerlink" title="在做推送通知的时候发现一个尴尬的事情，在测试推送时候需要获取device token，按照友盟的文档，我做了如下操作"></a>在做推送通知的时候发现一个尴尬的事情，在测试推送时候需要获取<code>device token</code>，按照友盟的文档，我做了如下操作</h5>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2017/08/01/Swift-获取device-token/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2199,7 +2204,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">28</span>
+                    <span class="site-state-item-count">29</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
