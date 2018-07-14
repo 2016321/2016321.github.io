@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2018-07-11T06:35:00.785Z</updated>
+  <updated>2018-07-14T06:41:22.587Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,34 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>《iOS和macOS性能优化》1.CPU：原理</title>
+    <link href="http://yoursite.com/2018/07/14/%E3%80%8AiOS%E5%92%8CmacOS%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E3%80%8B1-CPU%EF%BC%9A%E5%8E%9F%E7%90%86/"/>
+    <id>http://yoursite.com/2018/07/14/《iOS和macOS性能优化》1-CPU：原理/</id>
+    <published>2018-07-14T05:36:05.000Z</published>
+    <updated>2018-07-14T06:41:22.587Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          
+        
+      
+    
+    </summary>
+    
+      <category term="《iOS和macOS性能优化》总结" scheme="http://yoursite.com/categories/%E3%80%8AiOS%E5%92%8CmacOS%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E3%80%8B%E6%80%BB%E7%BB%93/"/>
+    
+    
+      <category term="iOS" scheme="http://yoursite.com/tags/iOS/"/>
+    
+      <category term="OC" scheme="http://yoursite.com/tags/OC/"/>
+    
+  </entry>
   
   <entry>
     <title>CoreText点击事件处理</title>
@@ -467,28 +495,6 @@
       <category term="iOS" scheme="http://yoursite.com/tags/iOS/"/>
     
       <category term="OC" scheme="http://yoursite.com/tags/OC/"/>
-    
-      <category term="Swift" scheme="http://yoursite.com/tags/Swift/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>KVC 遇到的一些问题 O.o?</title>
-    <link href="http://yoursite.com/2017/02/09/KVC-%E9%81%87%E5%88%B0%E7%9A%84%E4%B8%80%E4%BA%9B%E9%97%AE%E9%A2%98-O-o/"/>
-    <id>http://yoursite.com/2017/02/09/KVC-遇到的一些问题-O-o/</id>
-    <published>2017-02-09T10:54:06.000Z</published>
-    <updated>2018-07-02T10:42:26.735Z</updated>
-    
-    <summary type="html">
-    
-      &lt;h3 id=&quot;WTF-O-o&quot;&gt;&lt;a href=&quot;#WTF-O-o&quot; class=&quot;headerlink&quot; title=&quot;WTF O.o?&quot;&gt;&lt;/a&gt;WTF O.o?&lt;/h3&gt;&lt;h5 id=&quot;今天在自己封装控件时候发现一个问题，当我使用KVC和-keyPath发生了一个crash&quot;&gt;&lt;a href=&quot;#今天在自己封装控件时候发现一个问题，当我使用KVC和-keyPath发生了一个crash&quot; class=&quot;headerlink&quot; title=&quot;今天在自己封装控件时候发现一个问题，当我使用KVC和#keyPath发生了一个crash&quot;&gt;&lt;/a&gt;今天在自己封装控件时候发现一个问题，当我使用KVC和#keyPath发生了一个crash&lt;/h5&gt;
-    
-    </summary>
-    
-      <category term="Mobile" scheme="http://yoursite.com/categories/Mobile/"/>
-    
-    
-      <category term="iOS" scheme="http://yoursite.com/tags/iOS/"/>
     
       <category term="Swift" scheme="http://yoursite.com/tags/Swift/"/>
     

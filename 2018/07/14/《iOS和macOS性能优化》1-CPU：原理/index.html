@@ -108,18 +108,20 @@
 
 
 
-  <meta name="description" content="iOS 常用宏(OC)">
+  <meta name="description" content="看到了 Marcel Weiher 大神的 《iOS和macOS性能优化》中文版出版，马上买来窝图书馆啃完，下面是我做的读书笔记，希望分享给大家给大家带来帮助，大致翻了一下书感觉文字较多内容相对晦涩，我会它总结一下讲出来让大家更好理解。  前言关于Objective-C的历史大家自行Google吧，po几个网址大家简单了解下 smalltalk 官方 smalltalk 维基百科 大致的总结下就">
 <meta name="keywords" content="iOS,OC">
 <meta property="og:type" content="article">
-<meta property="og:title" content="iOS 常用宏(OC)">
-<meta property="og:url" content="http://yoursite.com/2016/10/22/iOS-常用宏/index.html">
+<meta property="og:title" content="《iOS和macOS性能优化》1.CPU：原理">
+<meta property="og:url" content="http://yoursite.com/2018/07/14/《iOS和macOS性能优化》1-CPU：原理/index.html">
 <meta property="og:site_name" content="Coder Note">
-<meta property="og:description" content="iOS 常用宏(OC)">
+<meta property="og:description" content="看到了 Marcel Weiher 大神的 《iOS和macOS性能优化》中文版出版，马上买来窝图书馆啃完，下面是我做的读书笔记，希望分享给大家给大家带来帮助，大致翻了一下书感觉文字较多内容相对晦涩，我会它总结一下讲出来让大家更好理解。  前言关于Objective-C的历史大家自行Google吧，po几个网址大家简单了解下 smalltalk 官方 smalltalk 维基百科 大致的总结下就">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-07-02T10:43:00.509Z">
+<meta property="og:image" content="https://s6.postimg.cc/dgmurke0x/WX20180714-142759_2x.png">
+<meta property="og:updated_time" content="2018-07-14T06:41:22.587Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="iOS 常用宏(OC)">
-<meta name="twitter:description" content="iOS 常用宏(OC)">
+<meta name="twitter:title" content="《iOS和macOS性能优化》1.CPU：原理">
+<meta name="twitter:description" content="看到了 Marcel Weiher 大神的 《iOS和macOS性能优化》中文版出版，马上买来窝图书馆啃完，下面是我做的读书笔记，希望分享给大家给大家带来帮助，大致翻了一下书感觉文字较多内容相对晦涩，我会它总结一下讲出来让大家更好理解。  前言关于Objective-C的历史大家自行Google吧，po几个网址大家简单了解下 smalltalk 官方 smalltalk 维基百科 大致的总结下就">
+<meta name="twitter:image" content="https://s6.postimg.cc/dgmurke0x/WX20180714-142759_2x.png">
 
 
 
@@ -128,7 +130,7 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2016/10/22/iOS-常用宏/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/07/14/《iOS和macOS性能优化》1-CPU：原理/"/>
 
 
 
@@ -138,7 +140,7 @@
   };
 </script>
 
-  <title>iOS 常用宏(OC) | Coder Note</title>
+  <title>《iOS和macOS性能优化》1.CPU：原理 | Coder Note</title>
   
 
 
@@ -303,7 +305,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/10/22/iOS-常用宏/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/14/《iOS和macOS性能优化》1-CPU：原理/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="coderwong">
@@ -320,7 +322,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">iOS 常用宏(OC)
+          <h1 class="post-title" itemprop="name headline">《iOS和macOS性能优化》1.CPU：原理
               
             
           </h1>
@@ -345,24 +347,12 @@
                 
               
 
-              <time title="创建时间：2016-10-22 20:47:28" itemprop="dateCreated datePublished" datetime="2016-10-22T20:47:28+08:00">2016-10-22</time>
+              <time title="创建时间：2018-07-14 13:36:05 / 修改时间：14:41:22" itemprop="dateCreated datePublished" datetime="2018-07-14T13:36:05+08:00">2018-07-14</time>
             
 
             
               
 
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2018-07-02 18:43:00" itemprop="dateModified" datetime="2018-07-02T18:43:00+08:00">2018-07-02</time>
               
             
           </span>
@@ -379,7 +369,7 @@
                 <span class="post-meta-item-text">分类于</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Mobile/" itemprop="url" rel="index"><span itemprop="name">Mobile</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/《iOS和macOS性能优化》总结/" itemprop="url" rel="index"><span itemprop="name">《iOS和macOS性能优化》总结</span></a></span>
 
                 
                 
@@ -393,7 +383,7 @@
 
           
           
-             <span id="/2016/10/22/iOS-常用宏/" class="leancloud_visitors" data-flag-title="iOS 常用宏(OC)">
+             <span id="/2018/07/14/《iOS和macOS性能优化》1-CPU：原理/" class="leancloud_visitors" data-flag-title="《iOS和macOS性能优化》1.CPU：原理">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -424,8 +414,22 @@
       
 
       
-        <h3 id="iOS-常用宏-OC"><a href="#iOS-常用宏-OC" class="headerlink" title="iOS 常用宏(OC)"></a>iOS 常用宏(OC)</h3><a id="more"></a>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br></pre></td><td class="code"><pre><span class="line">//字符串是否为空</span><br><span class="line"></span><br><span class="line">#define kStringIsEmpty(str) ([str isKindOfClass:[NSNull class]] || str == nil || [str length] &lt;1? YES : NO )</span><br><span class="line"></span><br><span class="line">//数组是否为空</span><br><span class="line"></span><br><span class="line">#define kArrayIsEmpty(array) (array == nil || [array isKindOfClass:[NSNull class]] || array.count ==0)</span><br><span class="line"></span><br><span class="line">//字典是否为空</span><br><span class="line"></span><br><span class="line">#define kDictIsEmpty(dic) (dic == nil || [dic isKindOfClass:[NSNull class]] || dic.allKeys ==0)</span><br><span class="line"></span><br><span class="line">//是否是空对象</span><br><span class="line"></span><br><span class="line">#define kObjectIsEmpty(_object) (_object == nil \|| [_object isKindOfClass:[NSNull class]] \|| ([_object respondsToSelector:@selector(length)] &amp;&amp; [(NSData *)_object length] ==0) \|| ([_object respondsToSelector:@selector(count)] &amp;&amp; [(NSArray*)_object count] ==0))</span><br><span class="line"></span><br><span class="line">//获取屏幕宽度与高度</span><br><span class="line"></span><br><span class="line">#define kScreenWidth \([[UIScreen mainScreen] respondsToSelector:@selector(nativeBounds)] ? [UIScreen mainScreen].nativeBounds.size.width/[UIScreen mainScreen].nativeScale : [UIScreen mainScreen].bounds.size.width)</span><br><span class="line"></span><br><span class="line">#define kScreenHeight \([[UIScreen mainScreen] respondsToSelector:@selector(nativeBounds)] ? [UIScreen mainScreen].nativeBounds.size.height/[UIScreen mainScreen].nativeScale : [UIScreen mainScreen].bounds.size.height)</span><br><span class="line"></span><br><span class="line">#define kScreenSize \([[UIScreen mainScreen] respondsToSelector:@selector(nativeBounds)] ? CGSizeMake([UIScreen mainScreen].nativeBounds.size.width/[UIScreen mainScreen].nativeScale,[UIScreen mainScreen].nativeBounds.size.height/[UIScreen mainScreen].nativeScale) : [UIScreen mainScreen].bounds.size)</span><br><span class="line"></span><br><span class="line">//一些缩写</span><br><span class="line"></span><br><span class="line">#define kApplication[UIApplication sharedApplication]</span><br><span class="line"></span><br><span class="line">#define kKeyWindow[UIApplication sharedApplication].keyWindow</span><br><span class="line"></span><br><span class="line">#define kAppDelegate(AppDelegate *)[UIApplication sharedApplication].delegate</span><br><span class="line"></span><br><span class="line">#define kUserDefaults[NSUserDefaults standardUserDefaults]</span><br><span class="line"></span><br><span class="line">#define kNotificationCenter [NSNotificationCenter defaultCenter]</span><br><span class="line"></span><br><span class="line">#define kUserDefaultsObjectForKey(str) [[NSUserDefaults standardUserDefaults]objectForKey:str]</span><br><span class="line"></span><br><span class="line">//APP版本号</span><br><span class="line"></span><br><span class="line">#define kAppVersion [[[NSBundle mainBundle] infoDictionary] objectForKey:@&quot;CFBundleShortVersionString&quot;]</span><br><span class="line"></span><br><span class="line">//系统版本号</span><br><span class="line"></span><br><span class="line">#define kSystemVersion [[UIDevice currentDevice] systemVersion]</span><br><span class="line"></span><br><span class="line">//获取当前语言</span><br><span class="line"></span><br><span class="line">#define kCurrentLanguage ([[NSLocale preferredLanguages] objectAtIndex:0])</span><br><span class="line"></span><br><span class="line">//判断是否为iPhone</span><br><span class="line"></span><br><span class="line">#define kISiPhone (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone)</span><br><span class="line"></span><br><span class="line">//判断是否为iPad</span><br><span class="line"></span><br><span class="line">#define kISiPad (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)</span><br><span class="line"></span><br><span class="line">//获取沙盒Document路径</span><br><span class="line"></span><br><span class="line">#define kDocumentPath [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) firstObject]</span><br><span class="line"></span><br><span class="line">//获取沙盒temp路径</span><br><span class="line"></span><br><span class="line">#define kTempPath NSTemporaryDirectory()</span><br><span class="line"></span><br><span class="line">//获取沙盒Cache路径</span><br><span class="line"></span><br><span class="line">#define kCachePath [NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES) firstObject]</span><br><span class="line"></span><br><span class="line">//判断是真机还是模拟器</span><br><span class="line"></span><br><span class="line">#if TARGET_OS_IPHONE</span><br><span class="line"></span><br><span class="line">//真机</span><br><span class="line"></span><br><span class="line">#endif</span><br><span class="line"></span><br><span class="line">#if TARGET_IPHONE_SIMULATOR</span><br><span class="line"></span><br><span class="line">//模拟器</span><br><span class="line"></span><br><span class="line">#endif</span><br><span class="line"></span><br><span class="line">//开发的时候打印，但是发布的时候不打印的NSLog</span><br><span class="line"></span><br><span class="line">#ifdef DEBUG </span><br><span class="line">#define NSLog(...) NSLog(@&quot;%s第%d行\n %@\n\n&quot;,__func__,__LINE__,[NSString stringWithFormat:__VA_ARGS__])</span><br><span class="line"></span><br><span class="line">#else</span><br><span class="line"></span><br><span class="line">#define NSLog(...)</span><br><span class="line"></span><br><span class="line">#endif</span><br><span class="line"></span><br><span class="line">//颜色相关宏</span><br><span class="line"></span><br><span class="line">#define kRGBColor(r, g, b)[UIColor colorWithRed:(r)/255.0green:(g)/255.0blue:(b)/255.0alpha:1.0]</span><br><span class="line"></span><br><span class="line">#define kRGBAColor(r, g, b, a) [UIColor colorWithRed:(r)/255.0green:(r)/255.0blue:(r)/255.0alpha:a]</span><br><span class="line"></span><br><span class="line">#define kRandomColorKRGBColor(arc4random_uniform(256)/255.0,arc4random_uniform(256)/255.0,arc4random_uniform(256)/255.0)</span><br><span class="line"></span><br><span class="line">#define kColorWithHex(rgbValue) \[UIColor colorWithRed:((float)((rgbValue &amp;0xFF0000) &gt;&gt;16)) /255.0\green:((float)((rgbValue &amp;0xFF00) &gt;&gt;8)) /255.0\blue:((float)(rgbValue &amp;0xFF)) /255.0alpha:1.0]</span><br><span class="line"></span><br><span class="line">#define UIColorFromRGB(rgbValue) [UIColor colorWithRed:((float)((rgbValue &amp;0xFF0000) &gt;&gt;16))/255.0green:((float)((rgbValue &amp;0xFF00) &gt;&gt;8))/255.0blue:((float)(rgbValue &amp;0xFF))/255.0alpha:1.0]</span><br><span class="line"></span><br><span class="line">//弱引用/强引用</span><br><span class="line"></span><br><span class="line">#define kWeakSelf(type)__weak typeof(type) weak##type = type;</span><br><span class="line"></span><br><span class="line">#define kStrongSelf(type) __strong typeof(type) type = weak##type;</span><br><span class="line"></span><br><span class="line">//由角度转换弧度</span><br><span class="line"></span><br><span class="line">#define kDegreesToRadian(x)(M_PI * (x) /180.0)</span><br><span class="line"></span><br><span class="line">//由弧度转换角度</span><br><span class="line"></span><br><span class="line">#define kRadianToDegrees(radian) (radian *180.0) / (M_PI)</span><br><span class="line"></span><br><span class="line">//获取一段时间间隔</span><br><span class="line"></span><br><span class="line">#define kStartTime CFAbsoluteTime start = CFAbsoluteTimeGetCurrent();</span><br><span class="line"></span><br><span class="line">#define kEndTimeNSLog(@&quot;Time: %f&quot;, CFAbsoluteTimeGetCurrent() - start)</span><br><span class="line"></span><br><span class="line">//标准系统状态栏高度</span><br><span class="line"></span><br><span class="line">#define SYS_STATUSBAR_HEIGHT20</span><br><span class="line"></span><br><span class="line">//热点栏高度</span><br><span class="line"></span><br><span class="line">#define HOTSPOT_STATUSBAR_HEIGHT20</span><br><span class="line"></span><br><span class="line">//导航栏（UINavigationController.UINavigationBar）高度</span><br><span class="line"></span><br><span class="line">#define NAVIGATIONBAR_HEIGHT44</span><br><span class="line"></span><br><span class="line">//工具栏（UINavigationController.UIToolbar）高度</span><br><span class="line"></span><br><span class="line">#define TOOLBAR_HEIGHT 44</span><br><span class="line"></span><br><span class="line">//标签栏（UITabBarController.UITabBar）高度</span><br><span class="line"></span><br><span class="line">#define TABBAR_HEIGHT 44</span><br><span class="line"></span><br><span class="line">// APP_STATUSBAR_HEIGHT=SYS_STATUSBAR_HEIGHT+[HOTSPOT_STATUSBAR_HEIGHT]</span><br><span class="line"></span><br><span class="line">#define APP_STATUSBAR_HEIGHT(CGRectGetHeight([UIApplication sharedApplication].statusBarFrame))</span><br><span class="line"></span><br><span class="line">//根据APP_STATUSBAR_HEIGHT判断是否存在热点栏</span><br><span class="line"></span><br><span class="line">#define IS_HOTSPOT_CONNECTED(APP_STATUSBAR_HEIGHT==(SYS_STATUSBAR_HEIGHT+HOTSPOT_STATUSBAR_HEIGHT)?YES:NO)</span><br><span class="line"></span><br><span class="line">//无热点栏时，标准系统状态栏高度+导航栏高度</span><br><span class="line"></span><br><span class="line">#define NORMAL_STATUS_AND_NAV_BAR_HEIGHT(SYS_STATUSBAR_HEIGHT+NAVIGATIONBAR_HEIGHT)</span><br><span class="line"></span><br><span class="line">//实时系统状态栏高度+导航栏高度，如有热点栏，其高度包含在APP_STATUSBAR_HEIGHT中。</span><br><span class="line"></span><br><span class="line">#define STATUS_AND_NAV_BAR_HEIGHT(APP_STATUSBAR_HEIGHT+NAVIGATIONBAR_HEIGHT)</span><br><span class="line"></span><br><span class="line">//读取本地图片</span><br><span class="line"></span><br><span class="line">#define LOADIMAGE(file,ext) [UIImage imageWithContentsOfFile:[[NSBundle mainBundle]pathForResource:file ofType:ext]]</span><br></pre></td></tr></table></figure>
+        <blockquote>
+<p>看到了 Marcel Weiher 大神的 《iOS和macOS性能优化》中文版出版，马上买来窝图书馆啃完，下面是我做的读书笔记，希望分享给大家给大家带来帮助，大致翻了一下书感觉文字较多内容相对晦涩，我会它总结一下讲出来让大家更好理解。</p>
+</blockquote>
+<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>关于<code>Objective-C</code>的历史大家自行Google吧，po几个网址大家简单了解下</p>
+<p><a href="http://www.smalltalk.org/" target="_blank" rel="noopener">smalltalk 官方</a></p>
+<p><a href="https://zh.wikipedia.org/wiki/Smalltalk" target="_blank" rel="noopener">smalltalk 维基百科</a></p>
+<p>大致的总结下就是<code>smalltalk</code>算得上是元老级别的面向对象语言，乔老爷正是在<a href="https://zh.wikipedia.org/wiki/%E5%B8%95%E7%BE%85%E5%A5%A7%E5%A4%9A%E7%A0%94%E7%A9%B6%E4%B8%AD%E5%BF%83" target="_blank" rel="noopener">Xerox PARC</a>这里面参观的时候了解到了它，这个研究中心诞生和很多现代计算机的不可或缺的基础技术和基础硬件。</p>
+<h1 id="一个简单的例子"><a href="#一个简单的例子" class="headerlink" title="一个简单的例子"></a>一个简单的例子</h1><p>我们看一个很简单的例子，对1~1000范围内的整数求和（只是示例，当然(n(n+1)/2)计算是最佳选择）。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;stdio.h&gt;</span><br><span class="line"></span><br><span class="line">int main( int argc , char *argv[] ) </span><br><span class="line">&#123;</span><br><span class="line">  int i,sum;</span><br><span class="line">  sun=0;</span><br><span class="line">  for (i=1;i&lt;= 1000;i++ ) &#123;</span><br><span class="line">  	sum+=i;</span><br><span class="line">  &#125;</span><br><span class="line">  return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><img src="https://s6.postimg.cc/dgmurke0x/WX20180714-142759_2x.png" alt=""></p>
+<p>我们使用clang来编译一下程序再运行程序，得到一个运行时间。<br>对于现代计算机来说这个简单的程序可能使用几毫秒就能完成，并且如果使用C语言的话编译可以直接转换成CPU指令。</p>
+<h2 id="（微）基准的危险"><a href="#（微）基准的危险" class="headerlink" title="（微）基准的危险"></a>（微）基准的危险</h2><p>我们运行下面的代码</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">int main( int argc , char *argv[] ) </span><br><span class="line">&#123;</span><br><span class="line">  return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;stdio.h&gt;</span><br><span class="line">#include &lt;stdlib.h&gt;</span><br><span class="line"></span><br><span class="line">int main( int argc , char *argv[] ) </span><br><span class="line">&#123;</span><br><span class="line">  int i,k,sum;</span><br><span class="line">  int limit=argc &gt; 1 ? atoi(argv[1]) : 1;</span><br><span class="line">  limit *= 1000;</span><br><span class="line">  for (k=0;k&lt;limit; k++ ) &#123;</span><br><span class="line">    sum=0;</span><br><span class="line">    for (i=1;i&lt;= 10000;i++ ) &#123;</span><br><span class="line">      sum+=i;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  printf(&quot;%d\n&quot;,sum);</span><br><span class="line">  return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="更多的整数求和的方式"><a href="#更多的整数求和的方式" class="headerlink" title="更多的整数求和的方式"></a>更多的整数求和的方式</h2><h2 id="Swift"><a href="#Swift" class="headerlink" title="Swift"></a>Swift</h2><h2 id="其他语言"><a href="#其他语言" class="headerlink" title="其他语言"></a>其他语言</h2><h1 id="混编的力量"><a href="#混编的力量" class="headerlink" title="混编的力量"></a>混编的力量</h1><h1 id="趋势"><a href="#趋势" class="headerlink" title="趋势"></a>趋势</h1><h1 id="操作成本"><a href="#操作成本" class="headerlink" title="操作成本"></a>操作成本</h1><h1 id="复杂度计算"><a href="#复杂度计算" class="headerlink" title="复杂度计算"></a>复杂度计算</h1><h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><h1 id="官方Demo"><a href="#官方Demo" class="headerlink" title="官方Demo"></a>官方Demo</h1><p><a href="https://github.com/mpw/iOS-macOS-performance" target="_blank" rel="noopener">demo飞机票</a></p>
+
       
     </div>
 
@@ -460,15 +464,15 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
+              <a href="/2018/07/10/CoreTextTouch/" rel="next" title="CoreText点击事件处理">
+                <i class="fa fa-chevron-left"></i> CoreText点击事件处理
+              </a>
+            
           </div>
 
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2016/10/23/iOS-获取设备信息-已经更新至iOS-11-iPhone-X/" rel="prev" title="iOS 获取设备信息(已经更新至iOS 11 iPhone X)">
-                iOS 获取设备信息(已经更新至iOS 11 iPhone X) <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -703,7 +707,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#iOS-常用宏-OC"><span class="nav-number">1.</span> <span class="nav-text">iOS 常用宏(OC)</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#一个简单的例子"><span class="nav-number">2.</span> <span class="nav-text">一个简单的例子</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#（微）基准的危险"><span class="nav-number">2.1.</span> <span class="nav-text">（微）基准的危险</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#更多的整数求和的方式"><span class="nav-number">2.2.</span> <span class="nav-text">更多的整数求和的方式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Swift"><span class="nav-number">2.3.</span> <span class="nav-text">Swift</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#其他语言"><span class="nav-number">2.4.</span> <span class="nav-text">其他语言</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#混编的力量"><span class="nav-number">3.</span> <span class="nav-text">混编的力量</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#趋势"><span class="nav-number">4.</span> <span class="nav-text">趋势</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#操作成本"><span class="nav-number">5.</span> <span class="nav-text">操作成本</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#复杂度计算"><span class="nav-number">6.</span> <span class="nav-text">复杂度计算</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#总结"><span class="nav-number">7.</span> <span class="nav-text">总结</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#官方Demo"><span class="nav-number">8.</span> <span class="nav-text">官方Demo</span></a></li></ol></div>
             
 
           </div>
