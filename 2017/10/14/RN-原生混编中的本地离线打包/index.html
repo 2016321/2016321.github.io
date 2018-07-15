@@ -114,13 +114,13 @@
 <meta property="og:url" content="http://yoursite.com/2017/10/14/RN-原生混编中的本地离线打包/index.html">
 <meta property="og:site_name" content="Coder Note">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="https://s6.postimg.cc/q0545sbv5/2353844-8653a172b647fafc.png">
-<meta property="og:image" content="https://s6.postimg.cc/65j2jqoyp/2353844-f7e023be1e9ea2c8.png">
-<meta property="og:image" content="https://s6.postimg.cc/7xc1eng1d/2353844-ec35ed2aabdb8007.png">
-<meta property="og:updated_time" content="2018-07-02T10:42:16.725Z">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/2353844-77a3395ea0351add.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/2353844-da54b61a866ea240.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/2353844-61153525dd03b038.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:updated_time" content="2018-07-15T15:56:05.553Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="RN 原生混编中的本地离线打包">
-<meta name="twitter:image" content="https://s6.postimg.cc/q0545sbv5/2353844-8653a172b647fafc.png">
+<meta name="twitter:image" content="https://upload-images.jianshu.io/upload_images/2353844-77a3395ea0351add.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 
 
 
@@ -363,7 +363,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2018-07-02 18:42:16" itemprop="dateModified" datetime="2018-07-02T18:42:16+08:00">2018-07-02</time>
+                <time title="修改时间：2018-07-15 23:56:05" itemprop="dateModified" datetime="2018-07-15T23:56:05+08:00">2018-07-15</time>
               
             
           </span>
@@ -425,13 +425,13 @@
       
 
       
-        <p><img src="https://s6.postimg.cc/q0545sbv5/2353844-8653a172b647fafc.png" alt=""></p>
+        <p><img src="https://upload-images.jianshu.io/upload_images/2353844-77a3395ea0351add.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="1.png"></p>
 <a id="more"></a>
 <h4 id="RN这种面向生产力的框架介绍的文档网上一堆，就不和大家介绍了，我们前端框架刚好是React，我们的构想就是移动端和前端有更多的互动，在不加人头的基础上提高开发迭代速度"><a href="#RN这种面向生产力的框架介绍的文档网上一堆，就不和大家介绍了，我们前端框架刚好是React，我们的构想就是移动端和前端有更多的互动，在不加人头的基础上提高开发迭代速度" class="headerlink" title="RN这种面向生产力的框架介绍的文档网上一堆，就不和大家介绍了，我们前端框架刚好是React，我们的构想就是移动端和前端有更多的互动，在不加人头的基础上提高开发迭代速度"></a>RN这种面向生产力的框架介绍的文档网上一堆，就不和大家介绍了，我们前端框架刚好是React，我们的构想就是移动端和前端有更多的互动，在不加人头的基础上提高开发迭代速度</h4><h5 id="本文基于原生与RN-0-48-混编的项目来描述，前提是您已经将RN框架导入到项目并可以正常运行，我们的项目目录结构与RN原生项目有着相同的目录结构"><a href="#本文基于原生与RN-0-48-混编的项目来描述，前提是您已经将RN框架导入到项目并可以正常运行，我们的项目目录结构与RN原生项目有着相同的目录结构" class="headerlink" title="本文基于原生与RN(0.48)混编的项目来描述，前提是您已经将RN框架导入到项目并可以正常运行，我们的项目目录结构与RN原生项目有着相同的目录结构"></a>本文基于原生与RN(0.48)混编的项目来描述，前提是您已经将RN框架导入到项目并可以正常运行，我们的项目目录结构与RN原生项目有着相同的目录结构</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">--entry-file &lt;path&gt;                Path to the root JS file, either absolute or relative to JS root</span><br><span class="line">RN项目的入口文件相对/相对路径</span><br><span class="line">--platform [string]                Either &quot;ios&quot; or &quot;android&quot;</span><br><span class="line">输入‘ios’或‘android’</span><br><span class="line">--transformer [string]             Specify a custom transformer to be used</span><br><span class="line">指定自定义的transformer文件绝对/相对路径[default: &quot;./node_modules/react-native/packager/transformer.js&quot;]</span><br><span class="line">--dev [boolean]                    If false, warnings are disabled and the bundle is minified</span><br><span class="line">如果为false, 不显示警告并且bundle会变小[default: true]</span><br><span class="line">--bundle-output &lt;string&gt;           File name where to store the resulting bundle, ex. /tmp/groups.bundle</span><br><span class="line">打包后的文件输出目录, 例: /tmp/groups.bundle</span><br><span class="line">--bundle-encoding [string]         Encoding the bundle should be written in (https://nodejs.org/api/buffer.html#buffer_buffer).</span><br><span class="line">归档文件至 可参考链接https://nodejs.org/api/buffer.html#buffer_buffer.</span><br><span class="line">--max-workers [number]             Specifies the maximum number of workers the worker-pool will spawn for transforming files. This defaults to the number of the cores available on your machine.</span><br><span class="line">指定用于产生转换文件的worker-pool的最大工作数，默认与设备处理器核心相同</span><br><span class="line">--sourcemap-output [string]        File name where to store the sourcemap file for resulting bundle, ex. /tmp/groups.map</span><br><span class="line">映射文件的名称</span><br><span class="line">--sourcemap-sources-root [string]  Path to make sourcemap&apos;s sources entries relative to, ex. /root/dir</span><br><span class="line">映射文件的路径</span><br><span class="line">--sourcemap-use-absolute-path      Report SourceMapURL using its full path</span><br><span class="line">使用SourceMapURL的绝对路径</span><br><span class="line">--assets-dest [string]             Directory name where to store assets referenced in the bundle</span><br><span class="line">打包图片资源的存储的绝对/相对路径</span><br><span class="line">--verbose                          Enables logging</span><br><span class="line">显示打包过程</span><br><span class="line">--reset-cache                      Removes cached files</span><br><span class="line">清除缓存文件</span><br><span class="line">--read-global-cache                Try to fetch transformed JS code from the global cache, if configured.</span><br><span class="line">--config [string]                  Path to the CLI configuration file</span><br><span class="line">命令行的配置文件路径</span><br><span class="line">-h, --help                         output usage information</span><br></pre></td></tr></table></figure>
 <h4 id="我们以原生的RN空项目为例"><a href="#我们以原生的RN空项目为例" class="headerlink" title="我们以原生的RN空项目为例"></a>我们以原生的RN空项目为例</h4><h5 id="执行打包命令，我们直接将打包的文件打进工程"><a href="#执行打包命令，我们直接将打包的文件打进工程" class="headerlink" title="执行打包命令，我们直接将打包的文件打进工程"></a>执行打包命令，我们直接将打包的文件打进工程</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">react-native bundle --entry-file index.ios.js --bundle-output ./ios/XXX/index.ios.jsbundle --platform ios --assets-dest ./ios/XXX/ --dev false</span><br></pre></td></tr></table></figure>
-<h5 id="执行后的目录-项目中没有引入图片等资源，没有asset文件"><a href="#执行后的目录-项目中没有引入图片等资源，没有asset文件" class="headerlink" title="执行后的目录(项目中没有引入图片等资源，没有asset文件)"></a>执行后的目录(项目中没有引入图片等资源，没有asset文件)</h5><p><img src="https://s6.postimg.cc/65j2jqoyp/2353844-f7e023be1e9ea2c8.png" alt=""></p>
+<h5 id="执行后的目录-项目中没有引入图片等资源，没有asset文件"><a href="#执行后的目录-项目中没有引入图片等资源，没有asset文件" class="headerlink" title="执行后的目录(项目中没有引入图片等资源，没有asset文件)"></a>执行后的目录(项目中没有引入图片等资源，没有asset文件)</h5><p><img src="https://upload-images.jianshu.io/upload_images/2353844-da54b61a866ea240.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="2.png"></p>
 <h5 id="将jsbundle文件和asset目录导入项目"><a href="#将jsbundle文件和asset目录导入项目" class="headerlink" title="将jsbundle文件和asset目录导入项目"></a>将jsbundle文件和asset目录导入项目</h5><p><em>assets 目录导入工程中时，要选择 Create folder references，因为这是图片素材。</em><br><em>还有个很关键的就是，jsbundle文件一定要导入到copy bundle resources 里面，不然之后通过ios原生的<code>path(forResource: &quot;main.jsbundle&quot;, ofType: nil)</code>这个方法找不到路径</em></p>
-<p><img src="https://s6.postimg.cc/7xc1eng1d/2353844-ec35ed2aabdb8007.png" alt=""></p>
+<p><img src="https://upload-images.jianshu.io/upload_images/2353844-61153525dd03b038.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="3.png"></p>
 <h4 id="希望我的文章能帮助到大家"><a href="#希望我的文章能帮助到大家" class="headerlink" title="希望我的文章能帮助到大家~"></a>希望我的文章能帮助到大家~</h4>
       
     </div>
