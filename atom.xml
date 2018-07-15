@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2018-07-15T10:37:40.357Z</updated>
+  <updated>2018-07-15T10:50:10.886Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,34 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>《iOS和macOS性能优化》2.CPU：测量和工具</title>
+    <link href="http://yoursite.com/2018/07/15/%E3%80%8AiOS%E5%92%8CmacOS%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E3%80%8B2-CPU%EF%BC%9A%E6%B5%8B%E9%87%8F%E5%92%8C%E5%B7%A5%E5%85%B7/"/>
+    <id>http://yoursite.com/2018/07/15/《iOS和macOS性能优化》2-CPU：测量和工具/</id>
+    <published>2018-07-15T10:42:23.000Z</published>
+    <updated>2018-07-15T10:50:10.886Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          
+        
+      
+    
+    </summary>
+    
+      <category term="《iOS和macOS性能优化》总结" scheme="http://yoursite.com/categories/%E3%80%8AiOS%E5%92%8CmacOS%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E3%80%8B%E6%80%BB%E7%BB%93/"/>
+    
+    
+      <category term="iOS" scheme="http://yoursite.com/tags/iOS/"/>
+    
+      <category term="OC" scheme="http://yoursite.com/tags/OC/"/>
+    
+  </entry>
   
   <entry>
     <title>《iOS和macOS性能优化》1.CPU：原理</title>
@@ -465,36 +493,6 @@
     
     
       <category term="iOS" scheme="http://yoursite.com/tags/iOS/"/>
-    
-      <category term="Swift" scheme="http://yoursite.com/tags/Swift/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>常用 GCD 笔记(OC / Swift)</title>
-    <link href="http://yoursite.com/2017/03/28/%E5%B8%B8%E7%94%A8-GCD-%E7%AC%94%E8%AE%B0-OC-Swift/"/>
-    <id>http://yoursite.com/2017/03/28/常用-GCD-笔记-OC-Swift/</id>
-    <published>2017-03-28T11:53:58.000Z</published>
-    <updated>2018-07-02T10:43:31.355Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        
-        
-          
-        
-      
-    
-    </summary>
-    
-      <category term="Mobile" scheme="http://yoursite.com/categories/Mobile/"/>
-    
-    
-      <category term="iOS" scheme="http://yoursite.com/tags/iOS/"/>
-    
-      <category term="OC" scheme="http://yoursite.com/tags/OC/"/>
     
       <category term="Swift" scheme="http://yoursite.com/tags/Swift/"/>
     
