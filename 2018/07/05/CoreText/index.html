@@ -116,14 +116,14 @@
 <meta property="og:site_name" content="Coder Note">
 <meta property="og:description" content="记得上次更新是半年前了，转眼就到了18年的Q3了。回顾一下我的博客的空窗期，记得在年初的时候前东家孵化了个线上的视频约见的项目，自己也算是尽力在做。之后又对项目管理感兴趣学了些报了个项目管理的考试，然而在最后一门论文崩盘也是心塞。在工作学习中发现，自己接触的越多越会感觉到自己的渺小自己的不足，同时考完试之后跳了一家更大的公司也搬了家，在项目组里面默默无闻，尽力去做的更好去完善自己吧，咳咳，扯多了">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="https://s6.postimg.cc/81bu1h1zl/Simulator_Screen_Shot_-_i_Phone_X_-_2018-07-06_at_09.43.59.png">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/2353844-8637da981dac23e7.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 <meta property="og:image" content="https://developer.apple.com/library/archive/documentation/StringsTextFonts/Conceptual/TextAndWebiPhoneOS/Art/text_kit_arch_2x.png">
 <meta property="og:image" content="https://developer.apple.com/library/archive/documentation/StringsTextFonts/Conceptual/CoreText_Programming/Art/core_text_arch_2x.png">
-<meta property="og:updated_time" content="2018-07-11T03:32:48.275Z">
+<meta property="og:updated_time" content="2018-07-15T11:27:31.230Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="CoreText跳坑">
 <meta name="twitter:description" content="记得上次更新是半年前了，转眼就到了18年的Q3了。回顾一下我的博客的空窗期，记得在年初的时候前东家孵化了个线上的视频约见的项目，自己也算是尽力在做。之后又对项目管理感兴趣学了些报了个项目管理的考试，然而在最后一门论文崩盘也是心塞。在工作学习中发现，自己接触的越多越会感觉到自己的渺小自己的不足，同时考完试之后跳了一家更大的公司也搬了家，在项目组里面默默无闻，尽力去做的更好去完善自己吧，咳咳，扯多了">
-<meta name="twitter:image" content="https://s6.postimg.cc/81bu1h1zl/Simulator_Screen_Shot_-_i_Phone_X_-_2018-07-06_at_09.43.59.png">
+<meta name="twitter:image" content="https://upload-images.jianshu.io/upload_images/2353844-8637da981dac23e7.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 
 
 
@@ -366,7 +366,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2018-07-11 11:32:48" itemprop="dateModified" datetime="2018-07-11T11:32:48+08:00">2018-07-11</time>
+                <time title="修改时间：2018-07-15 19:27:31" itemprop="dateModified" datetime="2018-07-15T19:27:31+08:00">2018-07-15</time>
               
             
           </span>
@@ -436,7 +436,7 @@
 <p>多线程中的注意事项：Core Text中的所有单个函数都是线程安全的。字体对象（<strong>CTFont</strong>，<strong>CTFontDescriptor</strong>和相关的对象）可以被多个任务、队列或线程同时使用。但是，布局对象（<strong>CTTypesetter</strong>，<strong>CTFramesetter</strong>，<strong>CTRun</strong>，<strong>CTLine</strong>，<strong>CTFrame</strong>和关联对象）应该在单个操作，工作队列或线程中使用。</p>
 <h2 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h2><p><span id="1-2-1"></span></p>
 <h3 id="坐标系相关"><a href="#坐标系相关" class="headerlink" title="坐标系相关"></a>坐标系相关</h3><p>我们如果不做任何转换的话我们应该绘制的是这个样子的</p>
-<p><img src="https://s6.postimg.cc/81bu1h1zl/Simulator_Screen_Shot_-_i_Phone_X_-_2018-07-06_at_09.43.59.png" alt=""></p>
+<p><img src="https://upload-images.jianshu.io/upload_images/2353844-8637da981dac23e7.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="1.png"></p>
 <p>可能图有点小，大致就是y轴反向的样子，因为<code>Core Text</code>期初是<code>OS X</code>系统上面的底层库，y轴为向上的方向，原点坐标是在左下，而<code>iOS</code>的原点坐标是在左上角的，y轴正好是反方向</p>
 <h3 id="Core-Text相关概念"><a href="#Core-Text相关概念" class="headerlink" title="Core Text相关概念"></a>Core Text相关概念</h3><p>今天我们尽量不去涉及<strong>Text Kit</strong>相关的东西，我们只是借用一下图，<strong>Text Kit</strong>是对<strong>Core Text</strong>的更高级的封装。</p>
 <p><img src="https://developer.apple.com/library/archive/documentation/StringsTextFonts/Conceptual/TextAndWebiPhoneOS/Art/text_kit_arch_2x.png" alt=""></p>
