@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2018-07-15T10:50:10.886Z</updated>
+  <updated>2018-07-26T01:25:29.710Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -17,39 +17,11 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>《iOS和macOS性能优化》2.CPU：测量和工具</title>
-    <link href="http://yoursite.com/2018/07/15/%E3%80%8AiOS%E5%92%8CmacOS%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E3%80%8B2-CPU%EF%BC%9A%E6%B5%8B%E9%87%8F%E5%92%8C%E5%B7%A5%E5%85%B7/"/>
-    <id>http://yoursite.com/2018/07/15/《iOS和macOS性能优化》2-CPU：测量和工具/</id>
-    <published>2018-07-15T10:42:23.000Z</published>
-    <updated>2018-07-15T10:50:10.886Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        
-        
-          
-        
-      
-    
-    </summary>
-    
-      <category term="《iOS和macOS性能优化》总结" scheme="http://yoursite.com/categories/%E3%80%8AiOS%E5%92%8CmacOS%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E3%80%8B%E6%80%BB%E7%BB%93/"/>
-    
-    
-      <category term="iOS" scheme="http://yoursite.com/tags/iOS/"/>
-    
-      <category term="OC" scheme="http://yoursite.com/tags/OC/"/>
-    
-  </entry>
-  
-  <entry>
     <title>《iOS和macOS性能优化》1.CPU：原理</title>
     <link href="http://yoursite.com/2018/07/14/%E3%80%8AiOS%E5%92%8CmacOS%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E3%80%8B1-CPU%EF%BC%9A%E5%8E%9F%E7%90%86/"/>
     <id>http://yoursite.com/2018/07/14/《iOS和macOS性能优化》1-CPU：原理/</id>
     <published>2018-07-14T05:36:05.000Z</published>
-    <updated>2018-07-15T10:37:40.357Z</updated>
+    <updated>2018-07-26T01:25:29.710Z</updated>
     
     <summary type="html">
     
@@ -192,7 +164,7 @@
     <link href="http://yoursite.com/2017/12/18/%E4%BD%BF%E7%94%A8LeanCloud%E5%AF%B9Hexo%E6%9E%84%E5%BB%BA%E7%9A%84%E5%8D%9A%E5%AE%A2%E9%85%8D%E7%BD%AE%E7%BB%9F%E8%AE%A1%E5%8A%9F%E8%83%BD/"/>
     <id>http://yoursite.com/2017/12/18/使用LeanCloud对Hexo构建的博客配置统计功能/</id>
     <published>2017-12-18T06:43:38.000Z</published>
-    <updated>2018-07-09T04:33:57.515Z</updated>
+    <updated>2018-07-16T02:11:46.069Z</updated>
     
     <summary type="html">
     
@@ -261,7 +233,7 @@
     <link href="http://yoursite.com/2017/10/09/Xcode9-xcodebuild-%E6%89%93%E5%8C%85%E4%B8%8A%E4%BC%A0%E8%92%B2%E5%85%AC%E8%8B%B1/"/>
     <id>http://yoursite.com/2017/10/09/Xcode9-xcodebuild-打包上传蒲公英/</id>
     <published>2017-10-09T14:00:58.000Z</published>
-    <updated>2018-07-02T10:37:21.425Z</updated>
+    <updated>2018-07-16T01:55:34.913Z</updated>
     
     <summary type="html">
     
@@ -305,7 +277,7 @@
     <link href="http://yoursite.com/2017/08/08/Swift-%E5%8E%BB%E9%99%A4UITextView-Padding/"/>
     <id>http://yoursite.com/2017/08/08/Swift-去除UITextView-Padding/</id>
     <published>2017-08-08T05:05:14.000Z</published>
-    <updated>2018-07-02T10:42:08.078Z</updated>
+    <updated>2018-07-16T01:33:09.323Z</updated>
     
     <summary type="html">
     
@@ -327,7 +299,7 @@
     <link href="http://yoursite.com/2017/08/01/Swift-%E8%8E%B7%E5%8F%96device-token/"/>
     <id>http://yoursite.com/2017/08/01/Swift-获取device-token/</id>
     <published>2017-08-01T07:56:21.000Z</published>
-    <updated>2018-07-02T10:42:11.910Z</updated>
+    <updated>2018-07-16T01:35:06.226Z</updated>
     
     <summary type="html">
     
@@ -349,7 +321,7 @@
     <link href="http://yoursite.com/2017/06/01/Swift%E4%B8%8B%E6%8B%89%E6%B3%A2%E6%B5%AA%E5%8A%A8%E7%94%BB/"/>
     <id>http://yoursite.com/2017/06/01/Swift下拉波浪动画/</id>
     <published>2017-06-01T05:00:11.000Z</published>
-    <updated>2018-07-02T10:42:00.449Z</updated>
+    <updated>2018-07-16T01:39:49.780Z</updated>
     
     <summary type="html">
     
@@ -393,7 +365,7 @@
     <link href="http://yoursite.com/2017/05/18/WKWebView%E5%8A%A0%E8%BD%BDHTML%E5%AD%97%E7%AC%A6%E4%B8%B2-%E8%8E%B7%E5%8F%96%E9%AB%98%E5%BA%A6%E6%B8%B2%E6%9F%93%E9%AB%98%E5%BA%A6/"/>
     <id>http://yoursite.com/2017/05/18/WKWebView加载HTML字符串-获取高度渲染高度/</id>
     <published>2017-05-17T16:24:24.000Z</published>
-    <updated>2018-07-02T10:41:54.359Z</updated>
+    <updated>2018-07-16T01:44:33.745Z</updated>
     
     <summary type="html">
     
@@ -415,7 +387,7 @@
     <link href="http://yoursite.com/2017/05/15/Swift-%E4%BD%BF%E7%94%A8runtime%E7%BB%99extension%E6%B7%BB%E5%8A%A0%E5%B1%9E%E6%80%A7/"/>
     <id>http://yoursite.com/2017/05/15/Swift-使用runtime给extension添加属性/</id>
     <published>2017-05-15T07:18:43.000Z</published>
-    <updated>2018-07-02T10:42:04.203Z</updated>
+    <updated>2018-07-16T01:29:02.573Z</updated>
     
     <summary type="html">
     
@@ -493,6 +465,36 @@
     
     
       <category term="iOS" scheme="http://yoursite.com/tags/iOS/"/>
+    
+      <category term="Swift" scheme="http://yoursite.com/tags/Swift/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>常用 GCD 笔记(OC / Swift)</title>
+    <link href="http://yoursite.com/2017/03/28/%E5%B8%B8%E7%94%A8-GCD-%E7%AC%94%E8%AE%B0-OC-Swift/"/>
+    <id>http://yoursite.com/2017/03/28/常用-GCD-笔记-OC-Swift/</id>
+    <published>2017-03-28T11:53:58.000Z</published>
+    <updated>2018-07-02T10:43:31.355Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          
+        
+      
+    
+    </summary>
+    
+      <category term="Mobile" scheme="http://yoursite.com/categories/Mobile/"/>
+    
+    
+      <category term="iOS" scheme="http://yoursite.com/tags/iOS/"/>
+    
+      <category term="OC" scheme="http://yoursite.com/tags/OC/"/>
     
       <category term="Swift" scheme="http://yoursite.com/tags/Swift/"/>
     
