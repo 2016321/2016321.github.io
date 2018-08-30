@@ -41,17 +41,21 @@ end
 urls.each_with_index do |url, index|
 
   if commenteds.include?("#{url}\n") == false
-    puts "-------#{url}"
     url_key = Digest::MD5.hexdigest(URI.parse(url).path)
     response = conn.get "/search/issues?q=label:#{url_key}+state:open+repo:#{username}/#{repo_name}"
-
+    
     if JSON.parse(response.body)['total_count'] > 0
       `echo #{url} >> .commenteds`
     else
       puts "正在创建: #{url}"
       title = open(url).read.scan(/<title>(.*?)<\/title>/).first.first.force_encoding('UTF-8')
+
+      puts "body: #{url}"
+      puts "title: #{title}"
+      puts "labels: #{url_key}------#{kind}"
+
       response = conn.post("/repos/#{username}/#{repo_name}/issues") do |req|
-      req.body = { body: url, labels: [kind, url], title: title }.to_json
+      req.body = { body: url, labels: [kind, url_key], title: title }.to_json
       end
       if JSON.parse(response.body)['number'] > 0
         `echo #{url} >> .commenteds`
