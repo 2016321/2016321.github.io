@@ -1,6 +1,4 @@
 
-# from : https://draveness.me/git-comments-initialize
-# 另外，token已放在.git-token文件下，防止泄漏。。
 
 username = "2016321" # GitHub 用户名
 token = `cat .git-token`  # GitHub Token
@@ -45,7 +43,7 @@ urls.each_with_index do |url, index|
   if commenteds.include?("#{url}\n") == false
     url_key = Digest::MD5.hexdigest(URI.parse(url).path)
     response = conn.get "/search/issues?q=label:#{url_key}+state:open+repo:#{username}/#{repo_name}"
-    
+
     if JSON.parse(response.body)['total_count'] > 0
       `echo #{url} >> .commenteds`
     else
