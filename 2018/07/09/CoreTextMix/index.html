@@ -1,0 +1,1198 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-CN">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=6.3.0" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.3.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=6.3.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.3.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=6.3.0" color="#222">
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '6.3.0',
+    sidebar: {"position":"left","display":"hide","offset":12,"b2t":true,"scrollpercent":false,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="我们接着上一篇讲，上篇已经大概的讲了下单纯的绘制文字，但是一篇文章一般都会有几张图片的，而且是嵌入文字内的，不一定是将上下文字换行来处理的，我们今天就讲一下如果图片嵌入了文字该如何处理。  思路我们已经可以正常绘制富文本了，也可以通过CTLine和CTRun来分别对每行或者每行的绘制对象来进行干预来完成绘制。我们来简单捋一下图文混排的思路，一些准备操作和之前是一样的，只是在将富文本传递给CTFr">
+<meta name="keywords" content="iOS,OC,Core Text">
+<meta property="og:type" content="article">
+<meta property="og:title" content="CoreText图文混排">
+<meta property="og:url" content="https://coderwong.com/2018/07/09/CoreTextMix/index.html">
+<meta property="og:site_name" content="Coder Note">
+<meta property="og:description" content="我们接着上一篇讲，上篇已经大概的讲了下单纯的绘制文字，但是一篇文章一般都会有几张图片的，而且是嵌入文字内的，不一定是将上下文字换行来处理的，我们今天就讲一下如果图片嵌入了文字该如何处理。  思路我们已经可以正常绘制富文本了，也可以通过CTLine和CTRun来分别对每行或者每行的绘制对象来进行干预来完成绘制。我们来简单捋一下图文混排的思路，一些准备操作和之前是一样的，只是在将富文本传递给CTFr">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2018-08-30T06:02:08.874Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="CoreText图文混排">
+<meta name="twitter:description" content="我们接着上一篇讲，上篇已经大概的讲了下单纯的绘制文字，但是一篇文章一般都会有几张图片的，而且是嵌入文字内的，不一定是将上下文字换行来处理的，我们今天就讲一下如果图片嵌入了文字该如何处理。  思路我们已经可以正常绘制富文本了，也可以通过CTLine和CTRun来分别对每行或者每行的绘制对象来进行干预来完成绘制。我们来简单捋一下图文混排的思路，一些准备操作和之前是一样的，只是在将富文本传递给CTFr">
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Coder Note" type="application/atom+xml" />
+
+
+
+
+  <link rel="canonical" href="https://coderwong.com/2018/07/09/CoreTextMix/"/>
+
+
+
+<script type="text/javascript" id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>CoreText图文混排 | Coder Note</title>
+  
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style type="text/css">
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
+
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
+
+    .use-motion {
+      .logo-line-before i { left: initial; }
+      .logo-line-after i { right: initial; }
+    }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Coder Note</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <p class="site-subtitle">Coderwong's blog</p>
+      
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+    <a href="/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-home"></i> <br />首页</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+    <a href="/archives/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />归档<span class="badge">30</span></a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+    <a href="/tags/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />标签<span class="badge">9</span></a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+    <a href="/categories/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-th"></i> <br />分类<span class="badge">3</span></a>
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://coderwong.com/2018/07/09/CoreTextMix/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Coderwong">
+      <meta itemprop="description" content="天道酬勤">
+      <meta itemprop="image" content="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1513588177840&di=fd065c5f8d576b6c406f9984f3abe6a2&imgtype=0&src=http%3A%2F%2Ff.hiphotos.baidu.com%2Fimage%2Fpic%2Fitem%2F9825bc315c6034a82b679065c113495408237648.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Coder Note">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">CoreText图文混排
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2018-07-09 09:52:24" itemprop="dateCreated datePublished" datetime="2018-07-09T09:52:24+08:00">2018-07-09</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2018-08-30 14:02:08" itemprop="dateModified" datetime="2018-08-30T14:02:08+08:00">2018-08-30</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Mobile/" itemprop="url" rel="index"><span itemprop="name">Mobile</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/07/09/CoreTextMix/#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count gitment-comments-count" data-xid="/2018/07/09/CoreTextMix/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+             <span id="/2018/07/09/CoreTextMix/" class="leancloud_visitors" data-flag-title="CoreText图文混排">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数：</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <blockquote>
+<p>我们接着上一篇讲，上篇已经大概的讲了下单纯的绘制文字，但是一篇文章一般都会有几张图片的，而且是嵌入文字内的，不一定是将上下文字换行来处理的，我们今天就讲一下如果图片嵌入了文字该如何处理。</p>
+</blockquote>
+<h1 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h1><p><strong>我们已经可以正常绘制富文本了，也可以通过<code>CTLine</code>和<code>CTRun</code>来分别对每行或者每行的绘制对象来进行干预来完成绘制。</strong><br>我们来简单捋一下图文混排的思路，一些准备操作和之前是一样的，只是在将富文本传递给<code>CTFramesetterRef</code>工厂对象时候需要将图片插入富文本中，因为<code>Core Text</code>无法直接绘制图片，只能是将相关的代理传递给一个既定的富文本，之后遍历<code>CTRun</code>来识别再去使用<code>Core Graphics</code>对图片进行绘制在View上面，而属性字符串里面只能存一些高度距离相关的属性。</p>
+<h1 id="Demo"><a href="#Demo" class="headerlink" title="Demo"></a>Demo</h1><h2 id="图文混排"><a href="#图文混排" class="headerlink" title="图文混排"></a>图文混排</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">- (void)drawRect:(CGRect)rect &#123;</span><br><span class="line">    [super drawRect:rect];</span><br><span class="line">    </span><br><span class="line">    //1.</span><br><span class="line">    CGContextRef context = UIGraphicsGetCurrentContext();</span><br><span class="line">    </span><br><span class="line">    //2.</span><br><span class="line">    CGMutablePathRef path = CGPathCreateMutable();</span><br><span class="line">    CGPathAddRect(path, NULL, self.bounds);</span><br><span class="line">    </span><br><span class="line">    //3.</span><br><span class="line">    CGContextSetTextMatrix(context, CGAffineTransformIdentity);</span><br><span class="line">    CGContextTranslateCTM(context , 0, self.bounds.size.height);</span><br><span class="line">    CGContextScaleCTM(context, 1.0, -1.0);</span><br><span class="line">    </span><br><span class="line">    //4.1</span><br><span class="line">    NSMutableAttributedString *att = [self getAtt];</span><br><span class="line">    </span><br><span class="line">    //4.2</span><br><span class="line">    NSMutableAttributedString *attachment = [self getAttachment:(CGSizeMake(50, 50)) imageName:@&quot;SuperMary&quot;];</span><br><span class="line">    [att insertAttributedString:attachment atIndex:3];</span><br><span class="line">    </span><br><span class="line">    //5.</span><br><span class="line">    CTFramesetterRef frameSetter = CTFramesetterCreateWithAttributedString((CFAttributedStringRef)att);</span><br><span class="line">    </span><br><span class="line">    //6.</span><br><span class="line">    CTFrameRef frame = CTFramesetterCreateFrame(frameSetter, CFRangeMake(0, [att length]), path, NULL);</span><br><span class="line">    </span><br><span class="line">    //7.1</span><br><span class="line">    CFArrayRef lines = CTFrameGetLines(frame);</span><br><span class="line">    CFIndex lineNumber =  CFArrayGetCount(lines);</span><br><span class="line">    CGPoint lineOrigins[lineNumber];</span><br><span class="line">    CTFrameGetLineOrigins(frame, CFRangeMake(0, 0), lineOrigins);</span><br><span class="line">    for (int i = 0 ; i &lt; CFArrayGetCount(lines); i++) &#123;</span><br><span class="line">        CGPoint point = lineOrigins[i];</span><br><span class="line">        CTLineRef line = CFArrayGetValueAtIndex(lines, i);</span><br><span class="line">        CGContextSetTextPosition(context, point.x, point.y);</span><br><span class="line">        CFArrayRef runs = CTLineGetGlyphRuns(line);</span><br><span class="line">        CFIndex runNumber = CFArrayGetCount(runs);</span><br><span class="line">        for (int j = 0; j &lt; runNumber; j++) &#123;</span><br><span class="line">            CTRunRef run = CFArrayGetValueAtIndex(runs, j);</span><br><span class="line">            //7.2</span><br><span class="line">            if ([self isImageAttachment:run]) &#123;</span><br><span class="line">                [self drawImage:frame line:line run:run point:point];</span><br><span class="line">            &#125;</span><br><span class="line">            CTRunDraw(run, context, CFRangeMake(0, 0));</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    //8.</span><br><span class="line">    CFRelease(path);</span><br><span class="line">    CFRelease(frameSetter);</span><br><span class="line">    CFRelease(frame);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">- (NSMutableAttributedString *)getAtt&#123;</span><br><span class="line">    NSMutableAttributedString *att = [[NSMutableAttributedString alloc] initWithString:@&quot;Core Text, Core Text, Core Text, Core Text, Core Text, Core Text, &quot;];</span><br><span class="line">    CTFontRef font = CTFontCreateWithName(CFSTR(&quot;PingFang SC&quot;), 24, NULL);</span><br><span class="line">    [att addAttribute:(id)kCTFontAttributeName value:(__bridge id)font  range:NSMakeRange(0, att.length)];</span><br><span class="line">    long number = 10;</span><br><span class="line">    CFNumberRef num = CFNumberCreate(kCFAllocatorDefault,kCFNumberSInt8Type,&amp;number);</span><br><span class="line">    [att addAttribute:(id)kCTKernAttributeName value:(__bridge id)num range:NSMakeRange(10, 4)];</span><br><span class="line">    return att;</span><br><span class="line">&#125;</span><br><span class="line">//1.</span><br><span class="line">- (NSMutableAttributedString *)getAttachment:(CGSize)size imageName:(NSString *)imageName&#123;</span><br><span class="line">    CTRunDelegateCallbacks callBacks;</span><br><span class="line">    callBacks.version = kCTRunDelegateVersion1;</span><br><span class="line">    callBacks.dealloc = DelegateDeallocCallback;</span><br><span class="line">    callBacks.getAscent = DelegateAscentCallBacks;</span><br><span class="line">    callBacks.getDescent = DelegateDescentCallBacks;</span><br><span class="line">    callBacks.getWidth = DelegateWidthCallBacks;</span><br><span class="line">    </span><br><span class="line">    NSString *sizeStr = NSStringFromCGSize(size);</span><br><span class="line"></span><br><span class="line">    CTRunDelegateRef delegate = CTRunDelegateCreate(&amp;callBacks, (__bridge void *)sizeStr);</span><br><span class="line"></span><br><span class="line">    unichar placeHolder = 0xFFFC;</span><br><span class="line">    NSString * placeHolderStr = [NSString stringWithCharacters:&amp;placeHolder length:1];</span><br><span class="line">    NSMutableAttributedString * imageAttachment = [[NSMutableAttributedString alloc] initWithString:placeHolderStr];</span><br><span class="line">    [imageAttachment addAttribute:@&quot;imageName&quot; value:imageName range:(NSMakeRange(0, 1))];</span><br><span class="line">    CFAttributedStringSetAttribute((CFMutableAttributedStringRef)imageAttachment, CFRangeMake(0, 1), kCTRunDelegateAttributeName, delegate);</span><br><span class="line">    CFRelease(delegate);</span><br><span class="line">    </span><br><span class="line">    return imageAttachment;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">//2.</span><br><span class="line">void DelegateDeallocCallback (void *refCon)&#123;</span><br><span class="line">    NSLog(@&quot;dealloc&quot;);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">CGFloat DelegateAscentCallBacks(void * refCon)&#123;</span><br><span class="line">    CGSize size = CGSizeFromString((__bridge NSString *)refCon);</span><br><span class="line">    return size.height;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">CGFloat DelegateDescentCallBacks(void * refCon)&#123;</span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">CGFloat DelegateWidthCallBacks(void * refCon)&#123;</span><br><span class="line">    CGSize size = CGSizeFromString((__bridge NSString *)refCon);</span><br><span class="line">    return size.width;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">//3.</span><br><span class="line">- (BOOL)isImageAttachment:(CTRunRef)run&#123;</span><br><span class="line">    NSDictionary * attributes = (NSDictionary *)CTRunGetAttributes(run);</span><br><span class="line">    CTRunDelegateRef delegate = (__bridge CTRunDelegateRef)[attributes valueForKey:(id)kCTRunDelegateAttributeName];</span><br><span class="line">    NSString *sizeStr = CTRunDelegateGetRefCon(delegate);</span><br><span class="line">    if (delegate == nil || ![sizeStr isKindOfClass:[NSString class]]) &#123;</span><br><span class="line">        return NO;</span><br><span class="line">    &#125;</span><br><span class="line">    return YES;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">//4.</span><br><span class="line">- (void)drawImage:(CTFrameRef)frame line:(CTLineRef)line run:(CTRunRef)run point:(CGPoint)point&#123;</span><br><span class="line">    </span><br><span class="line">    NSDictionary * attributes = (NSDictionary *)CTRunGetAttributes(run);</span><br><span class="line">    NSString *imageName = attributes[@&quot;imageName&quot;];</span><br><span class="line">    if (!imageName) &#123;</span><br><span class="line">        return;</span><br><span class="line">    &#125;</span><br><span class="line">    CGFloat ascent;</span><br><span class="line">    CGFloat descent;</span><br><span class="line">    CGRect boundsRun;</span><br><span class="line">    boundsRun.size.width = CTRunGetTypographicBounds(run, CFRangeMake(0, 0), &amp;ascent, &amp;descent, NULL);</span><br><span class="line">    boundsRun.size.height = ascent + descent;</span><br><span class="line">    CGFloat xOffset = CTLineGetOffsetForStringIndex(line, CTRunGetStringRange(run).location, NULL);</span><br><span class="line">    boundsRun.origin.x = point.x + xOffset;</span><br><span class="line">    boundsRun.origin.y = point.y - descent;</span><br><span class="line">    CGPathRef path = CTFrameGetPath(frame);</span><br><span class="line">    CGRect colRect = CGPathGetBoundingBox(path);</span><br><span class="line">    CGRect imageBounds = CGRectOffset(boundsRun, colRect.origin.x, colRect.origin.y);</span><br><span class="line">    </span><br><span class="line">     [self drawWithImageName:imageName rect:imageBounds];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">//5.</span><br><span class="line">- (void)drawWithImageName:(NSString *)imageName rect:(CGRect)rect&#123;</span><br><span class="line">    CGContextRef context = UIGraphicsGetCurrentContext();</span><br><span class="line">    UIImage * image = [UIImage imageNamed:imageName];</span><br><span class="line">    CGContextDrawImage(context, rect, image.CGImage);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="代码详解"><a href="#代码详解" class="headerlink" title="代码详解"></a>代码详解</h2><p>首先我们可以看到上面一段代码和之前一篇的遍历CTRun的几乎没有区别，只有 <strong>4.2</strong> 和 <strong>7.2</strong> 的部分有增添，那么我们分别讲一下这两段</p>
+<h3 id="1"><a href="#1" class="headerlink" title="1"></a>1</h3><p>首先我们先看一下第二段的标号为 <strong>1</strong> 的代码中</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">//创建一个CTRun代理回调的结构体</span><br><span class="line">CTRunDelegateCallbacks callBacks;</span><br><span class="line">//设置回调版本，kCTRunDelegateVersion1为默认</span><br><span class="line">callBacks.version = kCTRunDelegateVersion1;</span><br><span class="line">//设置当内存回收时候执行的回调</span><br><span class="line">callBacks.dealloc = DelegateDeallocCallback;</span><br><span class="line">//设置图片距离顶部基线的距离执行的回调</span><br><span class="line">callBacks.getAscent = DelegateAscentCallBacks;</span><br><span class="line">//设置图片距离底部基线的距离执行的回调</span><br><span class="line">callBacks.getDescent = DelegateDescentCallBacks;</span><br><span class="line">//设置图片的宽度执行的回调</span><br><span class="line">callBacks.getWidth = DelegateWidthCallBacks;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">//创建代理，将参数传到代理对象中</span><br><span class="line">CTRunDelegateRef delegate = CTRunDelegateCreate(&amp;callBacks, (__bridge void *)sizeStr);</span><br><span class="line"></span><br><span class="line">//创建占位富文本，注意，不要用单空格来进行占位，会导致绘制时候图片位置计算出现问题</span><br><span class="line">unichar placeHolder = 0xFFFC;</span><br><span class="line">NSString * placeHolderStr = [NSString stringWithCharacters:&amp;placeHolder length:1];</span><br><span class="line">NSMutableAttributedString * imageAttachment = [[NSMutableAttributedString alloc] initWithString:placeHolderStr];</span><br><span class="line">//@&quot;imageName&quot;为自定义的key，将imageName传递到富文本中，在绘制的时候可以直接取用</span><br><span class="line">[imageAttachment addAttribute:@&quot;imageName&quot; value:imageName range:(NSMakeRange(0, 1))];</span><br><span class="line">//给制定范围内的富文本设置代理</span><br><span class="line">CFAttributedStringSetAttribute((CFMutableAttributedStringRef)imageAttachment, CFRangeMake(0, 1), kCTRunDelegateAttributeName, delegate);</span><br><span class="line">//释放代理对象</span><br><span class="line">CFRelease(delegate);</span><br></pre></td></tr></table></figure>
+<h3 id="2"><a href="#2" class="headerlink" title="2"></a>2</h3><p>这一段就是给代理回调结构体设置的各个回调，其中返回的形参为</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">NSString *sizeStr = NSStringFromCGSize(size);</span><br><span class="line">CTRunDelegateRef delegate = CTRunDelegateCreate(&amp;callBacks, (__bridge void *)sizeStr);</span><br></pre></td></tr></table></figure>
+<p>中初始化代理时候传入的实参，因为返回时候是个指针，所以所有类型的对象都可以，也可以自定义对象进行传递。</p>
+<h3 id="3"><a href="#3" class="headerlink" title="3"></a>3</h3><p>我们可以看到 <strong>7.2</strong> 部分调用了这个方法，这个方法的作用就是判断遍历出来的 <code>CTRun</code> 是否是自己要绘制的富文本，返回一个布尔值。</p>
+<h3 id="4"><a href="#4" class="headerlink" title="4"></a>4</h3><p>方法的前面的判断就是判断是否有imageName，我们也可以根据需求将一个默认图绘制上去，我们着重讲一下计算图片绝对布局的算法。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">//距离顶部基线的距离</span><br><span class="line">CGFloat ascent;</span><br><span class="line">//距离底部基线的距离</span><br><span class="line">CGFloat descent;</span><br><span class="line">//进行计算的中间变量</span><br><span class="line">CGRect bounds;</span><br><span class="line">//获取图片的宽和上下基线的距离</span><br><span class="line">bounds.size.width = CTRunGetTypographicBounds(run, CFRangeMake(0, 0), &amp;ascent, &amp;descent, NULL);</span><br><span class="line">bounds.size.height = ascent + descent;</span><br><span class="line">//获取距离行的第一个字的原点的水平距离</span><br><span class="line">CGFloat xOffset = CTLineGetOffsetForStringIndex(line, CTRunGetStringRange(run).location, NULL);</span><br><span class="line">//计算图片原点的x坐标</span><br><span class="line">bounds.origin.x = point.x + xOffset;</span><br><span class="line">//计算图片原点的y坐标</span><br><span class="line">bounds.origin.y = point.y - descent;</span><br><span class="line">//获取绘制的区域</span><br><span class="line">CGPathRef path = CTFrameGetPath(frame);</span><br><span class="line">//获取裁剪区域的区域</span><br><span class="line">CGRect cutRect = CGPathGetBoundingBox(path);</span><br><span class="line">//获取图片的绝对布局</span><br><span class="line">CGRect drawBounds = CGRectOffset(bounds, cutRect.origin.x, cutRect.origin.y);</span><br></pre></td></tr></table></figure>
+<h3 id="5"><a href="#5" class="headerlink" title="5"></a>5</h3><p>两个形参分别是需要绘制的图片和图片的绝对布局，我们直接绘制既可。</p>
+<hr>
+<h5 id="我将图文混排增加的代码直接写成了各个方法，更灵活更易懂，这个地方我们可以自定义一个类来专门处理图文相关的代理等一系列的参数，YYText就是自定义了一个YYTextRunDelegate这个类来处理相关的，下一篇我们将继续写点击事件相关"><a href="#我将图文混排增加的代码直接写成了各个方法，更灵活更易懂，这个地方我们可以自定义一个类来专门处理图文相关的代理等一系列的参数，YYText就是自定义了一个YYTextRunDelegate这个类来处理相关的，下一篇我们将继续写点击事件相关" class="headerlink" title="我将图文混排增加的代码直接写成了各个方法，更灵活更易懂，这个地方我们可以自定义一个类来专门处理图文相关的代理等一系列的参数，YYText就是自定义了一个YYTextRunDelegate这个类来处理相关的，下一篇我们将继续写点击事件相关"></a>我将图文混排增加的代码直接写成了各个方法，更灵活更易懂，这个地方我们可以自定义一个类来专门处理图文相关的代理等一系列的参数，<code>YYText</code>就是自定义了一个<code>YYTextRunDelegate</code>这个类来处理相关的，下一篇我们将继续写点击事件相关</h5><p><a href="https://github.com/2016321/CoreTextDemo" target="_blank" rel="noopener">Demo</a></p>
+<p>英文水平贼渣的我又看了好久英文文档和博客总结的，如果转载请附上链接<a href="https://coderwong.com/2018/07/09/CoreTextFix/">https://coderwong.com/2018/07/09/CoreTextFix/</a>，万分感谢</p>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/iOS/" rel="tag"># iOS</a>
+          
+            <a href="/tags/OC/" rel="tag"># OC</a>
+          
+            <a href="/tags/Core-Text/" rel="tag"># Core Text</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/07/05/CoreText/" rel="next" title="CoreText跳坑">
+                <i class="fa fa-chevron-left"></i> CoreText跳坑
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/07/10/CoreTextTouch/" rel="prev" title="CoreText点击事件处理">
+                CoreText点击事件处理 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        
+  <script>
+    window._bd_share_config = {
+      "common": {
+        "bdText": "",
+        "bdMini": "1",
+        "bdMiniList": false,
+        "bdPic": ""
+      },
+      "image": {
+        "viewList": ["tsina", "douban", "sqq", "qzone", "weixin", "twi", "fbook"],
+        "viewText": "分享到：",
+        "viewSize": "16"
+      },
+      "slide": {
+        "bdImg": "5",
+        "bdPos": "left",
+        "bdTop": "100"
+      }
+    }
+  </script>
+
+<script>
+  with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='/static/api/js/share.js?v=89860593.js?'];
+</script>
+
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+  
+    <div class="comments" id="comments">
+      
+        <div id="gitment-container"></div>
+      
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1513588177840&di=fd065c5f8d576b6c406f9984f3abe6a2&imgtype=0&src=http%3A%2F%2Ff.hiphotos.baidu.com%2Fimage%2Fpic%2Fitem%2F9825bc315c6034a82b679065c113495408237648.jpg"
+                alt="Coderwong" />
+            
+              <p class="site-author-name" itemprop="name">Coderwong</p>
+              <p class="site-description motion-element" itemprop="description">天道酬勤</p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">30</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">3</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">9</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  <a href="https://github.com/2016321" target="_blank" title="GitHub"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="http://www.jianshu.com/u/3806171d1e74" target="_blank" title="简书"><i class="fa fa-fw fa-thumbs-down"></i>简书</a>
+                  
+                </span>
+              
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://theme-next.iissnan.com/" title="NexT" target="_blank">NexT</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://hexo.io/" title="hexo" target="_blank">hexo</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+            
+          
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#思路"><span class="nav-number">1.</span> <span class="nav-text">思路</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Demo"><span class="nav-number">2.</span> <span class="nav-text">Demo</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#图文混排"><span class="nav-number">2.1.</span> <span class="nav-text">图文混排</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#代码详解"><span class="nav-number">2.2.</span> <span class="nav-text">代码详解</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1"><span class="nav-number">2.2.1.</span> <span class="nav-text">1</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2"><span class="nav-number">2.2.2.</span> <span class="nav-text">2</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3"><span class="nav-number">2.2.3.</span> <span class="nav-text">3</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4"><span class="nav-number">2.2.4.</span> <span class="nav-text">4</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5"><span class="nav-number">2.2.5.</span> <span class="nav-text">5</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#我将图文混排增加的代码直接写成了各个方法，更灵活更易懂，这个地方我们可以自定义一个类来专门处理图文相关的代理等一系列的参数，YYText就是自定义了一个YYTextRunDelegate这个类来处理相关的，下一篇我们将继续写点击事件相关"><span class="nav-number">2.2.5.0.1.</span> <span class="nav-text">我将图文混排增加的代码直接写成了各个方法，更灵活更易懂，这个地方我们可以自定义一个类来专门处理图文相关的代理等一系列的参数，YYText就是自定义了一个YYTextRunDelegate这个类来处理相关的，下一篇我们将继续写点击事件相关</span></a></li></ol></li></ol></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+        <div class="back-to-top">
+          <i class="fa fa-arrow-up"></i>
+          
+        </div>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2016 &mdash; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Coderwong</span>
+
+  
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  
+
+
+
+  
+  
+
+
+
+  
+  
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/three/three.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/three/three-waves.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/three/canvas_lines.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/three/canvas_sphere.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=6.3.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=6.3.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=6.3.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=6.3.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.3.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.3.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.3.0"></script>
+
+
+
+  
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+    
+        
+        <link rel="stylesheet" href="https://aimingoo.github.io/gitmint/style/default.css">
+        <script src="https://aimingoo.github.io/gitmint/dist/gitmint.browser.js"></script>
+        <script src="https://cdn.bootcss.com/blueimp-md5/2.10.0/js/md5.min.js"></script>
+    
+
+    
+
+    
+      <script type="text/javascript">
+      function renderGitment(){
+        var gitment = new Gitmint({
+            id: md5(window.location.pathname),
+            owner: '2016321',
+            repo: '2016321.github.io',
+            
+            lang: "" || navigator.language || navigator.systemLanguage || navigator.userLanguage,
+            
+            oauth: {
+            
+            
+                client_secret: 'ceb90a820c56497f0800b5536971ffa98ede1cf9',
+            
+                client_id: '2c927277d8072e094233'
+            }});
+        gitment.render('gitment-container');
+      }
+
+      
+      renderGitment();
+      
+      </script>
+    
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("o79yp6QTlOKrk6UpnFwepEsA-gzGzoHsz", "U8M8nSuEamEMio7QehNUEIri");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            
+            counter.save(null, {
+              success: function(counter) {
+                
+                  var $element = $(document.getElementById(url));
+                  $element.find('.leancloud-visitors-count').text(counter.get('time'));
+                
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            
+              var newcounter = new Counter();
+              /* Set ACL */
+              var acl = new AV.ACL();
+              acl.setPublicReadAccess(true);
+              acl.setPublicWriteAccess(true);
+              newcounter.setACL(acl);
+              /* End Set ACL */
+              newcounter.set("title", title);
+              newcounter.set("url", url);
+              newcounter.set("time", 1);
+              newcounter.save(null, {
+                success: function(newcounter) {
+                  var $element = $(document.getElementById(url));
+                  $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+                },
+                error: function(newcounter, error) {
+                  console.log('Failed to create');
+                }
+              });
+            
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+  <style>
+    .copy-btn {
+      display: inline-block;
+      padding: 6px 12px;
+      font-size: 13px;
+      font-weight: 700;
+      line-height: 20px;
+      color: #333;
+      white-space: nowrap;
+      vertical-align: middle;
+      cursor: pointer;
+      background-color: #eee;
+      background-image: linear-gradient(#fcfcfc, #eee);
+      border: 1px solid #d5d5d5;
+      border-radius: 3px;
+      user-select: none;
+      outline: 0;
+    }
+
+    .highlight-wrap .copy-btn {
+      transition: opacity .3s ease-in-out;
+      opacity: 0;
+      padding: 2px 6px;
+      position: absolute;
+      right: 4px;
+      top: 8px;
+    }
+
+    .highlight-wrap:hover .copy-btn,
+    .highlight-wrap .copy-btn:focus {
+      opacity: 1
+    }
+
+    .highlight-wrap {
+      position: relative;
+    }
+  </style>
+  <script>
+    $('.highlight').each(function (i, e) {
+      var $wrap = $('<div>').addClass('highlight-wrap')
+      $(e).after($wrap)
+      $wrap.append($('<button>').addClass('copy-btn').append('复制').on('click', function (e) {
+        var code = $(this).parent().find('.code').find('.line').map(function (i, e) {
+          return $(e).text()
+        }).toArray().join('\n')
+        var ta = document.createElement('textarea')
+        document.body.appendChild(ta)
+        ta.style.position = 'absolute'
+        ta.style.top = '0px'
+        ta.style.left = '0px'
+        ta.value = code
+        ta.select()
+        ta.focus()
+        var result = document.execCommand('copy')
+        document.body.removeChild(ta)
+        
+          if(result)$(this).text('复制成功')
+          else $(this).text('复制失败')
+        
+        $(this).blur()
+      })).on('mouseleave', function (e) {
+        var $b = $(this).find('.copy-btn')
+        setTimeout(function () {
+          $b.text('复制')
+        }, 300)
+      }).append(e)
+    })
+  </script>
+
+
+</body>
+</html>

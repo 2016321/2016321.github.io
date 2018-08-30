@@ -1,0 +1,1773 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-CN">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=6.3.0" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.3.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=6.3.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.3.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=6.3.0" color="#222">
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '6.3.0',
+    sidebar: {"position":"left","display":"hide","offset":12,"b2t":true,"scrollpercent":false,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="看到了 Marcel Weiher 大神的 《iOS和macOS性能优化》中文版出版，马上买来窝图书馆啃完，下面是我做的读书笔记，希望分享给大家给大家带来帮助，大致翻了一下书感觉文字较多内容相对晦涩，我会它总结一下讲出来让大家更好理解。  前言关于Objective-C的历史大家自行Google吧，po几个网址大家简单了解下 smalltalk 官方 smalltalk 维基百科 大致的总结下就">
+<meta name="keywords" content="iOS,OC">
+<meta property="og:type" content="article">
+<meta property="og:title" content="《iOS和macOS性能优化》1.CPU：原理">
+<meta property="og:url" content="https://coderwong.com/2018/07/14/Book-Optimizing-1/index.html">
+<meta property="og:site_name" content="Coder Note">
+<meta property="og:description" content="看到了 Marcel Weiher 大神的 《iOS和macOS性能优化》中文版出版，马上买来窝图书馆啃完，下面是我做的读书笔记，希望分享给大家给大家带来帮助，大致翻了一下书感觉文字较多内容相对晦涩，我会它总结一下讲出来让大家更好理解。  前言关于Objective-C的历史大家自行Google吧，po几个网址大家简单了解下 smalltalk 官方 smalltalk 维基百科 大致的总结下就">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2018-08-30T06:03:36.206Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="《iOS和macOS性能优化》1.CPU：原理">
+<meta name="twitter:description" content="看到了 Marcel Weiher 大神的 《iOS和macOS性能优化》中文版出版，马上买来窝图书馆啃完，下面是我做的读书笔记，希望分享给大家给大家带来帮助，大致翻了一下书感觉文字较多内容相对晦涩，我会它总结一下讲出来让大家更好理解。  前言关于Objective-C的历史大家自行Google吧，po几个网址大家简单了解下 smalltalk 官方 smalltalk 维基百科 大致的总结下就">
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Coder Note" type="application/atom+xml" />
+
+
+
+
+  <link rel="canonical" href="https://coderwong.com/2018/07/14/Book-Optimizing-1/"/>
+
+
+
+<script type="text/javascript" id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>《iOS和macOS性能优化》1.CPU：原理 | Coder Note</title>
+  
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style type="text/css">
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
+
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
+
+    .use-motion {
+      .logo-line-before i { left: initial; }
+      .logo-line-after i { right: initial; }
+    }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Coder Note</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <p class="site-subtitle">Coderwong's blog</p>
+      
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+    <a href="/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-home"></i> <br />首页</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+    <a href="/archives/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />归档<span class="badge">30</span></a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+    <a href="/tags/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />标签<span class="badge">9</span></a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+    <a href="/categories/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-th"></i> <br />分类<span class="badge">3</span></a>
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://coderwong.com/2018/07/14/Book-Optimizing-1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Coderwong">
+      <meta itemprop="description" content="天道酬勤">
+      <meta itemprop="image" content="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1513588177840&di=fd065c5f8d576b6c406f9984f3abe6a2&imgtype=0&src=http%3A%2F%2Ff.hiphotos.baidu.com%2Fimage%2Fpic%2Fitem%2F9825bc315c6034a82b679065c113495408237648.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Coder Note">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">《iOS和macOS性能优化》1.CPU：原理
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2018-07-14 13:36:05" itemprop="dateCreated datePublished" datetime="2018-07-14T13:36:05+08:00">2018-07-14</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2018-08-30 14:03:36" itemprop="dateModified" datetime="2018-08-30T14:03:36+08:00">2018-08-30</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/《iOS和macOS性能优化》总结/" itemprop="url" rel="index"><span itemprop="name">《iOS和macOS性能优化》总结</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/07/14/Book-Optimizing-1/#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count gitment-comments-count" data-xid="/2018/07/14/Book-Optimizing-1/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+             <span id="/2018/07/14/Book-Optimizing-1/" class="leancloud_visitors" data-flag-title="《iOS和macOS性能优化》1.CPU：原理">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数：</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <blockquote>
+<p>看到了 Marcel Weiher 大神的 《iOS和macOS性能优化》中文版出版，马上买来窝图书馆啃完，下面是我做的读书笔记，希望分享给大家给大家带来帮助，大致翻了一下书感觉文字较多内容相对晦涩，我会它总结一下讲出来让大家更好理解。</p>
+</blockquote>
+<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>关于<code>Objective-C</code>的历史大家自行Google吧，po几个网址大家简单了解下</p>
+<p><a href="http://www.smalltalk.org/" target="_blank" rel="noopener">smalltalk 官方</a></p>
+<p><a href="https://zh.wikipedia.org/wiki/Smalltalk" target="_blank" rel="noopener">smalltalk 维基百科</a></p>
+<p>大致的总结下就是<code>smalltalk</code>算得上是元老级别的面向对象语言，乔老爷正是在<a href="https://zh.wikipedia.org/wiki/%E5%B8%95%E7%BE%85%E5%A5%A7%E5%A4%9A%E7%A0%94%E7%A9%B6%E4%B8%AD%E5%BF%83" target="_blank" rel="noopener">Xerox PARC</a>这里面参观的时候了解到了它，这个研究中心诞生和很多现代计算机的不可或缺的基础技术和基础硬件。</p>
+<h1 id="一个简单的例子"><a href="#一个简单的例子" class="headerlink" title="一个简单的例子"></a>一个简单的例子</h1><p>我们看一个很简单的例子，对1~1000范围内的整数求和（只是示例，当然(n(n+1)/2)计算是最佳选择）。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">//sumints.c</span><br><span class="line"></span><br><span class="line">#include &lt;stdio.h&gt;</span><br><span class="line"></span><br><span class="line">int main( int argc , char *argv[] ) </span><br><span class="line">&#123;</span><br><span class="line">  int i,sum;</span><br><span class="line">  sun=0;</span><br><span class="line">  for (i=1;i&lt;= 1000;i++ ) &#123;</span><br><span class="line">  	sum+=i;</span><br><span class="line">  &#125;</span><br><span class="line">  return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>在命令行中我们分别输入一下命令</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ cc -Os -Wall -o sumints sumints.c</span><br><span class="line">$ time ./sumints</span><br></pre></td></tr></table></figure>
+<p>我们使用clang来编译一下程序再运行程序，得到一个运行时间。<br>对于现代计算机来说这个简单的程序可能使用几毫秒就能完成，并且如果使用C语言的话编译可以直接转换成CPU指令。</p>
+<h2 id="（微）基准的危险"><a href="#（微）基准的危险" class="headerlink" title="（微）基准的危险"></a>（微）基准的危险</h2><p>我们运行下面的代码</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">int main( int argc , char *argv[] ) </span><br><span class="line">&#123;</span><br><span class="line">  return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>我们在命令行中重新执行上面的命令，我们得到了几乎相同的运行时间。</p>
+<ul>
+<li>现代比那一起进行优化时，对那些无用的计算自动进行了忽略。</li>
+<li>即使不进行忽略，编译器也会不去循环地生成得出结果的代码，而是选用静态的方式。</li>
+<li>如果任务的循环次数小，这个简单的程序的运行时长就取决于启动时间。</li>
+</ul>
+<p>我们需要提高循环地次数以至于程序启动时长可以忽略不计。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;stdio.h&gt;</span><br><span class="line">#include &lt;stdlib.h&gt;</span><br><span class="line"></span><br><span class="line">int main( int argc , char *argv[] ) </span><br><span class="line">&#123;</span><br><span class="line">  int i,k,sum;</span><br><span class="line">  int limit=argc &gt; 1 ? atoi(argv[1]) : 1;</span><br><span class="line">  limit *= 1000;</span><br><span class="line">  for (k=0;k&lt;limit; k++ ) &#123;</span><br><span class="line">    sum=0;</span><br><span class="line">    for (i=1;i&lt;= 10000;i++ ) &#123;</span><br><span class="line">      sum+=i;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  printf(&quot;%d\n&quot;,sum);</span><br><span class="line">  return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>我们通过控制变量法计算得到这个时间是线性增长的，其实我们可以设想未来的编译器当发现这个循环是在做相同的工作就会让外部只是循环一次。</p>
+<h2 id="更多的整数求和的方式"><a href="#更多的整数求和的方式" class="headerlink" title="更多的整数求和的方式"></a>更多的整数求和的方式</h2><p>但是上面只是测试了C语言的性能，我们要使用Objective-C来测试，但是Objective-C是没有面向对象的循环方式的，我们还是来使用C语言的方式循环。计算是使用的Objective-C中的NSNumber来进行计算。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">//sumints_objc</span><br><span class="line"></span><br><span class="line">#import &lt;Foundation/Foundation.h&gt;</span><br><span class="line"></span><br><span class="line">int main( int argc , char *argv[] ) </span><br><span class="line">&#123;</span><br><span class="line">	int i,k;</span><br><span class="line">	NSNumber* sum = nil;</span><br><span class="line">	for (k=0;k&lt;10000; k++ ) &#123;</span><br><span class="line">	  sum =@(0);</span><br><span class="line">	  for (i=1;i&lt;= 1000;i++ ) &#123;</span><br><span class="line">	    sum =@([sum intValue]+i);    </span><br><span class="line">	  &#125;</span><br><span class="line">	&#125;</span><br><span class="line">	NSLog(@&quot;%@&quot;,sum);</span><br><span class="line">	return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>我们需要使用<code>-framework Foundation</code>选项在编译的时候可以连接<code>Foundation</code>库来使用相应的类。同时使用<code>-m32</code>选择32位运行库。在实操的时候我将外层的循环此时错误的写成了现有数字的100倍，以至于运行时间用了22s之久。我们可以发现使用Objective-C对象运行的时间比之前久很多，这是因为耗费在了对象的内存分配上面，毕竟堆操作是一个相对耗时的动作。按照作者的做法并没有测试出线性增长，在使用64位架构的时候10000次只是用了1.5s左右，而100w次只是用了9.5s，虽然与作者的测试机相比配置好点，但是并没有明显的线性增长。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ cc -Wall -Os -m32 -o sumints_objc sumints_objc.m -framework Foundation</span><br><span class="line">$ time ./sumints_objc</span><br></pre></td></tr></table></figure>
+<h2 id="Swift"><a href="#Swift" class="headerlink" title="Swift"></a>Swift</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">var a=0</span><br><span class="line">for j in 0..&lt;10_000_000 &#123;</span><br><span class="line">	a=0</span><br><span class="line">	for i:Int in 0...1000 &#123;</span><br><span class="line">		a+=i</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">import Foundation</span><br><span class="line"></span><br><span class="line">var a:NSNumber=0</span><br><span class="line">for j in 0..&lt;10_000_000 &#123;</span><br><span class="line">	a=0</span><br><span class="line">	for i:Int in 0...1000 &#123;</span><br><span class="line">		a=a.intValue + i</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>上面两段代码分别是使用Swift中的基本类型和对象类型进行运算，结论上肯定是Swift的用时一定比Objective-C要慢，但是鉴于作者使用的应该是Swift2.x系列，我们不在讲作者得出的数据。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">var a=0</span><br><span class="line">for _ in 0..&lt;10_000_000 &#123;</span><br><span class="line">	a = (0..&lt;1000).reduce(0, +)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这里面我们使用了Swift4中的一个高度抽象化的函数reduce函数，同上，因为同样的原因这段Swift的效率问题我们之后再考证。</p>
+<h2 id="其他语言"><a href="#其他语言" class="headerlink" title="其他语言"></a>其他语言</h2><p>虽然有测试时间的偏差，但是作者的结论就现在来说应该还是适用</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">语言</th>
+<th style="text-align:center">采用对象方式</th>
+<th style="text-align:center">精度是否受限</th>
+<th style="text-align:center">执行时间(us)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">Objective-C（基本类型）</td>
+<td style="text-align:center">NO</td>
+<td style="text-align:center">NO</td>
+<td style="text-align:center">0.2</td>
+</tr>
+<tr>
+<td style="text-align:center">Swift（基本类型）</td>
+<td style="text-align:center">否</td>
+<td style="text-align:center">否</td>
+<td style="text-align:center">0.3</td>
+</tr>
+<tr>
+<td style="text-align:center">Java（基本类型）</td>
+<td style="text-align:center">否</td>
+<td style="text-align:center">否</td>
+<td style="text-align:center">0.4</td>
+</tr>
+<tr>
+<td style="text-align:center">Strongtalk</td>
+<td style="text-align:center">是</td>
+<td style="text-align:center">是</td>
+<td style="text-align:center">5.2</td>
+</tr>
+<tr>
+<td style="text-align:center">Java（对象方式）</td>
+<td style="text-align:center">是</td>
+<td style="text-align:center">否</td>
+<td style="text-align:center">6.1</td>
+</tr>
+<tr>
+<td style="text-align:center">Objective-C（采用标记指针的对象）</td>
+<td style="text-align:center">是</td>
+<td style="text-align:center">否</td>
+<td style="text-align:center">11.4</td>
+</tr>
+<tr>
+<td style="text-align:center">Smalltalk-80</td>
+<td style="text-align:center">是</td>
+<td style="text-align:center">是</td>
+<td style="text-align:center">12.7</td>
+</tr>
+<tr>
+<td style="text-align:center">Swift（采用标记指针的对象）</td>
+<td style="text-align:center">是</td>
+<td style="text-align:center">否</td>
+<td style="text-align:center">31</td>
+</tr>
+<tr>
+<td style="text-align:center">PostScript</td>
+<td style="text-align:center">在某种程度上</td>
+<td style="text-align:center">是</td>
+<td style="text-align:center">54.2</td>
+</tr>
+<tr>
+<td style="text-align:center">Ruby</td>
+<td style="text-align:center">是</td>
+<td style="text-align:center">是</td>
+<td style="text-align:center">55.3</td>
+</tr>
+<tr>
+<td style="text-align:center">Objective-C（普通对象）</td>
+<td style="text-align:center">是</td>
+<td style="text-align:center">否</td>
+<td style="text-align:center">238.1</td>
+</tr>
+<tr>
+<td style="text-align:center">MC 68000 汇编/7.1 MHz</td>
+<td style="text-align:center">否</td>
+<td style="text-align:center">否</td>
+<td style="text-align:center">（大约）3000</td>
+</tr>
+</tbody>
+</table>
+<p>我们大概得到的结论是在做简单的运算的时候更好的选择是使用基本类型。</p>
+<h1 id="混编的力量"><a href="#混编的力量" class="headerlink" title="混编的力量"></a>混编的力量</h1><p>我们可以使用C或C++来写我们的核心模块，在使用Objective-C封装一层。或者使用Objective-C编写核心模块再直接优化它。</p>
+<h1 id="操作成本"><a href="#操作成本" class="headerlink" title="操作成本"></a>操作成本</h1><p>下表是作者使用当时比较新的测试机做的性能耗时测试</p>
+<p><strong>2013 MacBook Pro Retina</strong></p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">操作</th>
+<th style="text-align:center">加法</th>
+<th style="text-align:center">乘法</th>
+<th style="text-align:center">1ns</th>
+<th style="text-align:center">消息发送</th>
+<th style="text-align:center">除法</th>
+<th style="text-align:center">autorelease</th>
+<th style="text-align:center">alloc</th>
+<th style="text-align:center">1/10th s</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">加法</td>
+<td style="text-align:center">1</td>
+<td style="text-align:center">2.2</td>
+<td style="text-align:center">3.4</td>
+<td style="text-align:center">22</td>
+<td style="text-align:center">23</td>
+<td style="text-align:center">644</td>
+<td style="text-align:center">1,012</td>
+<td style="text-align:center">3.374e+08</td>
+</tr>
+<tr>
+<td style="text-align:center">乘法</td>
+<td style="text-align:center"></td>
+<td style="text-align:center">1</td>
+<td style="text-align:center">1.5</td>
+<td style="text-align:center">9.8</td>
+<td style="text-align:center">10</td>
+<td style="text-align:center">291</td>
+<td style="text-align:center">457</td>
+<td style="text-align:center">1.523e+08</td>
+</tr>
+<tr>
+<td style="text-align:center">1ns</td>
+<td style="text-align:center">0.3</td>
+<td style="text-align:center">0.66</td>
+<td style="text-align:center">1</td>
+<td style="text-align:center">6.5</td>
+<td style="text-align:center">6.7</td>
+<td style="text-align:center">191</td>
+<td style="text-align:center">300</td>
+<td style="text-align:center">1e+08</td>
+</tr>
+<tr>
+<td style="text-align:center">消息发送</td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center">1</td>
+<td style="text-align:center">1</td>
+<td style="text-align:center">30</td>
+<td style="text-align:center">46</td>
+<td style="text-align:center">1.548e+07</td>
+</tr>
+<tr>
+<td style="text-align:center">除法</td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center">1</td>
+<td style="text-align:center">28</td>
+<td style="text-align:center">45</td>
+<td style="text-align:center">1.489e+07</td>
+</tr>
+<tr>
+<td style="text-align:center">autorelease</td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center">1</td>
+<td style="text-align:center">1.6</td>
+<td style="text-align:center">5.24e+05</td>
+</tr>
+<tr>
+<td style="text-align:center">alloc</td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center">1</td>
+<td style="text-align:center">3.333e+05</td>
+</tr>
+<tr>
+<td style="text-align:center">1/10th s</td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center">1</td>
+</tr>
+</tbody>
+</table>
+<p><strong>iPhone 5S</strong></p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">操作</th>
+<th style="text-align:center">1ns</th>
+<th style="text-align:center">乘法</th>
+<th style="text-align:center">消息发送</th>
+<th style="text-align:center">除法</th>
+<th style="text-align:center">autorelease</th>
+<th style="text-align:center">alloc</th>
+<th style="text-align:center">1/10th s</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">1ns</td>
+<td style="text-align:center">1</td>
+<td style="text-align:center">3.9</td>
+<td style="text-align:center">4.6</td>
+<td style="text-align:center">6.2</td>
+<td style="text-align:center">209.7</td>
+<td style="text-align:center">274</td>
+<td style="text-align:center">2147484</td>
+</tr>
+<tr>
+<td style="text-align:center">乘法</td>
+<td style="text-align:center"></td>
+<td style="text-align:center">1</td>
+<td style="text-align:center">1.2</td>
+<td style="text-align:center">1.6</td>
+<td style="text-align:center">53</td>
+<td style="text-align:center">70</td>
+<td style="text-align:center">545600.5</td>
+</tr>
+<tr>
+<td style="text-align:center">消息发送</td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center">1</td>
+<td style="text-align:center">1.3</td>
+<td style="text-align:center">45</td>
+<td style="text-align:center">59</td>
+<td style="text-align:center">464320.8</td>
+</tr>
+<tr>
+<td style="text-align:center">除法</td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center">1</td>
+<td style="text-align:center">34</td>
+<td style="text-align:center">44</td>
+<td style="text-align:center">346927.9</td>
+</tr>
+<tr>
+<td style="text-align:center">autorelease</td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center">1</td>
+<td style="text-align:center">1.3</td>
+<td style="text-align:center">10341.72</td>
+</tr>
+<tr>
+<td style="text-align:center">alloc</td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center">1</td>
+<td style="text-align:center">7837.331</td>
+</tr>
+<tr>
+<td style="text-align:center">1/10th s</td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center">1</td>
+</tr>
+</tbody>
+</table>
+<p><strong>15‘ MacBook Pro</strong></p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">操作</th>
+<th style="text-align:center">1/10th s</th>
+<th style="text-align:center">1ns</th>
+<th style="text-align:center">乘法</th>
+<th style="text-align:center">消息发送</th>
+<th style="text-align:center">除法</th>
+<th style="text-align:center">autorelease</th>
+<th style="text-align:center">alloc</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">1/10th s</td>
+<td style="text-align:center">1</td>
+<td style="text-align:center">-4.7e-07</td>
+<td style="text-align:center">-5.6e-07</td>
+<td style="text-align:center">-1.3e-06</td>
+<td style="text-align:center">-4.1e-06</td>
+<td style="text-align:center">-4e-05</td>
+<td style="text-align:center">-0.00017</td>
+</tr>
+<tr>
+<td style="text-align:center">1ns</td>
+<td style="text-align:center">-2.1e+06</td>
+<td style="text-align:center">1</td>
+<td style="text-align:center">1.2</td>
+<td style="text-align:center">2.8</td>
+<td style="text-align:center">8.8</td>
+<td style="text-align:center">85</td>
+<td style="text-align:center">370.8</td>
+</tr>
+<tr>
+<td style="text-align:center">乘法</td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center">1</td>
+<td style="text-align:center">2.3</td>
+<td style="text-align:center">7.3</td>
+<td style="text-align:center">70</td>
+<td style="text-align:center">307.2</td>
+</tr>
+<tr>
+<td style="text-align:center">消息发送</td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center">1</td>
+<td style="text-align:center">3.1</td>
+<td style="text-align:center">30</td>
+<td style="text-align:center">132.9</td>
+</tr>
+<tr>
+<td style="text-align:center">除法</td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center">1</td>
+<td style="text-align:center">1.3</td>
+<td style="text-align:center">23263.07</td>
+</tr>
+<tr>
+<td style="text-align:center">autorelease</td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center">1</td>
+<td style="text-align:center">17616.91</td>
+</tr>
+<tr>
+<td style="text-align:center">alloc</td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center">1</td>
+</tr>
+</tbody>
+</table>
+<p><strong>iPhone SE</strong></p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">操作</th>
+<th style="text-align:center">1ns</th>
+<th style="text-align:center">乘法</th>
+<th style="text-align:center">消息发送</th>
+<th style="text-align:center">除法</th>
+<th style="text-align:center">autorelease</th>
+<th style="text-align:center">alloc</th>
+<th style="text-align:center">1/10th s</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">1ns</td>
+<td style="text-align:center">1</td>
+<td style="text-align:center">2.2</td>
+<td style="text-align:center">3.3</td>
+<td style="text-align:center">4.5</td>
+<td style="text-align:center">92</td>
+<td style="text-align:center">121.9</td>
+<td style="text-align:center">2147484</td>
+</tr>
+<tr>
+<td style="text-align:center">乘法</td>
+<td style="text-align:center"></td>
+<td style="text-align:center">1</td>
+<td style="text-align:center">1.5</td>
+<td style="text-align:center">2</td>
+<td style="text-align:center">42</td>
+<td style="text-align:center">56</td>
+<td style="text-align:center">977906.9</td>
+</tr>
+<tr>
+<td style="text-align:center">消息发送</td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center">1</td>
+<td style="text-align:center">1.3</td>
+<td style="text-align:center">28</td>
+<td style="text-align:center">36</td>
+<td style="text-align:center">642574.4</td>
+</tr>
+<tr>
+<td style="text-align:center">除法</td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center">1</td>
+<td style="text-align:center">21</td>
+<td style="text-align:center">27</td>
+<td style="text-align:center">481606.6</td>
+</tr>
+<tr>
+<td style="text-align:center">autorelease</td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center">1</td>
+<td style="text-align:center">1.3</td>
+<td style="text-align:center">23263.07</td>
+</tr>
+<tr>
+<td style="text-align:center">alloc</td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center">1</td>
+<td style="text-align:center">17616.91</td>
+</tr>
+<tr>
+<td style="text-align:center">1/10th s</td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center">1</td>
+</tr>
+</tbody>
+</table>
+<p><strong>iPhone3G</strong></p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">操作</th>
+<th style="text-align:center">1ns</th>
+<th style="text-align:center">加法</th>
+<th style="text-align:center">乘法</th>
+<th style="text-align:center">除法</th>
+<th style="text-align:center">消息发送</th>
+<th style="text-align:center">autorelease</th>
+<th style="text-align:center">alloc</th>
+<th style="text-align:center">1/10th s</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">1ns</td>
+<td style="text-align:center">1</td>
+<td style="text-align:center">9.7</td>
+<td style="text-align:center">23</td>
+<td style="text-align:center">92</td>
+<td style="text-align:center">140</td>
+<td style="text-align:center">6,700</td>
+<td style="text-align:center">9,400</td>
+<td style="text-align:center">1e+08</td>
+</tr>
+<tr>
+<td style="text-align:center">加法</td>
+<td style="text-align:center"></td>
+<td style="text-align:center">1</td>
+<td style="text-align:center">2.4</td>
+<td style="text-align:center">9.5</td>
+<td style="text-align:center">14</td>
+<td style="text-align:center">691</td>
+<td style="text-align:center">969</td>
+<td style="text-align:center">1.031e+07</td>
+</tr>
+<tr>
+<td style="text-align:center">乘法</td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center">1</td>
+<td style="text-align:center">4</td>
+<td style="text-align:center">6.1</td>
+<td style="text-align:center">291</td>
+<td style="text-align:center">409</td>
+<td style="text-align:center">4.348e+06</td>
+</tr>
+<tr>
+<td style="text-align:center">除法</td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center">1</td>
+<td style="text-align:center">1.5</td>
+<td style="text-align:center">73</td>
+<td style="text-align:center">102</td>
+<td style="text-align:center">1.087e+06</td>
+</tr>
+<tr>
+<td style="text-align:center">消息发送</td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center">1</td>
+<td style="text-align:center">48</td>
+<td style="text-align:center">67</td>
+<td style="text-align:center">7.143e+05</td>
+</tr>
+<tr>
+<td style="text-align:center">autorelease</td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center">1</td>
+<td style="text-align:center">1.4</td>
+<td style="text-align:center">1.493e+04</td>
+</tr>
+<tr>
+<td style="text-align:center">alloc</td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center">1</td>
+<td style="text-align:center">1.064e+04</td>
+</tr>
+<tr>
+<td style="text-align:center">1/10th s</td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center">1</td>
+</tr>
+</tbody>
+</table>
+<p>其实上述的行为不会频繁执行，随着硬件的性能不断提升，这些操作的耗时可以忽略不计，但是如果有极大的操作量我们就要对其做相应的优化。</p>
+<h1 id="复杂度计算"><a href="#复杂度计算" class="headerlink" title="复杂度计算"></a>复杂度计算</h1><p>我们先暂时抛开空间复杂度只是谈谈时间复杂度，毕竟这个是真正影响一个算法执行时间的直接因素。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">- (NSMutableIndexSet *)rowsOdSelectedTasks:(NSArray *)selectedTasks &#123;</span><br><span class="line">	NSMutableIndexSet *selectedRows = [NSMutableIndexSet indexSet];</span><br><span class="line">	for (int row = 0; row &lt; (int)self.tableView.numberOfRows; row++) &#123;</span><br><span class="line">		Task *task = [self taskAtRow:row];</span><br><span class="line">		if task &#123;</span><br><span class="line">			NSUInteger index = [selectedTasks indexOfObject:task];</span><br><span class="line">			if (index != NSNotFound)&#123;</span><br><span class="line">				[selectedTasks addIndex:row];</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	return selectedRows;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>我们可以看一下上面的代码，虽然只有一个for循环，但是我们看<code>taskAtRow</code>这个方法，当我们去遍历的时候，如果有m个task元素的话，这个方法的时间复杂度就是O(m)，外层的for循环的时间复杂度为O(n)，总的复杂度为O(n*m)，但是如果n=m的话最终结果就是O(n^n)一个二次的算法。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">- (void)addObjectIfAbsent:(id)newObject</span><br><span class="line">&#123;</span><br><span class="line">	if (NSNotFound != [array indexOfObject:newObject]) &#123;</span><br><span class="line">		[array addObject:newObject];</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">- (void)addObject:(NSArray *)newObjects</span><br><span class="line">&#123;</span><br><span class="line">	for ( id obj in newObjects ) &#123;</span><br><span class="line">		[self addObjectIfAbsent:obj];</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>我们可以看一下上面的代码，虽然拆分出来了两个方法，但是还是对n个元素做遍历的存在性的判断，最后的复杂度还是O(n^n)，我们其实可以使用<code>NSSet</code>来替换<code>NSArray</code>，因为<code>NSSet</code>已经对元素进行了去重，可以将可以在常数时间做检查将时间复杂度降级。</p>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>虽然现在计算机性能和之前已经有了4000倍的提升，但是由于时间进度等因素我们发现的代码对比之前性能远不如之前了。而且现在更智能的编译器已经不能保证将高级代码优化得更快，硬件也是。所以我们还需要花更多的时间在代码的性能优化上面，尽可能的提升我们代码性能。</p>
+<h1 id="官方Demo"><a href="#官方Demo" class="headerlink" title="官方Demo"></a>官方Demo</h1><p><a href="https://github.com/mpw/iOS-macOS-performance" target="_blank" rel="noopener">demo飞机票</a></p>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/iOS/" rel="tag"># iOS</a>
+          
+            <a href="/tags/OC/" rel="tag"># OC</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/07/10/CoreTextTouch/" rel="next" title="CoreText点击事件处理">
+                <i class="fa fa-chevron-left"></i> CoreText点击事件处理
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        
+  <script>
+    window._bd_share_config = {
+      "common": {
+        "bdText": "",
+        "bdMini": "1",
+        "bdMiniList": false,
+        "bdPic": ""
+      },
+      "image": {
+        "viewList": ["tsina", "douban", "sqq", "qzone", "weixin", "twi", "fbook"],
+        "viewText": "分享到：",
+        "viewSize": "16"
+      },
+      "slide": {
+        "bdImg": "5",
+        "bdPos": "left",
+        "bdTop": "100"
+      }
+    }
+  </script>
+
+<script>
+  with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='/static/api/js/share.js?v=89860593.js?'];
+</script>
+
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+  
+    <div class="comments" id="comments">
+      
+        <div id="gitment-container"></div>
+      
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1513588177840&di=fd065c5f8d576b6c406f9984f3abe6a2&imgtype=0&src=http%3A%2F%2Ff.hiphotos.baidu.com%2Fimage%2Fpic%2Fitem%2F9825bc315c6034a82b679065c113495408237648.jpg"
+                alt="Coderwong" />
+            
+              <p class="site-author-name" itemprop="name">Coderwong</p>
+              <p class="site-description motion-element" itemprop="description">天道酬勤</p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">30</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">3</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">9</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  <a href="https://github.com/2016321" target="_blank" title="GitHub"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="http://www.jianshu.com/u/3806171d1e74" target="_blank" title="简书"><i class="fa fa-fw fa-thumbs-down"></i>简书</a>
+                  
+                </span>
+              
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://theme-next.iissnan.com/" title="NexT" target="_blank">NexT</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://hexo.io/" title="hexo" target="_blank">hexo</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+            
+          
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#一个简单的例子"><span class="nav-number">2.</span> <span class="nav-text">一个简单的例子</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#（微）基准的危险"><span class="nav-number">2.1.</span> <span class="nav-text">（微）基准的危险</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#更多的整数求和的方式"><span class="nav-number">2.2.</span> <span class="nav-text">更多的整数求和的方式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Swift"><span class="nav-number">2.3.</span> <span class="nav-text">Swift</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#其他语言"><span class="nav-number">2.4.</span> <span class="nav-text">其他语言</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#混编的力量"><span class="nav-number">3.</span> <span class="nav-text">混编的力量</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#操作成本"><span class="nav-number">4.</span> <span class="nav-text">操作成本</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#复杂度计算"><span class="nav-number">5.</span> <span class="nav-text">复杂度计算</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#总结"><span class="nav-number">6.</span> <span class="nav-text">总结</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#官方Demo"><span class="nav-number">7.</span> <span class="nav-text">官方Demo</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+        <div class="back-to-top">
+          <i class="fa fa-arrow-up"></i>
+          
+        </div>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2016 &mdash; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Coderwong</span>
+
+  
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  
+
+
+
+  
+  
+
+
+
+  
+  
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/three/three.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/three/three-waves.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/three/canvas_lines.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/three/canvas_sphere.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=6.3.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=6.3.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=6.3.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=6.3.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.3.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.3.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.3.0"></script>
+
+
+
+  
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+    
+        
+        <link rel="stylesheet" href="https://aimingoo.github.io/gitmint/style/default.css">
+        <script src="https://aimingoo.github.io/gitmint/dist/gitmint.browser.js"></script>
+        <script src="https://cdn.bootcss.com/blueimp-md5/2.10.0/js/md5.min.js"></script>
+    
+
+    
+
+    
+      <script type="text/javascript">
+      function renderGitment(){
+        var gitment = new Gitmint({
+            id: md5(window.location.pathname),
+            owner: '2016321',
+            repo: '2016321.github.io',
+            
+            lang: "" || navigator.language || navigator.systemLanguage || navigator.userLanguage,
+            
+            oauth: {
+            
+            
+                client_secret: 'ceb90a820c56497f0800b5536971ffa98ede1cf9',
+            
+                client_id: '2c927277d8072e094233'
+            }});
+        gitment.render('gitment-container');
+      }
+
+      
+      renderGitment();
+      
+      </script>
+    
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("o79yp6QTlOKrk6UpnFwepEsA-gzGzoHsz", "U8M8nSuEamEMio7QehNUEIri");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            
+            counter.save(null, {
+              success: function(counter) {
+                
+                  var $element = $(document.getElementById(url));
+                  $element.find('.leancloud-visitors-count').text(counter.get('time'));
+                
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            
+              var newcounter = new Counter();
+              /* Set ACL */
+              var acl = new AV.ACL();
+              acl.setPublicReadAccess(true);
+              acl.setPublicWriteAccess(true);
+              newcounter.setACL(acl);
+              /* End Set ACL */
+              newcounter.set("title", title);
+              newcounter.set("url", url);
+              newcounter.set("time", 1);
+              newcounter.save(null, {
+                success: function(newcounter) {
+                  var $element = $(document.getElementById(url));
+                  $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+                },
+                error: function(newcounter, error) {
+                  console.log('Failed to create');
+                }
+              });
+            
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+  <style>
+    .copy-btn {
+      display: inline-block;
+      padding: 6px 12px;
+      font-size: 13px;
+      font-weight: 700;
+      line-height: 20px;
+      color: #333;
+      white-space: nowrap;
+      vertical-align: middle;
+      cursor: pointer;
+      background-color: #eee;
+      background-image: linear-gradient(#fcfcfc, #eee);
+      border: 1px solid #d5d5d5;
+      border-radius: 3px;
+      user-select: none;
+      outline: 0;
+    }
+
+    .highlight-wrap .copy-btn {
+      transition: opacity .3s ease-in-out;
+      opacity: 0;
+      padding: 2px 6px;
+      position: absolute;
+      right: 4px;
+      top: 8px;
+    }
+
+    .highlight-wrap:hover .copy-btn,
+    .highlight-wrap .copy-btn:focus {
+      opacity: 1
+    }
+
+    .highlight-wrap {
+      position: relative;
+    }
+  </style>
+  <script>
+    $('.highlight').each(function (i, e) {
+      var $wrap = $('<div>').addClass('highlight-wrap')
+      $(e).after($wrap)
+      $wrap.append($('<button>').addClass('copy-btn').append('复制').on('click', function (e) {
+        var code = $(this).parent().find('.code').find('.line').map(function (i, e) {
+          return $(e).text()
+        }).toArray().join('\n')
+        var ta = document.createElement('textarea')
+        document.body.appendChild(ta)
+        ta.style.position = 'absolute'
+        ta.style.top = '0px'
+        ta.style.left = '0px'
+        ta.value = code
+        ta.select()
+        ta.focus()
+        var result = document.execCommand('copy')
+        document.body.removeChild(ta)
+        
+          if(result)$(this).text('复制成功')
+          else $(this).text('复制失败')
+        
+        $(this).blur()
+      })).on('mouseleave', function (e) {
+        var $b = $(this).find('.copy-btn')
+        setTimeout(function () {
+          $b.text('复制')
+        }, 300)
+      }).append(e)
+    })
+  </script>
+
+
+</body>
+</html>
