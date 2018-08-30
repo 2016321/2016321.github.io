@@ -5,7 +5,7 @@
 username = "2016321" # GitHub 用户名
 token = `cat .git-token`  # GitHub Token
 repo_name = "2016321.github.io" # 存放 issues
-sitemap_url = "https://coderwong/sitemap.xml" # sitemap
+sitemap_url = "https://coderwong.com/sitemap.xml" # sitemap
 kind = "gitment" # "Gitalk" or "gitment"
 
 require 'open-uri'
