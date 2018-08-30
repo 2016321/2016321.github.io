@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
   <title>Coder Note</title>
   
-  <subtitle>coderwong&#39;s blog</subtitle>
+  <subtitle>Coderwong&#39;s blog</subtitle>
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
@@ -10,7 +10,7 @@
   <id>http://yoursite.com/</id>
   
   <author>
-    <name>coderwong</name>
+    <name>Coderwong</name>
     
   </author>
   
