@@ -1,0 +1,503 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>Coder Note</title>
+  
+  <subtitle>Coderwong&#39;s blog</subtitle>
+  <link href="/atom.xml" rel="self"/>
+  
+  <link href="http://yoursite.com/"/>
+  <updated>2018-08-30T06:03:36.206Z</updated>
+  <id>http://yoursite.com/</id>
+  
+  <author>
+    <name>Coderwong</name>
+    
+  </author>
+  
+  <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>《iOS和macOS性能优化》1.CPU：原理</title>
+    <link href="http://yoursite.com/2018/07/14/Book-Optimizing-1/"/>
+    <id>http://yoursite.com/2018/07/14/Book-Optimizing-1/</id>
+    <published>2018-07-14T05:36:05.000Z</published>
+    <updated>2018-08-30T06:03:36.206Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          
+        
+      
+    
+    </summary>
+    
+      <category term="《iOS和macOS性能优化》总结" scheme="http://yoursite.com/categories/%E3%80%8AiOS%E5%92%8CmacOS%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E3%80%8B%E6%80%BB%E7%BB%93/"/>
+    
+    
+      <category term="iOS" scheme="http://yoursite.com/tags/iOS/"/>
+    
+      <category term="OC" scheme="http://yoursite.com/tags/OC/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>CoreText点击事件处理</title>
+    <link href="http://yoursite.com/2018/07/10/CoreTextTouch/"/>
+    <id>http://yoursite.com/2018/07/10/CoreTextTouch/</id>
+    <published>2018-07-10T03:03:49.000Z</published>
+    <updated>2018-07-11T06:35:00.785Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          
+        
+      
+    
+    </summary>
+    
+      <category term="Mobile" scheme="http://yoursite.com/categories/Mobile/"/>
+    
+    
+      <category term="iOS" scheme="http://yoursite.com/tags/iOS/"/>
+    
+      <category term="OC" scheme="http://yoursite.com/tags/OC/"/>
+    
+      <category term="Core Text" scheme="http://yoursite.com/tags/Core-Text/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>CoreText图文混排</title>
+    <link href="http://yoursite.com/2018/07/09/CoreTextMix/"/>
+    <id>http://yoursite.com/2018/07/09/CoreTextMix/</id>
+    <published>2018-07-09T01:52:24.000Z</published>
+    <updated>2018-08-30T06:02:08.874Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          
+        
+      
+    
+    </summary>
+    
+      <category term="Mobile" scheme="http://yoursite.com/categories/Mobile/"/>
+    
+    
+      <category term="iOS" scheme="http://yoursite.com/tags/iOS/"/>
+    
+      <category term="OC" scheme="http://yoursite.com/tags/OC/"/>
+    
+      <category term="Core Text" scheme="http://yoursite.com/tags/Core-Text/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>CoreText跳坑</title>
+    <link href="http://yoursite.com/2018/07/05/CoreText/"/>
+    <id>http://yoursite.com/2018/07/05/CoreText/</id>
+    <published>2018-07-05T12:54:26.000Z</published>
+    <updated>2018-07-15T11:27:31.230Z</updated>
+    
+    <summary type="html">
+    
+      &lt;blockquote&gt;
+&lt;p&gt;记得上次更新是半年前了，转眼就到了18年的Q3了。回顾一下我的博客的空窗期，记得在年初的时候前东家孵化了个线上的视频约见的项目，自己也算是尽力在做。之后又对项目管理感兴趣学了些报了个项目管理的考试，然而在最后一门论文崩盘也是心塞。在工作学习中发现，自己接触的越多越会感觉到自己的渺小自己的不足，同时考完试之后跳了一家更大的公司也搬了家，在项目组里面默默无闻，尽力去做的更好去完善自己吧，咳咳，扯多了，作为回归的第一篇还是得有点质量，总结一下CoreText的相关的东西，尽量用最少的文字讲更多的东西&lt;/p&gt;
+&lt;/blockquote&gt;
+    
+    </summary>
+    
+      <category term="Mobile" scheme="http://yoursite.com/categories/Mobile/"/>
+    
+    
+      <category term="iOS" scheme="http://yoursite.com/tags/iOS/"/>
+    
+      <category term="OC" scheme="http://yoursite.com/tags/OC/"/>
+    
+      <category term="Core Text" scheme="http://yoursite.com/tags/Core-Text/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Swift原生与RN通信的实现</title>
+    <link href="http://yoursite.com/2017/12/19/Swift%E5%8E%9F%E7%94%9F%E4%B8%8ERN%E9%80%9A%E4%BF%A1%E7%9A%84%E5%AE%9E%E7%8E%B0/"/>
+    <id>http://yoursite.com/2017/12/19/Swift原生与RN通信的实现/</id>
+    <published>2017-12-19T05:17:51.000Z</published>
+    <updated>2018-07-02T10:41:30.479Z</updated>
+    
+    <summary type="html">
+    
+      &lt;blockquote&gt;
+&lt;p&gt;公司的工程是使用纯Swift开发的，正好我们最近的版本需要使用RN进行混编，官网不是很友好用的都是OC来实现的，这里我们用Swift来与RN进行通信，下面我们简单介绍，前提是您已经将RN集成到工程中，如果不知道怎么集成的可以查看&lt;a href=&quot;reactnative.com&quot;&gt;官网&lt;/a&gt;或者&lt;a href=&quot;reactnative.cn&quot;&gt;中文网&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;环境:Xcode9、Swift4.0&lt;/p&gt;
+&lt;/blockquote&gt;
+    
+    </summary>
+    
+      <category term="Mobile" scheme="http://yoursite.com/categories/Mobile/"/>
+    
+    
+      <category term="iOS" scheme="http://yoursite.com/tags/iOS/"/>
+    
+      <category term="Swift" scheme="http://yoursite.com/tags/Swift/"/>
+    
+      <category term="JavaScript" scheme="http://yoursite.com/tags/JavaScript/"/>
+    
+      <category term="React Native" scheme="http://yoursite.com/tags/React-Native/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>使用LeanCloud对Hexo构建的博客配置统计功能</title>
+    <link href="http://yoursite.com/2017/12/18/%E4%BD%BF%E7%94%A8LeanCloud%E5%AF%B9Hexo%E6%9E%84%E5%BB%BA%E7%9A%84%E5%8D%9A%E5%AE%A2%E9%85%8D%E7%BD%AE%E7%BB%9F%E8%AE%A1%E5%8A%9F%E8%83%BD/"/>
+    <id>http://yoursite.com/2017/12/18/使用LeanCloud对Hexo构建的博客配置统计功能/</id>
+    <published>2017-12-18T06:43:38.000Z</published>
+    <updated>2018-07-16T02:11:46.069Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;##重大更新&lt;br&gt;由于NexT主题使用的Leancloud访客统计插件存在重大安全漏洞，拥有不良企图的人利用该漏洞可随意更改访客数量或一定程度上增删数据库记录。请根据下面的链接对其做相应的修改。&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;https://leaferx.online/2018/02/11/lc-security/&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;https://leaferx.online/2018/02/11/lc-security/&lt;/a&gt;&lt;/p&gt;
+&lt;h4 id=&quot;最近使用的hexo-NexT搭建博客，在搭建的过程中有各种问题，之后会一一列出，这篇文章先讲一下阅读统计的相关问题&quot;&gt;&lt;a href=&quot;#最近使用的hexo-NexT搭建博客，在搭建的过程中有各种问题，之后会一一列出，这篇文章先讲一下阅读统计的相关问题&quot; class=&quot;headerlink&quot; title=&quot;最近使用的hexo+NexT搭建博客，在搭建的过程中有各种问题，之后会一一列出，这篇文章先讲一下阅读统计的相关问题&quot;&gt;&lt;/a&gt;最近使用的hexo+NexT搭建博客，在搭建的过程中有各种问题，之后会一一列出，这篇文章先讲一下阅读统计的相关问题&lt;/h4&gt;
+    
+    </summary>
+    
+      <category term="Front-End" scheme="http://yoursite.com/categories/Front-End/"/>
+    
+    
+      <category term="hexo" scheme="http://yoursite.com/tags/hexo/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Method Dispatch in Swift</title>
+    <link href="http://yoursite.com/2017/12/07/Method-Dispatch-in-Swift/"/>
+    <id>http://yoursite.com/2017/12/07/Method-Dispatch-in-Swift/</id>
+    <published>2017-12-07T07:35:23.000Z</published>
+    <updated>2018-07-15T11:54:52.284Z</updated>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h2&gt;&lt;hr&gt;
+&lt;h3 id=&quot;已经使用Swift这门新兴的OO语言已经有很久了，作为面向对象语言在没有特殊声明的时候系统会默认对属性和方法进行重载，虽说Swift不完全算一种动态语言，但是由于和OC依然藕断丝连Swift里面动态派发依然会损耗不小的性能，那么动态派发是什么，Swift的派发机制是什么？我们来深入了-zhuang-解-bi-一下。&quot;&gt;&lt;a href=&quot;#已经使用Swift这门新兴的OO语言已经有很久了，作为面向对象语言在没有特殊声明的时候系统会默认对属性和方法进行重载，虽说Swift不完全算一种动态语言，但是由于和OC依然藕断丝连Swift里面动态派发依然会损耗不小的性能，那么动态派发是什么，Swift的派发机制是什么？我们来深入了-zhuang-解-bi-一下。&quot; class=&quot;headerlink&quot; title=&quot;已经使用Swift这门新兴的OO语言已经有很久了，作为面向对象语言在没有特殊声明的时候系统会默认对属性和方法进行重载，虽说Swift不完全算一种动态语言，但是由于和OC依然藕断丝连Swift里面动态派发依然会损耗不小的性能，那么动态派发是什么，Swift的派发机制是什么？我们来深入了(zhuang)解(bi)一下。&quot;&gt;&lt;/a&gt;已经使用Swift这门新兴的OO语言已经有很久了，作为面向对象语言在没有特殊声明的时候系统会默认对属性和方法进行重载，虽说Swift不完全算一种动态语言，但是由于和OC依然藕断丝连Swift里面动态派发依然会损耗不小的性能，那么动态派发是什么，Swift的派发机制是什么？我们来深入了(zhuang)解(bi)一下。&lt;/h3&gt;
+    
+    </summary>
+    
+      <category term="Mobile" scheme="http://yoursite.com/categories/Mobile/"/>
+    
+    
+      <category term="iOS" scheme="http://yoursite.com/tags/iOS/"/>
+    
+      <category term="Swift" scheme="http://yoursite.com/tags/Swift/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>RN 原生混编中的本地离线打包</title>
+    <link href="http://yoursite.com/2017/10/14/RN-%E5%8E%9F%E7%94%9F%E6%B7%B7%E7%BC%96%E4%B8%AD%E7%9A%84%E6%9C%AC%E5%9C%B0%E7%A6%BB%E7%BA%BF%E6%89%93%E5%8C%85/"/>
+    <id>http://yoursite.com/2017/10/14/RN-原生混编中的本地离线打包/</id>
+    <published>2017-10-14T13:40:50.000Z</published>
+    <updated>2018-07-15T15:56:05.553Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;&lt;img src=&quot;https://upload-images.jianshu.io/upload_images/2353844-77a3395ea0351add.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240&quot; alt=&quot;1.png&quot;&gt;&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="Mobile" scheme="http://yoursite.com/categories/Mobile/"/>
+    
+    
+      <category term="iOS" scheme="http://yoursite.com/tags/iOS/"/>
+    
+      <category term="JavaScript" scheme="http://yoursite.com/tags/JavaScript/"/>
+    
+      <category term="React Native" scheme="http://yoursite.com/tags/React-Native/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Xcode9 xcodebuild 打包上传蒲公英</title>
+    <link href="http://yoursite.com/2017/10/09/Xcode9-xcodebuild-%E6%89%93%E5%8C%85%E4%B8%8A%E4%BC%A0%E8%92%B2%E5%85%AC%E8%8B%B1/"/>
+    <id>http://yoursite.com/2017/10/09/Xcode9-xcodebuild-打包上传蒲公英/</id>
+    <published>2017-10-09T14:00:58.000Z</published>
+    <updated>2018-07-16T01:55:34.913Z</updated>
+    
+    <summary type="html">
+    
+      &lt;h3 id=&quot;最近在弄持续集成方案，因为Jenkins自动打包同样要使用手动触发，同时也不需要定时去打包上传，我们就写了一个shell脚本，当模块完成时候去上传蒲公英交付测试，之后会写一个使用ApplicationLoader上传App-Store的脚本，本文默认您已经进行过打包流程并成功&quot;&gt;&lt;a href=&quot;#最近在弄持续集成方案，因为Jenkins自动打包同样要使用手动触发，同时也不需要定时去打包上传，我们就写了一个shell脚本，当模块完成时候去上传蒲公英交付测试，之后会写一个使用ApplicationLoader上传App-Store的脚本，本文默认您已经进行过打包流程并成功&quot; class=&quot;headerlink&quot; title=&quot;最近在弄持续集成方案，因为Jenkins自动打包同样要使用手动触发，同时也不需要定时去打包上传，我们就写了一个shell脚本，当模块完成时候去上传蒲公英交付测试，之后会写一个使用ApplicationLoader上传App Store的脚本，本文默认您已经进行过打包流程并成功&quot;&gt;&lt;/a&gt;最近在弄持续集成方案，因为Jenkins自动打包同样要使用手动触发，同时也不需要定时去打包上传，我们就写了一个shell脚本，当模块完成时候去上传蒲公英交付测试，之后会写一个使用ApplicationLoader上传App Store的脚本，本文默认您已经进行过打包流程并成功&lt;/h3&gt;
+    
+    </summary>
+    
+      <category term="Mobile" scheme="http://yoursite.com/categories/Mobile/"/>
+    
+    
+      <category term="iOS" scheme="http://yoursite.com/tags/iOS/"/>
+    
+      <category term="Shell" scheme="http://yoursite.com/tags/Shell/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>删除WKWebView的cookies信息</title>
+    <link href="http://yoursite.com/2017/09/25/%E5%88%A0%E9%99%A4WKWebView%E7%9A%84cookies%E4%BF%A1%E6%81%AF/"/>
+    <id>http://yoursite.com/2017/09/25/删除WKWebView的cookies信息/</id>
+    <published>2017-09-25T07:55:47.000Z</published>
+    <updated>2018-07-02T10:43:25.739Z</updated>
+    
+    <summary type="html">
+    
+      &lt;h4 id=&quot;自WKWebView出来之后好多app都将沉重的UIWebView换成了WKWebView，其优点大致有以下几点&quot;&gt;&lt;a href=&quot;#自WKWebView出来之后好多app都将沉重的UIWebView换成了WKWebView，其优点大致有以下几点&quot; class=&quot;headerlink&quot; title=&quot;自WKWebView出来之后好多app都将沉重的UIWebView换成了WKWebView，其优点大致有以下几点&quot;&gt;&lt;/a&gt;自WKWebView出来之后好多app都将沉重的UIWebView换成了WKWebView，其优点大致有以下几点&lt;/h4&gt;
+    
+    </summary>
+    
+      <category term="Mobile" scheme="http://yoursite.com/categories/Mobile/"/>
+    
+    
+      <category term="iOS" scheme="http://yoursite.com/tags/iOS/"/>
+    
+      <category term="Swift" scheme="http://yoursite.com/tags/Swift/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Swift 去除UITextView Padding</title>
+    <link href="http://yoursite.com/2017/08/08/Swift-%E5%8E%BB%E9%99%A4UITextView-Padding/"/>
+    <id>http://yoursite.com/2017/08/08/Swift-去除UITextView-Padding/</id>
+    <published>2017-08-08T05:05:14.000Z</published>
+    <updated>2018-07-16T01:33:09.323Z</updated>
+    
+    <summary type="html">
+    
+      &lt;h3 id=&quot;我们经常会用到UILabel来显示只读的文本，在多行需要限制显示范围时候就要用到UITextView，但是UITextView周围都会添加边距，我们可以这样处理一下&quot;&gt;&lt;a href=&quot;#我们经常会用到UILabel来显示只读的文本，在多行需要限制显示范围时候就要用到UITextView，但是UITextView周围都会添加边距，我们可以这样处理一下&quot; class=&quot;headerlink&quot; title=&quot;我们经常会用到UILabel来显示只读的文本，在多行需要限制显示范围时候就要用到UITextView，但是UITextView周围都会添加边距，我们可以这样处理一下&quot;&gt;&lt;/a&gt;我们经常会用到UILabel来显示只读的文本，在多行需要限制显示范围时候就要用到UITextView，但是UITextView周围都会添加边距，我们可以这样处理一下&lt;/h3&gt;
+    
+    </summary>
+    
+      <category term="Mobile" scheme="http://yoursite.com/categories/Mobile/"/>
+    
+    
+      <category term="iOS" scheme="http://yoursite.com/tags/iOS/"/>
+    
+      <category term="Swift" scheme="http://yoursite.com/tags/Swift/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Swift 获取device token</title>
+    <link href="http://yoursite.com/2017/08/01/Swift-%E8%8E%B7%E5%8F%96device-token/"/>
+    <id>http://yoursite.com/2017/08/01/Swift-获取device-token/</id>
+    <published>2017-08-01T07:56:21.000Z</published>
+    <updated>2018-07-16T01:35:06.226Z</updated>
+    
+    <summary type="html">
+    
+      &lt;h5 id=&quot;在做推送通知的时候发现一个尴尬的事情，在测试推送时候需要获取device-token，按照友盟的文档，我做了如下操作&quot;&gt;&lt;a href=&quot;#在做推送通知的时候发现一个尴尬的事情，在测试推送时候需要获取device-token，按照友盟的文档，我做了如下操作&quot; class=&quot;headerlink&quot; title=&quot;在做推送通知的时候发现一个尴尬的事情，在测试推送时候需要获取device token，按照友盟的文档，我做了如下操作&quot;&gt;&lt;/a&gt;在做推送通知的时候发现一个尴尬的事情，在测试推送时候需要获取&lt;code&gt;device token&lt;/code&gt;，按照友盟的文档，我做了如下操作&lt;/h5&gt;
+    
+    </summary>
+    
+      <category term="Mobile" scheme="http://yoursite.com/categories/Mobile/"/>
+    
+    
+      <category term="iOS" scheme="http://yoursite.com/tags/iOS/"/>
+    
+      <category term="Swift" scheme="http://yoursite.com/tags/Swift/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Swift下拉波浪动画</title>
+    <link href="http://yoursite.com/2017/06/01/Swift%E4%B8%8B%E6%8B%89%E6%B3%A2%E6%B5%AA%E5%8A%A8%E7%94%BB/"/>
+    <id>http://yoursite.com/2017/06/01/Swift下拉波浪动画/</id>
+    <published>2017-06-01T05:00:11.000Z</published>
+    <updated>2018-07-16T01:39:49.780Z</updated>
+    
+    <summary type="html">
+    
+      &lt;h3 id=&quot;我们先看一下效果，现在很多app有这种交互，普通的下拉刷新有点low，这样感觉酷炫一点&quot;&gt;&lt;a href=&quot;#我们先看一下效果，现在很多app有这种交互，普通的下拉刷新有点low，这样感觉酷炫一点&quot; class=&quot;headerlink&quot; title=&quot;我们先看一下效果，现在很多app有这种交互，普通的下拉刷新有点low，这样感觉酷炫一点&quot;&gt;&lt;/a&gt;我们先看一下效果，现在很多app有这种交互，普通的下拉刷新有点low，这样感觉酷炫一点&lt;/h3&gt;
+    
+    </summary>
+    
+      <category term="Mobile" scheme="http://yoursite.com/categories/Mobile/"/>
+    
+    
+      <category term="iOS" scheme="http://yoursite.com/tags/iOS/"/>
+    
+      <category term="Swift" scheme="http://yoursite.com/tags/Swift/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>WKWebView 加载html字符串时取消缩放</title>
+    <link href="http://yoursite.com/2017/05/19/WKWebView-%E5%8A%A0%E8%BD%BDhtml%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%97%B6%E5%8F%96%E6%B6%88%E7%BC%A9%E6%94%BE/"/>
+    <id>http://yoursite.com/2017/05/19/WKWebView-加载html字符串时取消缩放/</id>
+    <published>2017-05-19T08:23:01.000Z</published>
+    <updated>2018-07-02T10:41:46.140Z</updated>
+    
+    <summary type="html">
+    
+      &lt;h3 id=&quot;继上次的WKWebview的坑今天又遇到了一个，因为我需要监听WebView的滚动，在缩放时候会对参数造成影响，同时用户体验也不好，给人一种不连贯的感觉。。。&quot;&gt;&lt;a href=&quot;#继上次的WKWebview的坑今天又遇到了一个，因为我需要监听WebView的滚动，在缩放时候会对参数造成影响，同时用户体验也不好，给人一种不连贯的感觉。。。&quot; class=&quot;headerlink&quot; title=&quot;继上次的WKWebview的坑今天又遇到了一个，因为我需要监听WebView的滚动，在缩放时候会对参数造成影响，同时用户体验也不好，给人一种不连贯的感觉。。。&quot;&gt;&lt;/a&gt;继上次的&lt;code&gt;WKWebview&lt;/code&gt;的坑今天又遇到了一个，因为我需要监听&lt;code&gt;WebView&lt;/code&gt;的滚动，在缩放时候会对参数造成影响，同时用户体验也不好，给人一种不连贯的感觉。。。&lt;/h3&gt;
+    
+    </summary>
+    
+      <category term="Mobile" scheme="http://yoursite.com/categories/Mobile/"/>
+    
+    
+      <category term="iOS" scheme="http://yoursite.com/tags/iOS/"/>
+    
+      <category term="JavaScript" scheme="http://yoursite.com/tags/JavaScript/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>WKWebView加载HTML字符串 获取高度渲染高度</title>
+    <link href="http://yoursite.com/2017/05/18/WKWebView%E5%8A%A0%E8%BD%BDHTML%E5%AD%97%E7%AC%A6%E4%B8%B2-%E8%8E%B7%E5%8F%96%E9%AB%98%E5%BA%A6%E6%B8%B2%E6%9F%93%E9%AB%98%E5%BA%A6/"/>
+    <id>http://yoursite.com/2017/05/18/WKWebView加载HTML字符串-获取高度渲染高度/</id>
+    <published>2017-05-17T16:24:24.000Z</published>
+    <updated>2018-07-16T01:44:33.745Z</updated>
+    
+    <summary type="html">
+    
+      &lt;h3 id=&quot;这篇文章算是个小记，可能只会暂时描述问题和解决问题方法，原理的方面之后具体写在Diary里面&quot;&gt;&lt;a href=&quot;#这篇文章算是个小记，可能只会暂时描述问题和解决问题方法，原理的方面之后具体写在Diary里面&quot; class=&quot;headerlink&quot; title=&quot;这篇文章算是个小记，可能只会暂时描述问题和解决问题方法，原理的方面之后具体写在Diary里面&quot;&gt;&lt;/a&gt;这篇文章算是个小记，可能只会暂时描述问题和解决问题方法，原理的方面之后具体写在Diary里面&lt;/h3&gt;
+    
+    </summary>
+    
+      <category term="Mobile" scheme="http://yoursite.com/categories/Mobile/"/>
+    
+    
+      <category term="iOS" scheme="http://yoursite.com/tags/iOS/"/>
+    
+      <category term="Swift" scheme="http://yoursite.com/tags/Swift/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Swift 使用runtime给extension添加属性</title>
+    <link href="http://yoursite.com/2017/05/15/Swift-%E4%BD%BF%E7%94%A8runtime%E7%BB%99extension%E6%B7%BB%E5%8A%A0%E5%B1%9E%E6%80%A7/"/>
+    <id>http://yoursite.com/2017/05/15/Swift-使用runtime给extension添加属性/</id>
+    <published>2017-05-15T07:18:43.000Z</published>
+    <updated>2018-07-16T01:29:02.573Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;最近使用swift写新项目，也算是试水，虽然现在swift算是推广起来了，很多大厂小公司的新项目都是swift，但是还是不少坑，这两天写一个waveView就遇到了个这个问题&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="Mobile" scheme="http://yoursite.com/categories/Mobile/"/>
+    
+    
+      <category term="iOS" scheme="http://yoursite.com/tags/iOS/"/>
+    
+      <category term="Swift" scheme="http://yoursite.com/tags/Swift/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>iOS 移除所有子视图</title>
+    <link href="http://yoursite.com/2017/05/09/iOS-%E7%A7%BB%E9%99%A4%E6%89%80%E6%9C%89%E5%AD%90%E8%A7%86%E5%9B%BE/"/>
+    <id>http://yoursite.com/2017/05/09/iOS-移除所有子视图/</id>
+    <published>2017-05-09T02:22:59.000Z</published>
+    <updated>2018-07-15T11:28:21.495Z</updated>
+    
+    <summary type="html">
+    
+      &lt;h5 id=&quot;有的时候我们会有这样的需求，就是移除所有子视图&quot;&gt;&lt;a href=&quot;#有的时候我们会有这样的需求，就是移除所有子视图&quot; class=&quot;headerlink&quot; title=&quot;有的时候我们会有这样的需求，就是移除所有子视图&quot;&gt;&lt;/a&gt;有的时候我们会有这样的需求，就是移除所有子视图&lt;/h5&gt;
+    
+    </summary>
+    
+      <category term="Mobile" scheme="http://yoursite.com/categories/Mobile/"/>
+    
+    
+      <category term="iOS" scheme="http://yoursite.com/tags/iOS/"/>
+    
+      <category term="Swift" scheme="http://yoursite.com/tags/Swift/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>使用runtime进行解档和归档</title>
+    <link href="http://yoursite.com/2017/04/15/%E4%BD%BF%E7%94%A8runtime%E8%BF%9B%E8%A1%8C%E8%A7%A3%E6%A1%A3%E5%92%8C%E5%BD%92%E6%A1%A3/"/>
+    <id>http://yoursite.com/2017/04/15/使用runtime进行解档和归档/</id>
+    <published>2017-04-15T14:35:36.000Z</published>
+    <updated>2018-07-02T10:43:08.797Z</updated>
+    
+    <summary type="html">
+    
+      &lt;h4 id=&quot;首先我们先看一下不用runtime的写法，大家可能感觉很简单为什么要用runtime来实现，但是试想一下如果一个对象有很多很多的属性，我们还要一行一行写吗，和从json中给模型赋值一个道理，还是要用runtime装一下-，要不然别人怎么知道你会😂😂&quot;&gt;&lt;a href=&quot;#首先我们先看一下不用runtime的写法，大家可能感觉很简单为什么要用runtime来实现，但是试想一下如果一个对象有很多很多的属性，我们还要一行一行写吗，和从json中给模型赋值一个道理，还是要用runtime装一下-，要不然别人怎么知道你会😂😂&quot; class=&quot;headerlink&quot; title=&quot;首先我们先看一下不用runtime的写法，大家可能感觉很简单为什么要用runtime来实现，但是试想一下如果一个对象有很多很多的属性，我们还要一行一行写吗，和从json中给模型赋值一个道理，还是要用runtime装一下*，要不然别人怎么知道你会😂😂&quot;&gt;&lt;/a&gt;首先我们先看一下不用runtime的写法，大家可能感觉很简单为什么要用runtime来实现，但是试想一下如果一个对象有很多很多的属性，我们还要一行一行写吗，和从json中给模型赋值一个道理，还是要用runtime装一下*，要不然别人怎么知道你会😂😂&lt;/h4&gt;
+    
+    </summary>
+    
+      <category term="Mobile" scheme="http://yoursite.com/categories/Mobile/"/>
+    
+    
+      <category term="iOS" scheme="http://yoursite.com/tags/iOS/"/>
+    
+      <category term="Swift" scheme="http://yoursite.com/tags/Swift/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>使用runtime防止Button暴力点击</title>
+    <link href="http://yoursite.com/2017/04/05/%E4%BD%BF%E7%94%A8runtime%E9%98%B2%E6%AD%A2Button%E6%9A%B4%E5%8A%9B%E7%82%B9%E5%87%BB/"/>
+    <id>http://yoursite.com/2017/04/05/使用runtime防止Button暴力点击/</id>
+    <published>2017-04-05T12:08:19.000Z</published>
+    <updated>2018-07-02T10:43:12.011Z</updated>
+    
+    <summary type="html">
+    
+      &lt;h3 id=&quot;按钮防止暴力点击是个很平常的需求，测试时候产品经理、测试妹子经常会看哪个按钮不爽，然后使劲戳它，心疼按钮2秒钟。。。&quot;&gt;&lt;a href=&quot;#按钮防止暴力点击是个很平常的需求，测试时候产品经理、测试妹子经常会看哪个按钮不爽，然后使劲戳它，心疼按钮2秒钟。。。&quot; class=&quot;headerlink&quot; title=&quot;按钮防止暴力点击是个很平常的需求，测试时候产品经理、测试妹子经常会看哪个按钮不爽，然后使劲戳它，心疼按钮2秒钟。。。&quot;&gt;&lt;/a&gt;按钮防止暴力点击是个很平常的需求，测试时候产品经理、测试妹子经常会看哪个按钮不爽，然后使劲戳它，心疼按钮2秒钟。。。&lt;/h3&gt;
+    
+    </summary>
+    
+      <category term="Mobile" scheme="http://yoursite.com/categories/Mobile/"/>
+    
+    
+      <category term="iOS" scheme="http://yoursite.com/tags/iOS/"/>
+    
+      <category term="Swift" scheme="http://yoursite.com/tags/Swift/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>常用 GCD 笔记(OC / Swift)</title>
+    <link href="http://yoursite.com/2017/03/28/%E5%B8%B8%E7%94%A8-GCD-%E7%AC%94%E8%AE%B0-OC-Swift/"/>
+    <id>http://yoursite.com/2017/03/28/常用-GCD-笔记-OC-Swift/</id>
+    <published>2017-03-28T11:53:58.000Z</published>
+    <updated>2018-07-02T10:43:31.355Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          
+        
+      
+    
+    </summary>
+    
+      <category term="Mobile" scheme="http://yoursite.com/categories/Mobile/"/>
+    
+    
+      <category term="iOS" scheme="http://yoursite.com/tags/iOS/"/>
+    
+      <category term="OC" scheme="http://yoursite.com/tags/OC/"/>
+    
+      <category term="Swift" scheme="http://yoursite.com/tags/Swift/"/>
+    
+  </entry>
+  
+</feed>
