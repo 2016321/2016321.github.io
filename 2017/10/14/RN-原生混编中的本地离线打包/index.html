@@ -947,7 +947,7 @@
       <script type="text/javascript">
       function renderGitment(){
         var gitment = new Gitmint({
-            id: md5(window.location.pathname),
+            id: "<%= url %>".substring(0,48),
             owner: '2016321',
             repo: '2016321.github.io',
             
