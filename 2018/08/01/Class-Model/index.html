@@ -108,21 +108,23 @@
 
 
 
-  <meta name="description" content="最近使用swift写新项目，也算是试水，虽然现在swift算是推广起来了，很多大厂小公司的新项目都是swift，但是还是不少坑，这两天写一个waveView就遇到了个这个问题">
-<meta name="keywords" content="iOS,Swift">
+  <meta name="description" content="最近感觉应该重新看下开源的 Runtime，希望能有更深层的理解，下面几篇都会围绕着runtime来写对象 OC 中，每一个对象都是一个类的实例，且这个对象的 isa 指针指向它所属的类。 PS:这里留下个坑，因为isa在现有的64位CPU下已经不是一个单纯的指针了，包含了引用计数和weak指向等等信息 随后的一篇我会着重讲写下 isa 相关的东西，飞机票 12345struct objc_cla">
+<meta name="keywords" content="iOS,Runtime">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Swift 使用runtime给extension添加属性">
-<meta property="og:url" content="https://coderwong.com/2017/05/15/Swift-使用runtime给extension添加属性/index.html">
+<meta property="og:title" content="Class-Model">
+<meta property="og:url" content="https://coderwong.com/2018/08/01/Class-Model/index.html">
 <meta property="og:site_name" content="Coder Note">
-<meta property="og:description" content="最近使用swift写新项目，也算是试水，虽然现在swift算是推广起来了，很多大厂小公司的新项目都是swift，但是还是不少坑，这两天写一个waveView就遇到了个这个问题">
+<meta property="og:description" content="最近感觉应该重新看下开源的 Runtime，希望能有更深层的理解，下面几篇都会围绕着runtime来写对象 OC 中，每一个对象都是一个类的实例，且这个对象的 isa 指针指向它所属的类。 PS:这里留下个坑，因为isa在现有的64位CPU下已经不是一个单纯的指针了，包含了引用计数和weak指向等等信息 随后的一篇我会着重讲写下 isa 相关的东西，飞机票 12345struct objc_cla">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/2353844-c23c98df2a977dc9.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/2353844-c8cd631f0279b760.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:updated_time" content="2018-07-16T01:29:02.573Z">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/2353844-87795c89d6ad16b4.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/2353844-2182b3739d1f51b4.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/2353844-850d2bdcf13f5c08.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/2353844-b21e389f4894d67f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:updated_time" content="2019-01-26T04:56:24.940Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Swift 使用runtime给extension添加属性">
-<meta name="twitter:description" content="最近使用swift写新项目，也算是试水，虽然现在swift算是推广起来了，很多大厂小公司的新项目都是swift，但是还是不少坑，这两天写一个waveView就遇到了个这个问题">
-<meta name="twitter:image" content="https://upload-images.jianshu.io/upload_images/2353844-c23c98df2a977dc9.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta name="twitter:title" content="Class-Model">
+<meta name="twitter:description" content="最近感觉应该重新看下开源的 Runtime，希望能有更深层的理解，下面几篇都会围绕着runtime来写对象 OC 中，每一个对象都是一个类的实例，且这个对象的 isa 指针指向它所属的类。 PS:这里留下个坑，因为isa在现有的64位CPU下已经不是一个单纯的指针了，包含了引用计数和weak指向等等信息 随后的一篇我会着重讲写下 isa 相关的东西，飞机票 12345struct objc_cla">
+<meta name="twitter:image" content="https://upload-images.jianshu.io/upload_images/2353844-87795c89d6ad16b4.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 
 
 
@@ -131,7 +133,7 @@
 
 
 
-  <link rel="canonical" href="https://coderwong.com/2017/05/15/Swift-使用runtime给extension添加属性/"/>
+  <link rel="canonical" href="https://coderwong.com/2018/08/01/Class-Model/"/>
 
 
 
@@ -141,7 +143,7 @@
   };
 </script>
 
-  <title>Swift 使用runtime给extension添加属性 | Coder Note</title>
+  <title>Class-Model | Coder Note</title>
   
 
 
@@ -306,7 +308,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://coderwong.com/2017/05/15/Swift-使用runtime给extension添加属性/">
+    <link itemprop="mainEntityOfPage" href="https://coderwong.com/2018/08/01/Class-Model/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Coderwong">
@@ -323,7 +325,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Swift 使用runtime给extension添加属性
+          <h1 class="post-title" itemprop="name headline">Class-Model
               
             
           </h1>
@@ -348,7 +350,7 @@
                 
               
 
-              <time title="创建时间：2017-05-15 15:18:43" itemprop="dateCreated datePublished" datetime="2017-05-15T15:18:43+08:00">2017-05-15</time>
+              <time title="创建时间：2018-08-01 22:01:22" itemprop="dateCreated datePublished" datetime="2018-08-01T22:01:22+08:00">2018-08-01</time>
             
 
             
@@ -381,8 +383,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2017/05/15/Swift-使用runtime给extension添加属性/#comments" itemprop="discussionUrl">
-                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count gitment-comments-count" data-xid="/2017/05/15/Swift-使用runtime给extension添加属性/" itemprop="commentsCount"></span>
+                <a href="/2018/08/01/Class-Model/#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count gitment-comments-count" data-xid="/2018/08/01/Class-Model/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -390,7 +392,7 @@
 
           
           
-             <span id="/2017/05/15/Swift-使用runtime给extension添加属性/" class="leancloud_visitors" data-flag-title="Swift 使用runtime给extension添加属性">
+             <span id="/2018/08/01/Class-Model/" class="leancloud_visitors" data-flag-title="Class-Model">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -421,26 +423,33 @@
       
 
       
-        <p>最近使用swift写新项目，也算是试水，虽然现在swift算是推广起来了，很多大厂小公司的新项目都是swift，但是还是不少坑，这两天写一个waveView就遇到了个这个问题</p>
-<a id="more"></a>
-<hr>
-<p>一般再OC中使用runtime给分类添加属性是这个样子的<code>objc_setAssociatedObject</code>和<code>objc_getAssociatedObject</code></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">- (void)setSomeProperty:(NSString *)someProperty&#123;</span><br><span class="line">    objc_setAssociatedObject(self, Key, @(quickTapEnable), OBJC_ASSOCIATION_RETAIN_NONATOMIC);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">- (NSString *)someProperty&#123;</span><br><span class="line">    return [objc_getAssociatedObject(self, Key) boolValue];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>看了看之前写过的OC代码，微微一笑，写出了这段代码</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">var refreshView : WaveView&#123;</span><br><span class="line">        set&#123;</span><br><span class="line">            objc_setAssociatedObject(self, &quot;key&quot;, newValue, .OBJC_ASSOCIATION_COPY_NONATOMIC)</span><br><span class="line">        &#125;</span><br><span class="line">        get&#123;</span><br><span class="line">            return objc_getAssociatedObject(self, &quot;key&quot;) as! WaveView</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-<p><img src="https://upload-images.jianshu.io/upload_images/2353844-c23c98df2a977dc9.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="1.png"></p>
-<p>然后用了一下这个这几行检验一下，果然没存进去。。。</p>
-<p>我们看一下<code>objc_setAssociatedObject</code>的API<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">/** </span><br><span class="line"> * Sets an associated value for a given object using a given key and association policy.</span><br><span class="line"> * </span><br><span class="line"> * @param object The source object for the association.</span><br><span class="line"> * @param key The key for the association.</span><br><span class="line"> * @param value The value to associate with the key key for object. Pass nil to clear an existing association.</span><br><span class="line"> * @param policy The policy for the association. For possible values, see “Associative Object Behaviors.”</span><br><span class="line"> * </span><br><span class="line"> * @see objc_setAssociatedObject</span><br><span class="line"> * @see objc_removeAssociatedObjects</span><br><span class="line"> */</span><br><span class="line">@available(iOS 3.1, *)</span><br><span class="line">public func objc_setAssociatedObject(_ object: Any!, _ key: UnsafeRawPointer!, _ value: Any!, _ policy: objc_AssociationPolicy)</span><br></pre></td></tr></table></figure></p>
-<p>第二个参数是<code>UnsafeRawPointer</code>结构体指针类型，Swift并不推荐对指针进行直接操作,  但仍提供了几种可以直接操作内存的指针类型，在Swift中无类型的指针，原始内存可以用<code>UnsafeRawPointer</code> 和<code>UnsafeMutableRawPointer</code>来表示</p>
-<p>我们看一下<code>UnsafeRawPointer</code>的构造函数</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">/// Converts a pattern of bits to an `UnsafeRawPointer`.</span><br><span class="line">///</span><br><span class="line">/// Returns `nil` if `bitPattern` is zero.</span><br><span class="line">public init?(bitPattern: Int)</span><br><span class="line"></span><br><span class="line">/// Converts a pattern of bits to an `UnsafeRawPointer`.</span><br><span class="line">///</span><br><span class="line">/// Returns `nil` if `bitPattern` is zero.</span><br><span class="line">public init?(bitPattern: UInt)</span><br></pre></td></tr></table></figure>
-<p>要想通过字符串生成意义对应的<code>Int</code>值，我们可以使用</p>
-<p><code>&quot;key&quot;.hashValue</code>的形式将字符串生成哈希值来返回<code>Int</code>值<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">var refreshView : WaveView? &#123;</span><br><span class="line">        set&#123;</span><br><span class="line">            let key: UnsafeRawPointer! = UnsafeRawPointer(bitPattern: &quot;key&quot;.hashValue)</span><br><span class="line">            objc_setAssociatedObject(self, key, newValue, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)</span><br><span class="line">        &#125;</span><br><span class="line">        get&#123;</span><br><span class="line">            let key: UnsafeRawPointer! = UnsafeRawPointer(bitPattern: &quot;key&quot;.hashValue)</span><br><span class="line">            return objc_getAssociatedObject(self, key) as? WaveView</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure></p>
-<p><img src="https://upload-images.jianshu.io/upload_images/2353844-c8cd631f0279b760.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="2.png"></p>
-<p>这种方法完美解决了解包失败</p>
-<hr>
-<p>因为是经常使用的<code>key</code>值，我们应该一次定义多次调用，避免这样重复写好多次,如同在配置文件里面定义全局通知的标识符一样<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">let key = UnsafeRawPointer(bitPattern: &quot;key&quot;.hashValue)</span><br></pre></td></tr></table></figure></p>
-<h3 id="希望这篇文章可以帮到大家"><a href="#希望这篇文章可以帮到大家" class="headerlink" title="希望这篇文章可以帮到大家"></a>希望这篇文章可以帮到大家</h3>
+        <h2 id="最近感觉应该重新看下开源的-Runtime，希望能有更深层的理解，下面几篇都会围绕着runtime来写"><a href="#最近感觉应该重新看下开源的-Runtime，希望能有更深层的理解，下面几篇都会围绕着runtime来写" class="headerlink" title="最近感觉应该重新看下开源的 Runtime，希望能有更深层的理解，下面几篇都会围绕着runtime来写"></a>最近感觉应该重新看下开源的 <a href="https://opensource.apple.com/tarballs/objc4/objc4-750.tar.gz" target="_blank" rel="noopener">Runtime</a>，希望能有更深层的理解，下面几篇都会围绕着runtime来写</h2><h3 id="对象"><a href="#对象" class="headerlink" title="对象"></a>对象</h3><p><img src="https://upload-images.jianshu.io/upload_images/2353844-87795c89d6ad16b4.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="1.png"></p>
+<p>OC 中，每一个对象都是一个类的实例，且这个对象的 <code>isa</code> 指针指向它所属的类。</p>
+<p>PS:这里留下个坑，因为isa在现有的64位CPU下已经不是一个单纯的指针了，包含了引用计数和weak指向等等信息</p>
+<p>随后的一篇我会着重讲写下 <code>isa</code> 相关的东西，<a href="https://baidu.com" target="_blank" rel="noopener">飞机票</a></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">struct objc_class;</span><br><span class="line">struct objc_object;</span><br><span class="line"></span><br><span class="line">typedef struct objc_class *Class;</span><br><span class="line">typedef struct objc_object *id;</span><br></pre></td></tr></table></figure>
+<p>我们也可以看到49行开始的定义，定义了 <code>Class</code> 和 <code>id</code> 两类型，分别是 <code>objc_class</code> 和 <code>objc_object</code> 类型的指针</p>
+<h2 id="类"><a href="#类" class="headerlink" title="类"></a>类</h2><p><img src="https://upload-images.jianshu.io/upload_images/2353844-2182b3739d1f51b4.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="2.png"></p>
+<p>打开此文件，我们可以找到 OC 中的类的定义 <code>struct objc_class</code> 。 OC 中类也是一个结构体对象，继承了 <code>struct objc_object</code>ss 。</p>
+<p>对象的类:</p>
+<ul>
+<li>指向的父类对象</li>
+<li>对象的占用大小</li>
+<li>成员变量的类型及布局</li>
+<li>对象可以相应的消息</li>
+<li>对象实例方法的实现</li>
+</ul>
+<p>当我们向对象发送消息时候，这个对象会通过 <code>isa</code> 指针来找到其所属的类是否可以相应消息。</p>
+<p><img src="https://upload-images.jianshu.io/upload_images/2353844-850d2bdcf13f5c08.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="3.png"></p>
+<p>我们可以看一下 OC 中大部分类都继承的 <code>NSObject</code> 这个类， 同样他有个 <code>isa</code> 指针成员变量，也就是说继承它的都会有这个成员变量。</p>
+<h2 id="元类"><a href="#元类" class="headerlink" title="元类"></a>元类</h2><p><img src="https://upload-images.jianshu.io/upload_images/2353844-b21e389f4894d67f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="4.png"></p>
+<p>其实每个类也是一个对象，它也是一个类的实例，这个类就是元类。类对象能否响应这个消息也要通过 <code>isa</code> 找到类对象所属的类（元类）才能知道。所以实例方法保存在类中，而类方法保存在元类中。</p>
+<p>同时元类也是一个对象，也就是元类对象，元类对象的元类也就是根元类。不过，有一点比较特殊，那就是所有的元类所属的类都是同一个根元类。根元类指的就是根类的元类，具体来说就是根类 <code>NSObject</code> 对应的元类。理论上我们也可以给元类发送消息，但是 OC 倾向于隐藏元类，不想让大家知道元类的存在。元类是为了保持 OC 对象模型在设计上的完整性而引入的，比如用来保存类方法等，它主要是用来给编译器使用的。</p>
+<h2 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h2><ul>
+<li><a href="http://blog.devtang.com/2013/10/15/objective-c-object-model/" target="_blank" rel="noopener">Objective-C对象模型及应用</a></li>
+<li><a href="https://developer.apple.com/library/archive/documentation/Cocoa/Conceptual/ObjCRuntimeGuide/Introduction/Introduction.html?language=objc" target="_blank" rel="noopener">Objective-C Runtime Programming Guide</a></li>
+</ul>
+
       
     </div>
 
@@ -462,7 +471,7 @@
           
             <a href="/tags/iOS/" rel="tag"># iOS</a>
           
-            <a href="/tags/Swift/" rel="tag"># Swift</a>
+            <a href="/tags/Runtime/" rel="tag"># Runtime</a>
           
         </div>
       
@@ -475,8 +484,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/05/09/iOS-移除所有子视图/" rel="next" title="iOS 移除所有子视图">
-                <i class="fa fa-chevron-left"></i> iOS 移除所有子视图
+              <a href="/2018/07/10/CoreTextTouch/" rel="next" title="CoreText点击事件处理">
+                <i class="fa fa-chevron-left"></i> CoreText点击事件处理
               </a>
             
           </div>
@@ -484,10 +493,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2017/05/18/WKWebView加载HTML字符串-获取高度渲染高度/" rel="prev" title="WKWebView加载HTML字符串 获取高度渲染高度">
-                WKWebView加载HTML字符串 获取高度渲染高度 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -724,7 +729,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#希望这篇文章可以帮到大家"><span class="nav-number">1.</span> <span class="nav-text">希望这篇文章可以帮到大家</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#最近感觉应该重新看下开源的-Runtime，希望能有更深层的理解，下面几篇都会围绕着runtime来写"><span class="nav-number">1.</span> <span class="nav-text">最近感觉应该重新看下开源的 Runtime，希望能有更深层的理解，下面几篇都会围绕着runtime来写</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#对象"><span class="nav-number">1.1.</span> <span class="nav-text">对象</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#类"><span class="nav-number">2.</span> <span class="nav-text">类</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#元类"><span class="nav-number">3.</span> <span class="nav-text">元类</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考链接"><span class="nav-number">4.</span> <span class="nav-text">参考链接</span></a></li></ol></div>
             
 
           </div>
