@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://coderwong.com/"/>
-  <updated>2019-01-26T04:56:24.940Z</updated>
+  <updated>2019-01-29T07:22:30.249Z</updated>
   <id>https://coderwong.com/</id>
   
   <author>
@@ -17,11 +17,39 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>Objective-C 中 initialize load</title>
+    <link href="https://coderwong.com/2018/08/10/Objective-C_initialize_load/"/>
+    <id>https://coderwong.com/2018/08/10/Objective-C_initialize_load/</id>
+    <published>2018-08-10T11:48:42.000Z</published>
+    <updated>2019-01-29T07:22:30.249Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          
+        
+      
+    
+    </summary>
+    
+      <category term="Mobile" scheme="https://coderwong.com/categories/Mobile/"/>
+    
+    
+      <category term="iOS" scheme="https://coderwong.com/tags/iOS/"/>
+    
+      <category term="Runtime" scheme="https://coderwong.com/tags/Runtime/"/>
+    
+  </entry>
+  
+  <entry>
     <title>Class-Model</title>
     <link href="https://coderwong.com/2018/08/01/Class-Model/"/>
     <id>https://coderwong.com/2018/08/01/Class-Model/</id>
     <published>2018-08-01T14:01:22.000Z</published>
-    <updated>2019-01-26T04:56:24.940Z</updated>
+    <updated>2019-01-28T07:39:34.190Z</updated>
     
     <summary type="html">
     
@@ -465,36 +493,6 @@
     
     
       <category term="iOS" scheme="https://coderwong.com/tags/iOS/"/>
-    
-      <category term="Swift" scheme="https://coderwong.com/tags/Swift/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>常用 GCD 笔记(OC / Swift)</title>
-    <link href="https://coderwong.com/2017/03/28/%E5%B8%B8%E7%94%A8-GCD-%E7%AC%94%E8%AE%B0-OC-Swift/"/>
-    <id>https://coderwong.com/2017/03/28/常用-GCD-笔记-OC-Swift/</id>
-    <published>2017-03-28T11:53:58.000Z</published>
-    <updated>2018-07-02T10:43:31.355Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        
-        
-          
-        
-      
-    
-    </summary>
-    
-      <category term="Mobile" scheme="https://coderwong.com/categories/Mobile/"/>
-    
-    
-      <category term="iOS" scheme="https://coderwong.com/tags/iOS/"/>
-    
-      <category term="OC" scheme="https://coderwong.com/tags/OC/"/>
     
       <category term="Swift" scheme="https://coderwong.com/tags/Swift/"/>
     
