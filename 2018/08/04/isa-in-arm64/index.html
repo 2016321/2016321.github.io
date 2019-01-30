@@ -108,18 +108,18 @@
 
 
 
-  <meta name="description" content="iOS UIButton swift3.0">
-<meta name="keywords" content="iOS,Swift">
+  <meta name="description" content="之前的博客留了一个64位CPU中isa指针的坑，今天来填个坑。  isa 的本质回顾OC对象的本质，每个OC对象都含有一个isa指针，arm64 之前，isa仅仅是一个指针，保存着对象或类对象内存地址，在 arm64 架构之后，apple对isa进行了优化，变成了一个共用体 union 结构，同时使用位域来存储更多的信息。OC对象的isa指针斌不是直接指向类对象或者是元类对象的，而是需要 &amp;am">
+<meta name="keywords" content="iOS,Runtime">
 <meta property="og:type" content="article">
-<meta property="og:title" content="iOS UIButton swift3.0">
-<meta property="og:url" content="https://coderwong.com/2016/11/06/iOS-UIButton-swift3-0/index.html">
+<meta property="og:title" content="isa-in-arm64">
+<meta property="og:url" content="https://coderwong.com/2018/08/04/isa-in-arm64/index.html">
 <meta property="og:site_name" content="Coder Note">
-<meta property="og:description" content="iOS UIButton swift3.0">
+<meta property="og:description" content="之前的博客留了一个64位CPU中isa指针的坑，今天来填个坑。  isa 的本质回顾OC对象的本质，每个OC对象都含有一个isa指针，arm64 之前，isa仅仅是一个指针，保存着对象或类对象内存地址，在 arm64 架构之后，apple对isa进行了优化，变成了一个共用体 union 结构，同时使用位域来存储更多的信息。OC对象的isa指针斌不是直接指向类对象或者是元类对象的，而是需要 &amp;am">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-07-02T10:42:44.545Z">
+<meta property="og:updated_time" content="2019-01-30T05:01:16.084Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="iOS UIButton swift3.0">
-<meta name="twitter:description" content="iOS UIButton swift3.0">
+<meta name="twitter:title" content="isa-in-arm64">
+<meta name="twitter:description" content="之前的博客留了一个64位CPU中isa指针的坑，今天来填个坑。  isa 的本质回顾OC对象的本质，每个OC对象都含有一个isa指针，arm64 之前，isa仅仅是一个指针，保存着对象或类对象内存地址，在 arm64 架构之后，apple对isa进行了优化，变成了一个共用体 union 结构，同时使用位域来存储更多的信息。OC对象的isa指针斌不是直接指向类对象或者是元类对象的，而是需要 &amp;am">
 
 
 
@@ -128,7 +128,7 @@
 
 
 
-  <link rel="canonical" href="https://coderwong.com/2016/11/06/iOS-UIButton-swift3-0/"/>
+  <link rel="canonical" href="https://coderwong.com/2018/08/04/isa-in-arm64/"/>
 
 
 
@@ -138,7 +138,7 @@
   };
 </script>
 
-  <title>iOS UIButton swift3.0 | Coder Note</title>
+  <title>isa-in-arm64 | Coder Note</title>
   
 
 
@@ -303,7 +303,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://coderwong.com/2016/11/06/iOS-UIButton-swift3-0/">
+    <link itemprop="mainEntityOfPage" href="https://coderwong.com/2018/08/04/isa-in-arm64/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Coderwong">
@@ -320,7 +320,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">iOS UIButton swift3.0
+          <h1 class="post-title" itemprop="name headline">isa-in-arm64
               
             
           </h1>
@@ -345,7 +345,7 @@
                 
               
 
-              <time title="创建时间：2016-11-06 13:15:36" itemprop="dateCreated datePublished" datetime="2016-11-06T13:15:36+08:00">2016-11-06</time>
+              <time title="创建时间：2018-08-04 12:18:44" itemprop="dateCreated datePublished" datetime="2018-08-04T12:18:44+08:00">2018-08-04</time>
             
 
             
@@ -378,8 +378,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2016/11/06/iOS-UIButton-swift3-0/#comments" itemprop="discussionUrl">
-                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count gitment-comments-count" data-xid="/2016/11/06/iOS-UIButton-swift3-0/" itemprop="commentsCount"></span>
+                <a href="/2018/08/04/isa-in-arm64/#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count gitment-comments-count" data-xid="/2018/08/04/isa-in-arm64/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -387,7 +387,7 @@
 
           
           
-             <span id="/2016/11/06/iOS-UIButton-swift3-0/" class="leancloud_visitors" data-flag-title="iOS UIButton swift3.0">
+             <span id="/2018/08/04/isa-in-arm64/" class="leancloud_visitors" data-flag-title="isa-in-arm64">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -418,10 +418,38 @@
       
 
       
-        <h3 id="iOS-UIButton-swift3-0"><a href="#iOS-UIButton-swift3-0" class="headerlink" title="iOS UIButton swift3.0"></a>iOS UIButton swift3.0</h3><a id="more"></a>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br></pre></td><td class="code"><pre><span class="line">//通过frame来初始化UIButton</span><br><span class="line">let button = UIButton(frame: CGRect(x: 0, y: 300, width: 320, height: 60))</span><br><span class="line">//通过UIButtonType来初始化UIButton</span><br><span class="line">/*</span><br><span class="line">enum UIButtonType : Int &#123;</span><br><span class="line">case Custom 自定义风格</span><br><span class="line">case System 系统风格</span><br><span class="line">case DetailDisclosure   蓝色小箭头按钮，主要做详细说明用</span><br><span class="line">case InfoLight          亮色感叹号</span><br><span class="line">case InfoDark           暗色感叹号</span><br><span class="line">case ContactAdd         十字加号按钮</span><br><span class="line">&#125;</span><br><span class="line">*/</span><br><span class="line">var button2 = UIButton(type: UIButtonType.custom)</span><br><span class="line">//设置背景色，方便看到效果</span><br><span class="line">button.backgroundColor = UIColor.orange</span><br><span class="line">//添加到视图上</span><br><span class="line">self.view.addSubview(button)</span><br><span class="line">//---------------常用属性和方法</span><br><span class="line">//修改背景色</span><br><span class="line">button.backgroundColor = UIColor.orange</span><br><span class="line">//获取标题标签控件</span><br><span class="line">var aLabel = button.titleLabel</span><br><span class="line">//设置标题，需要注意，这里需要指定设置UIButton的哪个状态的title</span><br><span class="line">/*</span><br><span class="line">struct UIControlState : RawOptionSetType &#123;</span><br><span class="line">init(_ value: UInt)</span><br><span class="line">static var Normal: UIControlState &#123; get &#125;</span><br><span class="line">static var Highlighted: UIControlState &#123; get &#125; // used when UIControl isHighlighted is set</span><br><span class="line">static var Disabled: UIControlState &#123; get &#125;</span><br><span class="line">static var Selected: UIControlState &#123; get &#125; // flag usable by app (see below)</span><br><span class="line">static var Application: UIControlState &#123; get &#125; // additional flags available for application use</span><br><span class="line">static var Reserved: UIControlState &#123; get &#125; // flags reserved for internal framework use</span><br><span class="line">&#125;</span><br><span class="line">*/</span><br><span class="line">button.setTitle(&quot;&quot;, for: UIControlState())</span><br><span class="line">//设置标题颜色</span><br><span class="line">button.setTitleColor(UIColor.red, for: UIControlState())//正常状态标题颜色</span><br><span class="line">button.setTitleColor(UIColor.black, for: .highlighted)//鼠标按下标题颜色</span><br><span class="line">//设置标题阴影颜色</span><br><span class="line">button.setTitleShadowColor(UIColor.black, for: UIControlState())</span><br><span class="line">//设置图片，图片会遮挡butoon的标题</span><br><span class="line">//        button.setImage(UIImage(named: &quot;testImage&quot;), forState: .Normal)</span><br><span class="line">//设置背景图片</span><br><span class="line">//         button.setBackgroundImage(UIImage(named: &quot;testImage&quot;), forState: .Normal)</span><br><span class="line">//设置富文本</span><br><span class="line">let buttonAttribute:NSMutableAttributedString=NSMutableAttributedString(string: &quot;swift大法好!&quot;)</span><br><span class="line">//文本0开始5个字符字体HelveticaNeue-Bold，16号</span><br><span class="line">buttonAttribute.addAttribute(NSFontAttributeName, value: UIFont(name: &quot;HelveticaNeue-Bold&quot;, size: 20)!, range: NSMakeRange(0, 4))</span><br><span class="line">//设置字体颜色</span><br><span class="line">buttonAttribute.addAttribute(NSForegroundColorAttributeName, value: UIColor.red, range: NSMakeRange(4, 2))</span><br><span class="line">//设置文字背景颜色</span><br><span class="line">buttonAttribute.addAttribute(NSBackgroundColorAttributeName, value: UIColor.green, range: NSMakeRange(0, 6))</span><br><span class="line">button.setAttributedTitle(buttonAttribute, for: UIControlState())</span><br><span class="line">//默认情况下，钮高亮的情况下图像的颜色会被画的深一些，如果下面的这个属性设置为false，那么可以去掉这个功能</span><br><span class="line">button.adjustsImageWhenHighlighted = false</span><br><span class="line">//默认情况下，当按钮禁用的时候，图像会被画得深一点，设置NO可以取消设置</span><br><span class="line">button.adjustsImageWhenDisabled = false</span><br><span class="line">//下面这个属性设置为yes的状态下，按钮按下会发光</span><br><span class="line">button.showsTouchWhenHighlighted = true</span><br><span class="line">//获取富文本</span><br><span class="line">var attributedTitle = button.attributedTitle(for: UIControlState())</span><br><span class="line">//获取标题</span><br><span class="line">var titleOfState = button.title(for: UIControlState())</span><br><span class="line">//获取标题颜色</span><br><span class="line">var titleColorOfState = button.titleColor(for: UIControlState())</span><br><span class="line">//获取标题阴影颜色</span><br><span class="line">var titleShadowColorOfState = button.titleShadowColor(for: UIControlState())</span><br><span class="line">//获取图片</span><br><span class="line">var imageOfState = button.image(for: UIControlState())</span><br><span class="line">//事件</span><br><span class="line">button.addTarget(self, action: #selector(ViewController.buttonUpInsideFunc), for: .touchUpInside)</span><br></pre></td></tr></table></figure>
-<p>代码仅供参考，希望可以帮到你，如果您有补充请直接私信希望能互相学习互相进步！</p>
-<p><a href="https://github.com/2016321/swift3.0-UI-base/tree/master/UI-Base-UIButton" target="_blank" rel="noopener">GitHub下载地址</a></p>
+        <blockquote>
+<p>之前的博客留了一个64位CPU中isa指针的坑，今天来填个坑。</p>
+</blockquote>
+<h1 id="isa-的本质"><a href="#isa-的本质" class="headerlink" title="isa 的本质"></a>isa 的本质</h1><p>回顾OC对象的本质，每个OC对象都含有一个isa指针，<code>arm64</code> 之前，isa仅仅是一个指针，保存着对象或类对象内存地址，在 <code>arm64</code> 架构之后，apple对isa进行了优化，变成了一个<a href="https://zh.wikipedia.org/wiki/%E8%81%94%E5%90%88%E4%BD%93" target="_blank" rel="noopener">共用体</a> <code>union</code> 结构，同时使用位域来存储更多的信息。OC对象的isa指针斌不是直接指向类对象或者是元类对象的，而是需要 <code>&amp;ISA_MASK</code> 通过位运算才能取到相应的地址，但是为什么要这样做。</p>
+<h2 id="objc-object"><a href="#objc-object" class="headerlink" title="objc_object"></a>objc_object</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">objc_object</span> &#123;</span></span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="keyword">isa_t</span> isa;</span><br><span class="line">...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="isa-t"><a href="#isa-t" class="headerlink" title="isa_t"></a>isa_t</h2><p><code>isa</code> 指针其实是一个 <code>isa_t</code> 类型的共用体，我们看下 <code>isa_t</code> 内部查看其结构。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">union</span> <span class="keyword">isa_t</span> &#123;</span><br><span class="line">    <span class="keyword">isa_t</span>() &#123; &#125;</span><br><span class="line">    <span class="keyword">isa_t</span>(<span class="keyword">uintptr_t</span> value) : bits(value) &#123; &#125;</span><br><span class="line"></span><br><span class="line">    Class cls;</span><br><span class="line">    <span class="keyword">uintptr_t</span> bits;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">if</span> defined(ISA_BITFIELD)</span></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> &#123;</span></span><br><span class="line">        ISA_BITFIELD;  <span class="comment">// defined in isa.h</span></span><br><span class="line">    &#125;;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span></span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>上述源码中 <code>isa_t</code> 是 <code>union</code> 类型，<code>union</code> 表示共用体。可以看到共用体中有一个结构体，结构体内部分别定义了一些变量，变量后面的值代表的是该变量占用多少个字节，也就是位域。</p>
+<h2 id="位域"><a href="#位域" class="headerlink" title="位域"></a>位域</h2><p>位域声明 <code>位域名 : 位域长度</code></p>
+<ul>
+<li>如果一个字节所剩空间不够存放另一位域时，应从下一单元起存放该位域。也可以有意使某位域从下一单元开始。</li>
+<li>位域的长度不能大于数据类型本身的长度，比如int类型就不能超过32位二进位。</li>
+<li>位域可以无位域名，这时它只用来作填充或调整位置，无名的位域是不能使用的。</li>
+</ul>
+<h2 id="ISA-BITFIELD"><a href="#ISA-BITFIELD" class="headerlink" title="ISA_BITFIELD"></a>ISA_BITFIELD</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta"># <span class="meta-keyword">if</span> __arm64__</span></span><br><span class="line"><span class="meta">#   <span class="meta-keyword">define</span> ISA_MASK        0x0000000ffffffff8ULL</span></span><br><span class="line"><span class="meta">#   <span class="meta-keyword">define</span> ISA_MAGIC_MASK  0x000003f000000001ULL</span></span><br><span class="line"><span class="meta">#   <span class="meta-keyword">define</span> ISA_MAGIC_VALUE 0x000001a000000001ULL</span></span><br><span class="line"><span class="meta">#   <span class="meta-keyword">define</span> ISA_BITFIELD                                                      \</span></span><br><span class="line">      <span class="keyword">uintptr_t</span> nonpointer        : <span class="number">1</span>;                                       \</span><br><span class="line">      <span class="keyword">uintptr_t</span> has_assoc         : <span class="number">1</span>;                                       \</span><br><span class="line">      <span class="keyword">uintptr_t</span> has_cxx_dtor      : <span class="number">1</span>;                                       \</span><br><span class="line">      <span class="keyword">uintptr_t</span> shiftcls          : <span class="number">33</span>; <span class="comment">/*MACH_VM_MAX_ADDRESS 0x1000000000*/</span> \</span><br><span class="line">      <span class="keyword">uintptr_t</span> magic             : <span class="number">6</span>;                                       \</span><br><span class="line">      <span class="keyword">uintptr_t</span> weakly_referenced : <span class="number">1</span>;                                       \</span><br><span class="line">      <span class="keyword">uintptr_t</span> deallocating      : <span class="number">1</span>;                                       \</span><br><span class="line">      <span class="keyword">uintptr_t</span> has_sidetable_rc  : <span class="number">1</span>;                                       \</span><br><span class="line">      <span class="keyword">uintptr_t</span> extra_rc          : <span class="number">19</span></span><br><span class="line"><span class="meta">#   <span class="meta-keyword">define</span> RC_ONE   (1ULL&lt;&lt;45)</span></span><br><span class="line"><span class="meta">#   <span class="meta-keyword">define</span> RC_HALF  (1ULL&lt;&lt;18)</span></span><br><span class="line"></span><br><span class="line"><span class="meta"># <span class="meta-keyword">elif</span> __x86_64__</span></span><br><span class="line"><span class="meta">#   <span class="meta-keyword">define</span> ISA_MASK        0x00007ffffffffff8ULL</span></span><br><span class="line"><span class="meta">#   <span class="meta-keyword">define</span> ISA_MAGIC_MASK  0x001f800000000001ULL</span></span><br><span class="line"><span class="meta">#   <span class="meta-keyword">define</span> ISA_MAGIC_VALUE 0x001d800000000001ULL</span></span><br><span class="line"><span class="meta">#   <span class="meta-keyword">define</span> ISA_BITFIELD                                                        \</span></span><br><span class="line">      <span class="keyword">uintptr_t</span> nonpointer        : <span class="number">1</span>;                                         \</span><br><span class="line">      <span class="keyword">uintptr_t</span> has_assoc         : <span class="number">1</span>;                                         \</span><br><span class="line">      <span class="keyword">uintptr_t</span> has_cxx_dtor      : <span class="number">1</span>;                                         \</span><br><span class="line">      <span class="keyword">uintptr_t</span> shiftcls          : <span class="number">44</span>; <span class="comment">/*MACH_VM_MAX_ADDRESS 0x7fffffe00000*/</span> \</span><br><span class="line">      <span class="keyword">uintptr_t</span> magic             : <span class="number">6</span>;                                         \</span><br><span class="line">      <span class="keyword">uintptr_t</span> weakly_referenced : <span class="number">1</span>;                                         \</span><br><span class="line">      <span class="keyword">uintptr_t</span> deallocating      : <span class="number">1</span>;                                         \</span><br><span class="line">      <span class="keyword">uintptr_t</span> has_sidetable_rc  : <span class="number">1</span>;                                         \</span><br><span class="line">      <span class="keyword">uintptr_t</span> extra_rc          : <span class="number">8</span></span><br><span class="line"><span class="meta">#   <span class="meta-keyword">define</span> RC_ONE   (1ULL&lt;&lt;56)</span></span><br><span class="line"><span class="meta">#   <span class="meta-keyword">define</span> RC_HALF  (1ULL&lt;&lt;7)</span></span><br><span class="line"></span><br><span class="line"><span class="meta"># <span class="meta-keyword">else</span></span></span><br><span class="line"><span class="meta">#   <span class="meta-keyword">error</span> unknown architecture for packed isa</span></span><br><span class="line"><span class="meta"># <span class="meta-keyword">endif</span></span></span><br></pre></td></tr></table></figure>
+<p>上面的代码描述了再64位下 <code>arm64</code> 架构和 <code>x86_64</code> 架构中的 <code>isa</code> 的占用空间布局。</p>
+<h1 id="isa中存储的信息及作用"><a href="#isa中存储的信息及作用" class="headerlink" title="isa中存储的信息及作用"></a>isa中存储的信息及作用</h1><ul>
+<li>nonpointer：0代表一个普通指针，储存着Class、Meta-Class对象的内存地址。1代表优化后的使用位域储存更多的信息的结构体。</li>
+<li>has_assoc：表示是否有设置过关联的对象，如果没有，释放时候会更快。</li>
+<li>has_cxx_dtor：表示是否有声明C++析构函数，如果没有释放会更快。</li>
+<li>shiftcls：这里存储着Class、Meta-Class对象的内存地址信息。</li>
+<li>magic：用于在调试时分辨对象是否未完成初始化。</li>
+<li>weakly_referenced：表示是否有被弱引用指向过。</li>
+<li>deallocating：表示对象是否正在释放。</li>
+<li>has_sidetable_rc：引用计数器是否过大无法存储在isa中，如果为1，那么引用计数会存储在一个叫SideTable的属性中。</li>
+<li>extra_rc：里面存储的值是引用计数器减1。</li>
+</ul>
+<h1 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h1><ul>
+<li><a href="http://www.sealiesoftware.com/blog/archive/2013/09/24/objc_explain_Non-pointer_isa.html" target="_blank" rel="noopener">Non-pointer isa</a></li>
+<li><a href="https://www.mikeash.com/pyblog/friday-qa-2017-06-30-dissecting-objc_msgsend-on-arm64.html" target="_blank" rel="noopener">Dissecting objc_msgSend on ARM64</a></li>
+<li><a href="https://halfrost.com/objc_runtime_isa_class/" target="_blank" rel="noopener">神经病院 Objective-C Runtime 入院第一天—— isa 和 Class</a></li>
+</ul>
 
       
     </div>
@@ -444,7 +472,7 @@
           
             <a href="/tags/iOS/" rel="tag"># iOS</a>
           
-            <a href="/tags/Swift/" rel="tag"># Swift</a>
+            <a href="/tags/Runtime/" rel="tag"># Runtime</a>
           
         </div>
       
@@ -457,8 +485,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/11/06/iOS-UITextView-swift3-0/" rel="next" title="iOS UITextView swift3.0">
-                <i class="fa fa-chevron-left"></i> iOS UITextView swift3.0
+              <a href="/2018/08/01/Class-Model/" rel="next" title="Class-Model">
+                <i class="fa fa-chevron-left"></i> Class-Model
               </a>
             
           </div>
@@ -467,8 +495,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2016/12/18/友盟-Swift-集成的一些注意事项/" rel="prev" title="友盟 Swift 集成的一些注意事项">
-                友盟 Swift 集成的一些注意事项 <i class="fa fa-chevron-right"></i>
+              <a href="/2018/08/10/Objective-C_initialize_load/" rel="prev" title="Objective-C 中 initialize load">
+                Objective-C 中 initialize load <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -706,7 +734,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#iOS-UIButton-swift3-0"><span class="nav-number">1.</span> <span class="nav-text">iOS UIButton swift3.0</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#isa-的本质"><span class="nav-number">1.</span> <span class="nav-text">isa 的本质</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#objc-object"><span class="nav-number">1.1.</span> <span class="nav-text">objc_object</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#isa-t"><span class="nav-number">1.2.</span> <span class="nav-text">isa_t</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#位域"><span class="nav-number">1.3.</span> <span class="nav-text">位域</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ISA-BITFIELD"><span class="nav-number">1.4.</span> <span class="nav-text">ISA_BITFIELD</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#isa中存储的信息及作用"><span class="nav-number">2.</span> <span class="nav-text">isa中存储的信息及作用</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考链接"><span class="nav-number">3.</span> <span class="nav-text">参考链接</span></a></li></ol></div>
             
 
           </div>
