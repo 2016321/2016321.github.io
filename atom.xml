@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://coderwong.com/"/>
-  <updated>2019-02-11T08:45:15.160Z</updated>
+  <updated>2019-02-11T15:02:00.327Z</updated>
   <id>https://coderwong.com/</id>
   
   <author>
@@ -15,6 +15,34 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>关联对象实现原理</title>
+    <link href="https://coderwong.com/2018/08/12/associated_object/"/>
+    <id>https://coderwong.com/2018/08/12/associated_object/</id>
+    <published>2018-08-12T06:30:57.000Z</published>
+    <updated>2019-02-11T15:02:00.327Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          
+        
+      
+    
+    </summary>
+    
+      <category term="Mobile" scheme="https://coderwong.com/categories/Mobile/"/>
+    
+    
+      <category term="iOS" scheme="https://coderwong.com/tags/iOS/"/>
+    
+      <category term="Runtime" scheme="https://coderwong.com/tags/Runtime/"/>
+    
+  </entry>
   
   <entry>
     <title>Category的原理</title>
@@ -476,28 +504,6 @@
     <summary type="html">
     
       &lt;p&gt;最近使用swift写新项目，也算是试水，虽然现在swift算是推广起来了，很多大厂小公司的新项目都是swift，但是还是不少坑，这两天写一个waveView就遇到了个这个问题&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="Mobile" scheme="https://coderwong.com/categories/Mobile/"/>
-    
-    
-      <category term="iOS" scheme="https://coderwong.com/tags/iOS/"/>
-    
-      <category term="Swift" scheme="https://coderwong.com/tags/Swift/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>iOS 移除所有子视图</title>
-    <link href="https://coderwong.com/2017/05/09/iOS-%E7%A7%BB%E9%99%A4%E6%89%80%E6%9C%89%E5%AD%90%E8%A7%86%E5%9B%BE/"/>
-    <id>https://coderwong.com/2017/05/09/iOS-移除所有子视图/</id>
-    <published>2017-05-09T02:22:59.000Z</published>
-    <updated>2018-07-15T11:28:21.495Z</updated>
-    
-    <summary type="html">
-    
-      &lt;h5 id=&quot;有的时候我们会有这样的需求，就是移除所有子视图&quot;&gt;&lt;a href=&quot;#有的时候我们会有这样的需求，就是移除所有子视图&quot; class=&quot;headerlink&quot; title=&quot;有的时候我们会有这样的需求，就是移除所有子视图&quot;&gt;&lt;/a&gt;有的时候我们会有这样的需求，就是移除所有子视图&lt;/h5&gt;
     
     </summary>
     
