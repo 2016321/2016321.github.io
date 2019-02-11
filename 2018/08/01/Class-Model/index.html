@@ -120,7 +120,7 @@
 <meta property="og:image" content="https://upload-images.jianshu.io/upload_images/2353844-2182b3739d1f51b4.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 <meta property="og:image" content="https://upload-images.jianshu.io/upload_images/2353844-850d2bdcf13f5c08.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 <meta property="og:image" content="https://upload-images.jianshu.io/upload_images/2353844-b21e389f4894d67f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:updated_time" content="2019-01-30T02:09:56.645Z">
+<meta property="og:updated_time" content="2019-02-11T03:53:50.434Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Class-Model">
 <meta name="twitter:description" content="最近感觉应该重新看下开源的 Runtime，希望能有更深层的理解，下面几篇都会围绕着runtime来写对象 OC 中，每一个对象都是一个类的实例，且这个对象的 isa 指针指向它所属的类。 PS:这里留下个坑，因为isa在现有的64位CPU下已经不是一个单纯的指针了，包含了引用计数和weak指向等等信息 随后的一篇我会着重讲写下 isa 相关的东西，飞机票 12345struct objc_cla">
@@ -426,7 +426,7 @@
         <h1 id="最近感觉应该重新看下开源的-Runtime，希望能有更深层的理解，下面几篇都会围绕着runtime来写"><a href="#最近感觉应该重新看下开源的-Runtime，希望能有更深层的理解，下面几篇都会围绕着runtime来写" class="headerlink" title="最近感觉应该重新看下开源的 Runtime，希望能有更深层的理解，下面几篇都会围绕着runtime来写"></a>最近感觉应该重新看下开源的 <a href="https://opensource.apple.com/tarballs/objc4/objc4-750.tar.gz" target="_blank" rel="noopener">Runtime</a>，希望能有更深层的理解，下面几篇都会围绕着runtime来写</h1><h2 id="对象"><a href="#对象" class="headerlink" title="对象"></a>对象</h2><p><img src="https://upload-images.jianshu.io/upload_images/2353844-87795c89d6ad16b4.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="1.png"></p>
 <p>OC 中，每一个对象都是一个类的实例，且这个对象的 <code>isa</code> 指针指向它所属的类。</p>
 <p>PS:这里留下个<a href="https://opensource.apple.com/tarballs/objc4/objc4-750.tar.gz" target="_blank" rel="noopener">坑</a>，因为isa在现有的64位CPU下已经不是一个单纯的指针了，包含了引用计数和weak指向等等信息</p>
-<p>随后的一篇我会着重讲写下 <code>isa</code> 相关的东西，<a href="https://baidu.com" target="_blank" rel="noopener">飞机票</a></p>
+<p>随后的一篇我会着重讲写下 <code>isa</code> 相关的东西，<a href="https://coderwong.com/2018/08/04/isa-in-arm64/">飞机票</a></p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">objc_class</span>;</span></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">objc_object</span>;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">objc_class</span> *<span class="title">Class</span>;</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">objc_object</span> *<span class="title">id</span>;</span></span><br></pre></td></tr></table></figure>
 <p>我们也可以看到49行开始的定义，定义了 <code>Class</code> 和 <code>id</code> 两类型，分别是 <code>objc_class</code> 和 <code>objc_object</code> 类型的指针</p>
 <h2 id="类"><a href="#类" class="headerlink" title="类"></a>类</h2><p><img src="https://upload-images.jianshu.io/upload_images/2353844-2182b3739d1f51b4.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="2.png"></p>

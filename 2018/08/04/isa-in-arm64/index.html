@@ -116,7 +116,7 @@
 <meta property="og:site_name" content="Coder Note">
 <meta property="og:description" content="之前的博客留了一个64位CPU中isa指针的坑，今天来填个坑。  isa 的本质回顾OC对象的本质，每个OC对象都含有一个isa指针，arm64 之前，isa仅仅是一个指针，保存着对象或类对象内存地址，在 arm64 架构之后，apple对isa进行了优化，变成了一个共用体 union 结构，同时使用位域来存储更多的信息。OC对象的isa指针斌不是直接指向类对象或者是元类对象的，而是需要 &amp;am">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-01-30T05:18:51.191Z">
+<meta property="og:updated_time" content="2019-01-30T09:07:05.911Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="isa">
 <meta name="twitter:description" content="之前的博客留了一个64位CPU中isa指针的坑，今天来填个坑。  isa 的本质回顾OC对象的本质，每个OC对象都含有一个isa指针，arm64 之前，isa仅仅是一个指针，保存着对象或类对象内存地址，在 arm64 架构之后，apple对isa进行了优化，变成了一个共用体 union 结构，同时使用位域来存储更多的信息。OC对象的isa指针斌不是直接指向类对象或者是元类对象的，而是需要 &amp;am">
