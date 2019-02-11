@@ -2,9 +2,23 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://coderwong.com/2018/08/12/category/</loc>
+    
+    <lastmod>2019-02-11T08:45:15.160Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://coderwong.com/2018/07/09/CoreTextMix/</loc>
+    
+    <lastmod>2019-02-11T04:15:30.860Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://coderwong.com/2018/08/01/Class-Model/</loc>
     
-    <lastmod>2019-02-11T03:53:50.434Z</lastmod>
+    <lastmod>2019-02-11T04:04:21.682Z</lastmod>
     
   </url>
   
@@ -26,13 +40,6 @@
     <loc>https://coderwong.com/2018/08/10/Objective-C_initialize_load/</loc>
     
     <lastmod>2019-01-29T07:22:30.249Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://coderwong.com/2018/07/09/CoreTextMix/</loc>
-    
-    <lastmod>2018-08-30T06:02:08.874Z</lastmod>
     
   </url>
   

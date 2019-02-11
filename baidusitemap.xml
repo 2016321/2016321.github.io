@@ -4,8 +4,54 @@
 
     
   <url>
+    <loc>https://coderwong.com/2018/08/12/category/</loc>
+    <lastmod>2019-02-11T08:45:15.160Z</lastmod>
+    <data>
+        <display>
+        <title>Category的原理</title>
+        <pubTime>2018-08-12T06:30:57.000Z</pubTime>
+        
+        <tag>iOS</tag>
+         
+        <tag>Runtime</tag>
+         
+         
+           
+             
+              <breadCrumb title="Mobile" url="https://coderwong.com/categories/Mobile/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://coderwong.com/2018/07/09/CoreTextMix/</loc>
+    <lastmod>2019-02-11T04:15:30.860Z</lastmod>
+    <data>
+        <display>
+        <title>CoreText图文混排</title>
+        <pubTime>2018-07-09T01:52:24.000Z</pubTime>
+        
+        <tag>iOS</tag>
+         
+        <tag>OC</tag>
+         
+        <tag>Core Text</tag>
+         
+         
+           
+             
+              <breadCrumb title="Mobile" url="https://coderwong.com/categories/Mobile/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>https://coderwong.com/2018/08/01/Class-Model/</loc>
-    <lastmod>2019-02-11T03:53:50.434Z</lastmod>
+    <lastmod>2019-02-11T04:04:21.682Z</lastmod>
     <data>
         <display>
         <title>Class-Model</title>
@@ -78,30 +124,6 @@
         <tag>iOS</tag>
          
         <tag>Runtime</tag>
-         
-         
-           
-             
-              <breadCrumb title="Mobile" url="https://coderwong.com/categories/Mobile/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>https://coderwong.com/2018/07/09/CoreTextMix/</loc>
-    <lastmod>2018-08-30T06:02:08.874Z</lastmod>
-    <data>
-        <display>
-        <title>CoreText图文混排</title>
-        <pubTime>2018-07-09T01:52:24.000Z</pubTime>
-        
-        <tag>iOS</tag>
-         
-        <tag>OC</tag>
-         
-        <tag>Core Text</tag>
          
          
            
@@ -705,11 +727,11 @@
         
         <tag>iOS</tag>
          
+        <tag>Swift</tag>
+         
         <tag>JavaScript</tag>
          
         <tag>React Native</tag>
-         
-        <tag>Swift</tag>
          
          
            
