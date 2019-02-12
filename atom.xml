@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://coderwong.com/"/>
-  <updated>2019-02-12T11:16:58.230Z</updated>
+  <updated>2019-02-12T11:22:39.811Z</updated>
   <id>https://coderwong.com/</id>
   
   <author>
@@ -21,17 +21,11 @@
     <link href="https://coderwong.com/2018/08/16/KVO%E7%9A%84%E5%AE%9E%E7%8E%B0%E5%8E%9F%E7%90%86/"/>
     <id>https://coderwong.com/2018/08/16/KVO的实现原理/</id>
     <published>2018-08-16T12:06:17.000Z</published>
-    <updated>2019-02-12T11:16:58.230Z</updated>
+    <updated>2019-02-12T11:22:39.811Z</updated>
     
     <summary type="html">
     
-      
-      
-        
-        
-          
-        
-      
+      &lt;h1 id=&quot;KVO的实现原理&quot;&gt;&lt;a href=&quot;#KVO的实现原理&quot; class=&quot;headerlink&quot; title=&quot;KVO的实现原理&quot;&gt;&lt;/a&gt;KVO的实现原理&lt;/h1&gt;&lt;p&gt;首先需要了解KVO基本使用，KVO的全称 &lt;code&gt;Key-Value Observing&lt;/code&gt;，俗称“键值监听”，可以用于监听某个对象属性值的改变。&lt;/p&gt;
     
     </summary>
     
